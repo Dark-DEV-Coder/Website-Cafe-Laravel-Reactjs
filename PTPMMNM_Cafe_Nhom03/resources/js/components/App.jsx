@@ -1,19 +1,11 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import 'antd/dist/antd.css';
+import React from "react";
 
-export default class App extends Component {
-    render() {
-        return (
-            <BrowserRouter>
-                <div>
-                    Hello
-                </div>
-            </BrowserRouter>
-        );
-    }
+const App = () => {
+    return (
+        <div>
+            <h1>Hello Laravel && React</h1>
+        </div>
+    )
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
-
+export default App
