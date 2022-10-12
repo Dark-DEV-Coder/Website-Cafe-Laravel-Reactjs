@@ -577,48 +577,6 @@ table.dataTable thead>tr>td.sorting {
 	border: 1px solid #f43b48;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary.active,
-.btn-primary:active,
-.open>.dropdown-toggle.btn-primary {
-	background-color: #f10e1d;
-	border: 1px solid #f10e1d;
-}
-
-.btn-primary.active.focus,
-.btn-primary.active:focus,
-.btn-primary.active:hover,
-.btn-primary.focus:active,
-.btn-primary:active:focus,
-.btn-primary:active:hover,
-.open>.dropdown-toggle.btn-primary.focus,
-.open>.dropdown-toggle.btn-primary:focus,
-.open>.dropdown-toggle.btn-primary:hover {
-	background-color: #f10e1d;
-	border: 1px solid #f10e1d;
-}
-
-.btn-primary.active:not(:disabled):not(.disabled),
-.btn-primary:active:not(:disabled):not(.disabled),
-.show>.btn-primary.dropdown-toggle {
-	background-color: #f10e1d;
-	border-color: #f10e1d;
-	color: #fff;
-}
-
-.btn-primary.active:focus:not(:disabled):not(.disabled),
-.btn-primary:active:focus:not(:disabled):not(.disabled),
-.show>.btn-primary.dropdown-toggle:focus {
-	box-shadow: unset;
-}
-
-.btn-primary.disabled,
-.btn-primary:disabled {
-	background-color: #f43b48;
-	border-color: #f43b48;
-	color: #fff;
-}
 
 .btn-success {
 	background-color: #55ce63;

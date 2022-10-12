@@ -9,11 +9,11 @@
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         @viteReactRefresh
-       
+        @vite(['resources/js/app.jsx'])
     </head>
     <body>
-       <div id="ahsgdh">
-            <a href='./login_admin.blade.php'> Bấm vô đây</a>
+       <div id="app">
+
        </div>
     </body>
 </html>
