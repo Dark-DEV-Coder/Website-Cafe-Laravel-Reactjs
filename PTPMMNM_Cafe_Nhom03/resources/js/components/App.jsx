@@ -1,9 +1,10 @@
 import React from "react";
+import LoginContainer from "./login_container";
 
 const App = () => {
     return (
         <div>
-            <h1>Hello Laravel && React</h1>
+            <LoginContainer />
         </div>
     )
 }

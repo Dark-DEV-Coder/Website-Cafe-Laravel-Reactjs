@@ -9,7 +9,7 @@
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         @viteReactRefresh
-        @vite(['resources/css/app.css', 'resources/js/app.jsx'])
+        @vite(['resources/css/app.css', 'resources/js/app.jsx','resources/css/bootstrap.min.css','resources/css/font-awesome.min.css','resources/css/style.css'])
     </head>
     <body>
        <div id="app">
