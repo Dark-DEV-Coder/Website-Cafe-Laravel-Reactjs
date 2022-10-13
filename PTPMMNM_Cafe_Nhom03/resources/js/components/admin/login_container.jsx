@@ -8,6 +8,15 @@ function LoginContainer() {
                     <div class="account-box">
                         <div class="account-wrapper">
                             <h3 class="account-title">Login</h3>
+                            {/* <Form>
+                                <Form.Field
+                                    label="Username"
+                                    name="username"
+                                    control={Input}
+                                    placeholder="Username account"
+                                />
+                            </Form> */}
+
                             <form action="index.html">
                                 <div class="form-group">
                                     <label>Email Address</label>
@@ -27,7 +36,7 @@ function LoginContainer() {
                                     <input class="form-control" type="password" />
                                 </div>
                                 <div class="form-group text-center">
-                                    <button class="btn btn-primary account-btn" type="submit">Login</button>
+                                    <button class="btn btn-primary account-btn" type="submit" href="./home.jsx">Login</button>
                                 </div>
                                 <div class="account-footer">
                                     <p>Don't have an account yet? <a href="register.html">Register</a></p>
