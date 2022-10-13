@@ -1,7 +1,7 @@
 import React from "react";
 import LoginContainer from "./login_container";
 
-const App = () => {
+const Login = () => {
     return (
         <div>
             <LoginContainer />
@@ -9,4 +9,4 @@ const App = () => {
     )
 }
 
-export default App
+export default Login

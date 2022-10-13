@@ -12,7 +12,7 @@
        
     </head>
     <body>
-       <div id="ahsgdh">
+       <div>
             <a href='./login_admin.blade.php'> Bấm vô đây</a>
        </div>
     </body>
