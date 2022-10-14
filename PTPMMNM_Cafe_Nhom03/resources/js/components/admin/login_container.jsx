@@ -36,7 +36,7 @@ function LoginContainer() {
                                     <input class="form-control" type="password" />
                                 </div>
                                 <div class="form-group text-center">
-                                    <button class="btn btn-primary account-btn" type="submit" href="./home.jsx">Login</button>
+                                    <button class="btn btn-primary account-btn" type="submit" >Login</button>
                                 </div>
                                 <div class="account-footer">
                                     <p>Don't have an account yet? <a href="register.html">Register</a></p>

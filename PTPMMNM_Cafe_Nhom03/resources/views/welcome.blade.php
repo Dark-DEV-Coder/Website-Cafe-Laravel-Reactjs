@@ -13,7 +13,9 @@
     </head>
     <body>
        <div>
-            <a href='./login_admin.blade.php'> Bấm vô đây</a>
+           <div id="root">
+           <a href='./login_admin.blade.php'> Bấm vô đây</a>
+           </div> 
        </div>
     </body>
 </html>

@@ -20,3 +20,9 @@ Route::get('/', function () {
 Route::get('/login_admin.blade.php', function () {
     return view('login_admin');
 });
+
+Route::get('/home_admin.blade.php', function () {
+    return view('home_admin');
+});
+// Route::get('/admin/home','App\Http\Controllers\HomeAdminController@HomeAdmin');
+

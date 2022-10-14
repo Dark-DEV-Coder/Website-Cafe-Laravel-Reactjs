@@ -74,74 +74,7 @@ Version      : 3.6
 
 ========================================*/
 
-@font-face {
-	font-family: 'Material Icons';
-	font-style: normal;
-	font-weight: 400;
-	src: url(../fonts/MaterialIcons-Regular.eot);
-	/* For IE6-8 */
-	src: local('Material Icons'),
-		local('MaterialIcons-Regular'),
-		url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
-		url(../fonts/MaterialIcons-Regular.woff) format('woff'),
-		url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
-}
 
-@font-face {
-	font-family: 'CircularStd';
-	font-style: normal;
-	font-weight: 400;
-	src: local('Circular Std Book'), url('../fonts/CircularStd-Book.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'CircularStd';
-	font-style: italic;
-	font-weight: 400;
-	src: local('Circular Std Book Italic'), url('../fonts/CircularStd-BookItalic.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'CircularStd';
-	font-style: normal;
-	font-weight: 500;
-	src: local('Circular Std Medium'), url('../fonts/CircularStd-Medium.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'CircularStd';
-	font-style: italic;
-	font-weight: 500;
-	src: local('Circular Std Medium Italic'), url('../fonts/CircularStd-MediumItalic.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'CircularStd';
-	font-style: normal;
-	font-weight: 600;
-	src: local('Circular Std Bold'), url('../fonts/CircularStd-Bold.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'CircularStd';
-	font-style: italic;
-	font-weight: 600;
-	src: local('Circular Std Bold Italic'), url('../fonts/CircularStd-BoldItalic.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'CircularStd';
-	font-style: normal;
-	font-weight: 800;
-	src: local('Circular Std Black'), url('../fonts/CircularStd-Black.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'CircularStd';
-	font-style: italic;
-	font-weight: 800;
-	src: local('Circular Std Black Italic'), url('../fonts/CircularStd-BlackItalic.woff') format('woff');
-}
 
 /*-----------------
 	1. General
@@ -152,7 +85,7 @@ html {
 }
 
 body {
-	font-family: 'CircularStd', sans-serif;
+	font-family: 'Cairo', sans-serif;
 	font-size: .9375rem;
 	color: #1f1f1f;
 	background-color: #f7f7f7;
@@ -166,9 +99,9 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: CircularStd;
+	/* font-family: CircularStd; */
 	margin-top: 0;
-	font-weight: 500;
+	/* font-weight: 500; */
 }
 
 h1,
@@ -277,7 +210,7 @@ textarea.form-control {
 }
 
 .material-icons {
-	font-family: 'Material Icons';
+	/* font-family: 'Material Icons'; */
 	font-weight: normal;
 	font-style: normal;
 	font-size: 24px;
@@ -1962,7 +1895,7 @@ table.dataTable thead>tr>td.sorting {
 	position: absolute;
 	right: 15px;
 	display: inline-block;
-	font-family: 'FontAwesome';
+	/* font-family: 'FontAwesome'; */
 	text-rendering: auto;
 	line-height: 40px;
 	font-size: 18px;
@@ -2166,7 +2099,7 @@ table.dataTable thead>tr>td.sorting {
 	color: #979797;
 	content: "\f073";
 	display: block;
-	font-family: "FontAwesome";
+	/* font-family: "FontAwesome"; */
 	font-size: 15px;
 	margin: auto;
 	position: absolute;
@@ -2200,8 +2133,8 @@ table.dataTable thead>tr>td.sorting {
 }
 
 .account-title {
-	font-size: 26px;
-	font-weight: 500;
+	font-size: 30px;
+	font-weight: 700;
 	margin-bottom: 5px;
 	text-align: center;
 }
@@ -2264,7 +2197,7 @@ table.dataTable thead>tr>td.sorting {
 .account-box label {
 	color: #1f1f1f;
 	font-size: 16px;
-	font-weight: normal;
+	font-weight: 700px;
 	margin-bottom: 5px;
 }
 
@@ -3908,13 +3841,13 @@ table.dataTable thead>tr>td.sorting {
 .fc-toolbar h2 {
 	font-size: 18px;
 	font-weight: 600;
-	font-family: 'CircularStd', sans-serif;
+	/* font-family: 'CircularStd', sans-serif; */
 	line-height: 30px;
 	text-transform: uppercase;
 }
 
 .fc-day-grid-event .fc-time {
-	font-family: 'CircularStd', sans-serif;
+	/* font-family: 'CircularStd', sans-serif; */
 }
 
 .fc-day {
