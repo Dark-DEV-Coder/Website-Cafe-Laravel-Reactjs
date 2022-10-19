@@ -23,7 +23,7 @@ class SanPhamController extends Controller
             'message' => 'Danh sách sản phẩm',
             'data' => SanPhamResource::collection($sanphams),
         ];
-        return response()->json($arr,200);
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -47,7 +47,7 @@ class SanPhamController extends Controller
                 'message' => 'Lỗi kiểm tra dữ liệu',
                 'data' => $validator->errors()
             ];
-            return response()->json($arr,200);            
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
         $sanpham = SanPhamModel::create($input);
         $arr = [
@@ -55,7 +55,7 @@ class SanPhamController extends Controller
             'message' => 'Sản phẩm đã tạo thành công',
             'data' => new SanPhamResource($sanpham),
         ];
-        return response()->json($arr,201);
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -74,14 +74,14 @@ class SanPhamController extends Controller
                 'message' => 'Không có sản phẩm này',
                 'data' => [],
             ];
-            return response()->json($arr,200);  
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
         }
         $arr = [
             'status' => true,
             'message' => 'Chi tiết sản phẩm',
             'data' => new SanPhamResource($sanpham),
         ];
-        return response()->json($arr,201);
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -106,7 +106,7 @@ class SanPhamController extends Controller
                 'message' => 'Lỗi kiểm tra dữ liệu',
                 'data' => $validator->errors()
             ];
-            return response()->json($arr,200);            
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
         $sanpham->MaLoaiSP = $input['MaLoaiSP'];
@@ -120,7 +120,7 @@ class SanPhamController extends Controller
             'message' => 'Sản phẩm đã cập nhật thành công',
             'data' => new SanPhamResource($sanpham),
         ];
-        return response()->json($arr,200);
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -138,6 +138,6 @@ class SanPhamController extends Controller
             'message' => 'Sản phẩm đã được xóa',
             'data' => [],
         ];
-        return response()->json($arr,200);
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }

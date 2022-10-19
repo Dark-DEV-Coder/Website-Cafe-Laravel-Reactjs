@@ -24,7 +24,7 @@ class TaiKhoanController extends Controller
             'message' => 'Danh sách tài khoản',
             'data' => TaiKhoanResource::collection($taikhoans),
         ];
-        return response()->json($arr,200);
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -47,7 +47,7 @@ class TaiKhoanController extends Controller
                 'message' => 'Lỗi kiểm tra dữ liệu',
                 'data' => $validator->errors()
             ];
-            return response()->json($arr,200);            
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
         $taikhoan = TaiKhoanModel::create($input);
         $arr = [
@@ -55,7 +55,7 @@ class TaiKhoanController extends Controller
             'message' => 'Tài khoản đã tạo thành công',
             'data' => new TaiKhoanResource($taikhoan),
         ];
-        return response()->json($arr,201);
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -81,7 +81,7 @@ class TaiKhoanController extends Controller
             'message' => 'Chi tiết tài khoản',
             'data' => new TaiKhoanResource($taikhoan),
         ];
-        return response()->json($arr,201);
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -105,7 +105,7 @@ class TaiKhoanController extends Controller
                 'message' => 'Lỗi kiểm tra dữ liệu',
                 'data' => $validator->errors()
             ];
-            return response()->json($arr,200);            
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
         $taikhoan->MaQuyen = $input['MaQuyen'];
@@ -117,7 +117,7 @@ class TaiKhoanController extends Controller
             'message' => 'Tài khoản đã cập nhật thành công',
             'data' => new TaiKhoanResource($taikhoan),
         ];
-        return response()->json($arr,200);
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -135,6 +135,6 @@ class TaiKhoanController extends Controller
             'message' => 'Tài khoản đã được xóa',
             'data' => [],
         ];
-        return response()->json($arr,200);
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }

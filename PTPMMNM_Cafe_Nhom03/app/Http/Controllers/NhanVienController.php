@@ -23,7 +23,7 @@ class NhanVienController extends Controller
             'message' => 'Danh sách nhân viên',
             'data' => NhanVienResource::collection($nhanviens),
         ];
-        return response()->json($arr,200);
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -48,7 +48,7 @@ class NhanVienController extends Controller
                 'message' => 'Lỗi kiểm tra dữ liệu',
                 'data' => $validator->errors(),
             ];
-            return response()->json($arr,200);
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
         $nhanvien = NhanVienModel::create($input);
         $arr = [
@@ -56,7 +56,7 @@ class NhanVienController extends Controller
             'message' => 'Nhân viên đã thêm thành công',
             'data' => new NhanVienResource($nhanvien),
         ];
-        return response()->json($arr,201);
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -75,14 +75,14 @@ class NhanVienController extends Controller
                 'message' => 'Không có nhân viên này',
                 'data' => [],
             ];
-            return response()->json($arr,200);
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
         $arr = [
             'status' => true,
             'message' => 'Chi tiết nhân viên',
             'data' => new NhanVienResource($nhanvien),
         ];
-        return response()->json($arr,201);
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -108,7 +108,7 @@ class NhanVienController extends Controller
                 'message' => 'Lỗi kiểm tra dữ liệu',
                 'data' => $validator->errors()
             ];
-            return response()->json($arr,200);            
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
         $nhanvien->HoNV = $input['HoNV'];
@@ -124,7 +124,7 @@ class NhanVienController extends Controller
             'message' => 'Nhân viên đã cập nhật thành công',
             'data' => new NhanVienResource($nhanvien),
         ];
-        return response()->json($arr,200);
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -142,6 +142,6 @@ class NhanVienController extends Controller
             'message' => 'Nhân viên đã được xóa',
             'data' => [],
         ];
-        return response()->json($arr,200);
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }
