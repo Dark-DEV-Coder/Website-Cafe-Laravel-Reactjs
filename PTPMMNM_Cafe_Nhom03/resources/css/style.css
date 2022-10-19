@@ -2137,6 +2137,7 @@ table.dataTable thead>tr>td.sorting {
 	font-weight: 700;
 	margin-bottom: 5px;
 	text-align: center;
+	cursor:  default;
 }
 
 .account-subtitle {

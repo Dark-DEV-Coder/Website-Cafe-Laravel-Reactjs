@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SanPhamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaiKhoanController;
@@ -19,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('tai_khoan',TaiKhoanController::class);
+Route::resource('tk',TaiKhoanController::class);
+Route::resource('sp',SanPhamController::class);

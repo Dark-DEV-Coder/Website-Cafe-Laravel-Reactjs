@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\TaiKhoanModel;
-use App\Http\Resources\TaiKhoan as TaiKhoanResource;
+use App\Models\SanPhamModel;
+use App\Http\Resources\SanPham as SanPhamResource;
 
-class TaiKhoanController extends Controller
+class SanPhamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +17,11 @@ class TaiKhoanController extends Controller
     public function index()
     {
         //
-        $taikhoans = TaiKhoanModel::all();
+        $sanphams = SanPhamModel::all();
         $arr=[
             'status' => true,
-            'message' => 'Danh sách tài khoản',
-            'data' => TaiKhoanResource::collection($taikhoans),
+            'message' => 'Danh sách sản phẩm',
+            'data' => SanPhamResource::collection($sanphams),
         ];
         return response()->json($arr,200);
     }
@@ -38,7 +37,8 @@ class TaiKhoanController extends Controller
         //
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaTK' => 'required', 'MaQuyen' => 'required', 'TenDangNhap' => 'required', 'MatKhau' => 'required',
+            'MaSP' => 'required', 'MaLoaiSP' => 'required', 'MaNCC' => 'required', 'TenSP' => 'required',
+            'Hinh' => 'required', 'MoTa' => 'required',
         ]);
 
         if ($validator->fails()){
@@ -49,11 +49,11 @@ class TaiKhoanController extends Controller
             ];
             return response()->json($arr,200);            
         }
-        $taikhoan = TaiKhoanModel::create($input);
+        $sanpham = SanPhamModel::create($input);
         $arr = [
             'status' => true,
-            'message' => 'Tài khoản đã tạo thành công',
-            'data' => new TaiKhoanResource($taikhoan),
+            'message' => 'Sản phẩm đã tạo thành công',
+            'data' => new SanPhamResource($sanpham),
         ];
         return response()->json($arr,201);
     }
@@ -67,19 +67,19 @@ class TaiKhoanController extends Controller
     public function show($id)
     {
         //
-        $taikhoan = TaiKhoanModel::find($id);
-        if (is_null($taikhoan)){
+        $sanpham = SanPhamModel::find($id);
+        if (is_null($sanpham)){
             $arr = [
                 'status' => false,
-                'message' => 'Không có tài khoản này',
+                'message' => 'Không có sản phẩm này',
                 'data' => [],
             ];
             return response()->json($arr,200);  
         }
         $arr = [
             'status' => true,
-            'message' => 'Chi tiết tài khoản',
-            'data' => new TaiKhoanResource($taikhoan),
+            'message' => 'Chi tiết sản phẩm',
+            'data' => new SanPhamResource($sanpham),
         ];
         return response()->json($arr,201);
     }
@@ -91,12 +91,13 @@ class TaiKhoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TaiKhoanModel $taikhoan)
+    public function update(Request $request, SanPhamModel $sanpham)
     {
         //
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaTK' => 'required', 'MaQuyen' => 'required', 'TenDangNhap' => 'required', 'MatKhau' => 'required',
+            'MaSP' => 'required', 'MaLoaiSP' => 'required', 'MaNCC' => 'required', 'TenSP' => 'required',
+            'Hinh' => 'required', 'MoTa' => 'required',
         ]);
 
         if ($validator->fails()){
@@ -108,15 +109,17 @@ class TaiKhoanController extends Controller
             return response()->json($arr,200);            
         }
 
-        $taikhoan->MaTK = $input['MaTK'];
-        $taikhoan->MaQuyen = $input['MaQuyen'];
-        $taikhoan->TenDangNhap = $input['TenDangNhap'];
-        $taikhoan->MatKhau = $input['MatKhau'];
+        $sanpham->MaSP = $input['MaSP'];
+        $sanpham->MaLoaiSP = $input['MaLoaiSP'];
+        $sanpham->MaNCC = $input['MaNCC'];
+        $sanpham->TenSP = $input['TenSP'];
+        $sanpham->Hinh = $input['Hinh'];
+        $sanpham->MoTa = $input['MoTa'];
 
         $arr = [
             'status' => true,
-            'message' => 'Tài khoản đã cập nhật thành công',
-            'data' => new TaiKhoanResource($taikhoan),
+            'message' => 'Sản phẩm đã cập nhật thành công',
+            'data' => new SanPhamResource($sanpham),
         ];
         return response()->json($arr,200);
     }
@@ -127,13 +130,13 @@ class TaiKhoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaiKhoanModel $taikhoan)
+    public function destroy(SanPhamModel $sanpham)
     {
         //
-        $taikhoan->delete();
+        $sanpham->delete();
         $arr=[
             'status' => true,
-            'message' => 'Tài khoản đã được xóa',
+            'message' => 'Sản phẩm đã được xóa',
             'data' => [],
         ];
         return response()->json($arr,200);
