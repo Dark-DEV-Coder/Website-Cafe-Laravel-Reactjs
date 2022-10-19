@@ -96,7 +96,7 @@ class SanPhamController extends Controller
         //
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaSP' => 'required', 'MaLoaiSP' => 'required', 'MaNCC' => 'required', 'TenSP' => 'required',
+            'MaLoaiSP' => 'required', 'MaNCC' => 'required', 'TenSP' => 'required',
             'Hinh' => 'required', 'MoTa' => 'required',
         ]);
 
@@ -109,7 +109,6 @@ class SanPhamController extends Controller
             return response()->json($arr,200);            
         }
 
-        $sanpham->MaSP = $input['MaSP'];
         $sanpham->MaLoaiSP = $input['MaLoaiSP'];
         $sanpham->MaNCC = $input['MaNCC'];
         $sanpham->TenSP = $input['TenSP'];

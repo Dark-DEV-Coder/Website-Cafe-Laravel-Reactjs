@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
-use Illuminate\Http\Request;
+use App\Http\Resources\NhanVien as NhanVienResource;
+use App\Models\NhanVienModel;
 use Illuminate\Support\Facades\Validator;
-use App\Models\TaiKhoanModel;
-use App\Http\Resources\TaiKhoan as TaiKhoanResource;
+use Illuminate\Http\Request;
 
-class TaiKhoanController extends Controller
+class NhanVienController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +17,11 @@ class TaiKhoanController extends Controller
     public function index()
     {
         //
-        $taikhoans = TaiKhoanModel::all();
+        $nhanviens = NhanVienModel::all();
         $arr=[
             'status' => true,
-            'message' => 'Danh sách tài khoản',
-            'data' => TaiKhoanResource::collection($taikhoans),
+            'message' => 'Danh sách nhân viên',
+            'data' => NhanVienResource::collection($nhanviens),
         ];
         return response()->json($arr,200);
     }
@@ -38,22 +37,24 @@ class TaiKhoanController extends Controller
         //
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaTK' => 'required', 'MaQuyen' => 'required', 'TenDangNhap' => 'required', 'MatKhau' => 'required',
+            'MaNV' => 'required', 'HoNV' => 'required', 'TenNV' => 'required',
+            'NgaySinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
+            'Email' => 'required', 'Luong' => 'required',
         ]);
-
+        
         if ($validator->fails()){
             $arr = [
                 'status' => false,
                 'message' => 'Lỗi kiểm tra dữ liệu',
-                'data' => $validator->errors()
+                'data' => $validator->errors(),
             ];
-            return response()->json($arr,200);            
+            return response()->json($arr,200);
         }
-        $taikhoan = TaiKhoanModel::create($input);
+        $nhanvien = NhanVienModel::create($input);
         $arr = [
             'status' => true,
-            'message' => 'Tài khoản đã tạo thành công',
-            'data' => new TaiKhoanResource($taikhoan),
+            'message' => 'Nhân viên đã thêm thành công',
+            'data' => new NhanVienResource($nhanvien),
         ];
         return response()->json($arr,201);
     }
@@ -67,19 +68,19 @@ class TaiKhoanController extends Controller
     public function show($id)
     {
         //
-        $taikhoan = TaiKhoanModel::find($id);
-        if (is_null($taikhoan)){
+        $nhanvien = NhanVienModel::find($id);
+        if (is_null($nhanvien)){
             $arr = [
                 'status' => false,
-                'message' => 'Không có tài khoản này',
+                'message' => 'Không có nhân viên này',
                 'data' => [],
             ];
-            return response()->json($arr,200);  
+            return response()->json($arr,200);
         }
         $arr = [
             'status' => true,
-            'message' => 'Chi tiết tài khoản',
-            'data' => new TaiKhoanResource($taikhoan),
+            'message' => 'Chi tiết nhân viên',
+            'data' => new NhanVienResource($nhanvien),
         ];
         return response()->json($arr,201);
     }
@@ -91,12 +92,14 @@ class TaiKhoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TaiKhoanModel $taikhoan)
+    public function update(Request $request, NhanVienModel $nhanvien)
     {
         //
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaQuyen' => 'required', 'TenDangNhap' => 'required', 'MatKhau' => 'required',
+            'HoNV' => 'required', 'TenNV' => 'required',
+            'NgaySinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
+            'Email' => 'required', 'Luong' => 'required',
         ]);
 
         if ($validator->fails()){
@@ -108,14 +111,18 @@ class TaiKhoanController extends Controller
             return response()->json($arr,200);            
         }
 
-        $taikhoan->MaQuyen = $input['MaQuyen'];
-        $taikhoan->TenDangNhap = $input['TenDangNhap'];
-        $taikhoan->MatKhau = $input['MatKhau'];
+        $nhanvien->HoNV = $input['HoNV'];
+        $nhanvien->TenNV = $input['TenNV'];
+        $nhanvien->NgaySinh = $input['NgaySinh'];
+        $nhanvien->DiaChi = $input['DiaChi'];
+        $nhanvien->SoDienThoai = $input['SoDienThoai'];
+        $nhanvien->Email = $input['Email'];
+        $nhanvien->Luong = $input['Luong'];
 
         $arr = [
             'status' => true,
-            'message' => 'Tài khoản đã cập nhật thành công',
-            'data' => new TaiKhoanResource($taikhoan),
+            'message' => 'Nhân viên đã cập nhật thành công',
+            'data' => new NhanVienResource($nhanvien),
         ];
         return response()->json($arr,200);
     }
@@ -126,13 +133,13 @@ class TaiKhoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaiKhoanModel $taikhoan)
+    public function destroy(NhanVienModel $nhanvien)
     {
         //
-        $taikhoan->delete();
+        $nhanvien->delete();
         $arr=[
             'status' => true,
-            'message' => 'Tài khoản đã được xóa',
+            'message' => 'Nhân viên đã được xóa',
             'data' => [],
         ];
         return response()->json($arr,200);
