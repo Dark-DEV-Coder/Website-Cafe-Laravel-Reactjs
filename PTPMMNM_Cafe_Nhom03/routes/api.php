@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\KhachHangController;
+use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\SanPhamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('tk',TaiKhoanController::class);
 Route::resource('sp',SanPhamController::class);
+Route::resource('nvien',NhanVienController::class);
+Route::resource('khhang',KhachHangController::class);
