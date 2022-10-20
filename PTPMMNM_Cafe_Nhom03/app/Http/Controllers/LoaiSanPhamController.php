@@ -17,16 +17,13 @@ class LoaiSanPhamController extends Controller
     public function index()
     {
         //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $loaisanphams = LoaiSanPhamModel::all();
+        $arr=[
+            'status' => true,
+            'message' => 'Danh sách loại sản phẩm',
+            'data' => LoaiSanPhamResource::collection($loaisanphams),
+        ];
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -38,6 +35,26 @@ class LoaiSanPhamController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $validator = Validator::make($input,[
+            'MaLoaiSP' => 'required', 'TenLoai' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Lỗi kiểm tra dữ liệu',
+                'data' => $validator->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+        $loaisanpham = LoaiSanPhamModel::create($input);
+        $arr = [
+            'status' => true,
+            'message' => 'Loại sản phẩm đã tạo thành công',
+            'data' => new LoaiSanPhamResource($loaisanpham),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -49,17 +66,21 @@ class LoaiSanPhamController extends Controller
     public function show($id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $loaisanpham = LoaiSanPhamModel::find($id);
+        if (is_null($loaisanpham)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có loại sản phẩm này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Chi tiết loại sản phẩm',
+            'data' => new LoaiSanPhamResource($loaisanpham),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -69,9 +90,31 @@ class LoaiSanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, LoaiSanPhamModel $loaisanpham)
     {
         //
+        $input = $request->all();
+        $validator = Validator::make($input,[
+            'TenLoai' => 'required'
+        ]);
+
+        if ($validator->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Lỗi kiểm tra dữ liệu',
+                'data' => $validator->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
+        $loaisanpham->TenLoai = $input['TenLoai'];
+
+        $arr = [
+            'status' => true,
+            'message' => 'Loại sản phẩm đã cập nhật thành công',
+            'data' => new LoaiSanPhamResource($loaisanpham),
+        ];
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -80,8 +123,15 @@ class LoaiSanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(LoaiSanPhamModel $loaisanpham)
     {
         //
+        $loaisanpham->delete();
+        $arr=[
+            'status' => true,
+            'message' => 'Loại sản phẩm đã được xóa',
+            'data' => [],
+        ];
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }

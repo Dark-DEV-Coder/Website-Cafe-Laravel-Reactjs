@@ -17,16 +17,13 @@ class NhaCungCapController extends Controller
     public function index()
     {
         //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $nhacungcaps = NhaCungCapModel::all();
+        $arr=[
+            'status' => true,
+            'message' => 'Danh sách nhà cung cấp',
+            'data' => NhaCungCapResource::collection($nhacungcaps),
+        ];
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -38,6 +35,26 @@ class NhaCungCapController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $validator = Validator::make($input,[
+            'MaNCC' => 'required', 'TenNCC' => 'required','DiaChi' => 'required', 'SoDienThoai' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Lỗi kiểm tra dữ liệu',
+                'data' => $validator->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+        $nhacungcap = NhaCungCapModel::create($input);
+        $arr = [
+            'status' => true,
+            'message' => 'Nhà cung cấp đã tạo thành công',
+            'data' => new NhaCungCapResource($nhacungcap),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -49,17 +66,21 @@ class NhaCungCapController extends Controller
     public function show($id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $nhacungcap = NhaCungCapModel::find($id);
+        if (is_null($nhacungcap)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có nhà cung cấp này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Chi tiết nhà cung cấp',
+            'data' => new NhaCungCapResource($nhacungcap),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -69,9 +90,33 @@ class NhaCungCapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, NhaCungCapModel $nhacungcap)
     {
         //
+        $input = $request->all();
+        $validator = Validator::make($input,[
+            'TenNCC' => 'required','DiaChi' => 'required', 'SoDienThoai' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Lỗi kiểm tra dữ liệu',
+                'data' => $validator->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
+        $nhacungcap->TenNCC = $input['TenNCC'];
+        $nhacungcap->DiaChi = $input['DiaChi'];
+        $nhacungcap->SoDienThoai = $input['SoDienThoai'];
+
+        $arr = [
+            'status' => true,
+            'message' => 'Nhà cung cấp đã cập nhật thành công',
+            'data' => new NhaCungCapResource($nhacungcap),
+        ];
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -80,8 +125,15 @@ class NhaCungCapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(NhaCungCapModel $nhacungcap)
     {
         //
+        $nhacungcap->delete();
+        $arr=[
+            'status' => true,
+            'message' => 'Nhà cung cấp đã được xóa',
+            'data' => [],
+        ];
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }

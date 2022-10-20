@@ -111,8 +111,8 @@ class KhachHangController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $khachhang->HoNV = $input['HoKH'];
-        $khachhang->TenNV = $input['TenKH'];
+        $khachhang->HoKH = $input['HoKH'];
+        $khachhang->TenKH = $input['TenKH'];
         $khachhang->NgaySinh = $input['NgaySinh'];
         $khachhang->DiaChi = $input['DiaChi'];
         $khachhang->SoDienThoai = $input['SoDienThoai'];

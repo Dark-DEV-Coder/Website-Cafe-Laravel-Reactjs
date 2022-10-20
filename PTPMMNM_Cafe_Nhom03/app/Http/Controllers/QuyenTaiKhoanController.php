@@ -73,7 +73,7 @@ class QuyenTaiKhoanController extends Controller
                 'message' => 'Không có quyền tài khoản này',
                 'data' => [],
             ];
-            return response()->json($arr,200);  
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
         }
         $arr = [
             'status' => true,
