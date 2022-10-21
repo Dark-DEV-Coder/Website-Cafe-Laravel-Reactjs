@@ -136,3 +136,6 @@ class PhieuNhapHangController extends Controller
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }
+
+
+// alo 123
