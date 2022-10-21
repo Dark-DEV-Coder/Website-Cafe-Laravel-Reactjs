@@ -7,11 +7,12 @@ import '../css/bootstrap.min.css';
 import '../css/style.css';
 import LoginIndex from './features/Login';
 import HeaderAdmin from './components/admin/header_admin';
+import App from './components/App';
 if (document.getElementById('root')) {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <p> Trang chủ</p>
+                <App></App>
                 {/* <LoginIndex /> */}
             </BrowserRouter>
 
