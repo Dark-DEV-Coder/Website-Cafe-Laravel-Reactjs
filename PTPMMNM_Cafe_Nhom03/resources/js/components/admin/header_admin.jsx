@@ -1,17 +1,11 @@
 import React from 'react'
 
-export default function Home() {
+function HeaderAdmin() {
     return (
         <div>
             {/* <!-- Header --> */}
             <div className="header">
 
-                {/* <!-- Logo --> */}
-                <div className="header-left">
-                    <a href="index.html" className="logo">
-                        <img src="assets/img/logo.png" width="40" height="40" alt="" />
-                    </a>
-                </div>
                 {/* <!-- /Logo --> */}
 
                 <a id="toggle_btn" href="javascript:void(0);">
@@ -293,3 +287,5 @@ export default function Home() {
         </div>
     )
 }
+
+export default HeaderAdmin;

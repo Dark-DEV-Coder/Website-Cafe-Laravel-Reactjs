@@ -1519,10 +1519,10 @@ table.dataTable thead>tr>td.sorting {
 
 .header {
 	background: #f43b48;
-	background: -moz-linear-gradient(left, #f43b48 0%, #453a94 100%);
-	background: -webkit-linear-gradient(left, #f43b48 0%, #453a94 100%);
-	background: -ms-linear-gradient(left, #f43b48 0%, #453a94 100%);
-	background: linear-gradient(to right, #f43b48 0%, #453a94 100%);
+	background: -moz-linear-gradient(left, #82ae46 0%, #03ae7d 100%);
+	background: -webkit-linear-gradient(left, #82ae46 0%, #03ae7d 100%);
+	background: -ms-linear-gradient(left, #82ae46 0%, #03ae7d 100%);
+	background: linear-gradient(to right, #82ae46 0%, #03ae7d 100%);
 	border-bottom: 1px solid transparent;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
 	height: 60px;
@@ -2137,7 +2137,7 @@ table.dataTable thead>tr>td.sorting {
 	font-weight: 700;
 	margin-bottom: 5px;
 	text-align: center;
-	cursor:  default;
+	cursor: default;
 }
 
 .account-subtitle {
@@ -2171,10 +2171,10 @@ table.dataTable thead>tr>td.sorting {
 }
 
 .account-box .account-btn {
-	background: -moz-linear-gradient(left, #15ca6f 0%, #03ae7d 100%);
-	background: -webkit-linear-gradient(left, #15ca6f 0%, #03ae7d 100%);
-	background: -ms-linear-gradient(left, #15ca6f 0%, #03ae7d 100%);
-	background: linear-gradient(to right, #15ca6f 0%, #03ae7d 100%);
+	background: -moz-linear-gradient(left, #82ae46 0%, #03ae7d 200%);
+	background: -webkit-linear-gradient(left, #82ae46 0%, #03ae7d 200%);
+	background: -ms-linear-gradient(left, #82ae46 0%, #03ae7d 200%);
+	background: linear-gradient(to right, #82ae46 0%, #03ae7d 200%);
 	border: 0;
 	border-radius: 4px;
 	display: block;

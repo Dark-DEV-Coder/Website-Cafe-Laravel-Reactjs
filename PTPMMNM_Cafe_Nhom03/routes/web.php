@@ -17,12 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login_admin.blade.php', function () {
+Route::get('/login', function () {
     return view('login_admin');
 });
-
-Route::get('/home_admin.blade.php', function () {
+Route::get('/admin', function () {
     return view('home_admin');
 });
+
 
 
