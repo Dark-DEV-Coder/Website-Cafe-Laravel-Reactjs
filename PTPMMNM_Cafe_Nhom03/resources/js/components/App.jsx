@@ -1,13 +1,10 @@
 import React from "react";
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from "react-router-dom";
-
-
+import HomeAdmin from "./admin/home_admin";
 const App = () => {
     return (
-        <div className="App">
-            <p>Trang chủ</p>
-        </div>
+        <>
+            <HomeAdmin></HomeAdmin>
+        </>
 
 
     )

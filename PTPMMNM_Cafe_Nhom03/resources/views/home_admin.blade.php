@@ -12,11 +12,11 @@
 
 <body>
     <div id="homeAdmin">
-    <div class="main-wrapper">
         
 
     </div>
-    </div>
+    <script src="../assets/js/sidebar.js"></script>
+
 </body>
 
 </html>
