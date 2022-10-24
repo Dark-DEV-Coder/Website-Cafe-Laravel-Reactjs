@@ -1,10 +1,10 @@
 import React from "react";
-import HomeAdmin from "./admin/home_admin";
+import Router from "../router/Router";
 const App = () => {
     return (
-        <>
-            <HomeAdmin></HomeAdmin>
-        </>
+        <div>
+            <Router />
+        </div>
 
 
     )

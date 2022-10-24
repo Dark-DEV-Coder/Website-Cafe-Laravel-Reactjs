@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-
-function LoginContainer() {
+import React from "react";
+const Index = () => {
     return (
         <div className="main-wrapper" >
             <div className="account-content">
@@ -40,10 +39,6 @@ function LoginContainer() {
                 </div>
             </div>
         </div>
-
-
-    );
-
+    )
 }
-
-export default LoginContainer;
+export default Index

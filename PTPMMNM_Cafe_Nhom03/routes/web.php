@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/login', function () {
-    return view('login_admin');
-});
-Route::get('/admin', function () {
-    return view('home_admin');
-});
+Route::get('/{pathMatch}', function(){ return view('welcome'); })->where('pathMatch',".*");
+// Route::get('/login', function () {
+//     return view('login_admin');
+// });
+// Route::get('/admin', function () {
+//     return view('home_admin');
+// });
 
 
 
