@@ -1,5 +1,5 @@
 import React from "react";
-const Index = () => {
+const LoginAdmin = () => {
     return (
         <div className="main-wrapper" >
             <div className="account-content">
@@ -41,4 +41,4 @@ const Index = () => {
         </div>
     )
 }
-export default Index
+export default LoginAdmin

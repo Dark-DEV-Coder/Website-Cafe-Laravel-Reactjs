@@ -1,0 +1,101 @@
+.sidebar {
+    font-size: 20px;
+    flex: 1;
+    border-right: 0.5px solid lightgray;
+    min-height: 100vh;
+    background-color: white;
+
+    .top {
+        font-size: 30px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .logo {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            font-style: 20px;
+            font-weight: bold;
+            color: #82ae46;
+        }
+    }
+
+    hr {
+        height: 0;
+        border: 0.5px solid lightgray;
+    }
+
+    .center {
+        padding-left: 10px;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        .title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #999;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            cursor: default;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            padding: 7px;
+            cursor: pointer;
+
+            span {
+                margin-left: 10px;
+                font-style: 14px;
+                font-weight: 400;
+                color: rgb(80, 80, 80);
+            }
+
+            &:hover {
+                background-color: #e1f7c3;
+            }
+
+            .icon {
+                font-size: 28px;
+                color: #82ae46;
+            }
+        }
+    }
+
+    .bottom {
+        display: flex;
+        align-items: center;
+        margin: 10px;
+
+        .colorOption {
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            border: 1px solid #82ae46;
+            cursor: pointer;
+            margin: 5px;
+
+            &:nth-child(1) {
+                background-color: whitesmoke;
+            }
+
+            &:nth-child(2) {
+                background-color: #333;
+            }
+
+            &:nth-child(3) {
+                background-color: darkslategray;
+            }
+        }
+    }
+}

@@ -1,8 +1,8 @@
 import React from "react";
-import Index from "./components/login_admin";
+import LoginAdmin from "./components/login_admin/LoginAdmin";
 const IndexLogin = () => {
     return (
-        <Index></Index>
+        <LoginAdmin></LoginAdmin>
     )
 }
 export default IndexLogin
