@@ -1,0 +1,31 @@
+.table {
+    font-size: 16px;
+
+    td {
+        font-size: 14px;
+    }
+
+    thead th {
+        font-size: 15px;
+        color: gray;
+        font-weight: bold;
+    }
+
+    .status {
+        height: max-content;
+        width: max-content;
+        background-color: red;
+        padding: 10px;
+        border-radius: 5px;
+
+        &.Approved {
+            color: green;
+            background-color: rgba(0, 128, 0, 0.151);
+        }
+
+        &.Pending {
+            color: goldenrod;
+            background-color: rgba(189, 189, 3, 0.103);
+        }
+    }
+}

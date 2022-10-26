@@ -8,11 +8,19 @@ const Router = () => {
         <div>
             {/* Muốn html nào k thay đổi theo router thì làm ở đây */}
             <Routes>
-                <Route path="/" element={<HomeAdmin />}></Route>
-                <Route path="/login_admin" element={<IndexLogin />}></Route>
-                <Route path="/*" element={<NotFoundPage />}></Route>
+                <Route path="/">
+                    <Route index element={<HomeAdmin />}></Route>
+                    <Route path="home" element={<HomeAdmin />}></Route>
+                    <Route path="login_admin" element={<IndexLogin />}></Route>
+                    <Route path="/404" element={<NotFoundPage />}></Route>
+                    {/* <Route path="products">
+
+                    </Route> */}
+                </Route>
+
+
             </Routes>
-        </div>
+        </div >
     )
 }
 export default Router

@@ -7,7 +7,6 @@ import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 const Dashboard = ({ type }) => {
     let data;
-
     switch (type) {
         case "user":
             data = {

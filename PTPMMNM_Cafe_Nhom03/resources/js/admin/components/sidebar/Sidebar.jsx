@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Sidebar.scss";
+import { useNavigate } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 import CategoryIcon from '@mui/icons-material/Category';
@@ -12,7 +13,12 @@ import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
 import LogoutIcon from '@mui/icons-material/Logout';
+
 const Sidebar = () => {
+    const navigate = useNavigate()
+    const click = (link) => {
+        navigate("/" + link)
+    }
     return (
         <div className='sidebar'>
             <div className="top">
@@ -22,7 +28,7 @@ const Sidebar = () => {
             <div className="center">
                 <ul>
                     <p className="title">MAIN</p>
-                    <li>
+                    <li onClick={() => click("home")}>
                         <DashboardIcon className='icon' />
                         <span>Dashboard</span>
                     </li>
