@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\TaiKhoanModel;
 use App\Http\Resources\TaiKhoan as TaiKhoanResource;
+use Illuminate\Support\Facades\DB;
 
 class TaiKhoanController extends Controller
 {
@@ -18,7 +19,7 @@ class TaiKhoanController extends Controller
     public function index()
     {
         //
-        $taikhoans = TaiKhoanModel::all();
+        $taikhoans = DB::table('tai_khoan')->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách tài khoản',
