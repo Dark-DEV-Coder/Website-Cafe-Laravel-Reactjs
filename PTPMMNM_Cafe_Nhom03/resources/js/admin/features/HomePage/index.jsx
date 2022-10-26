@@ -1,7 +1,9 @@
 import React from "react";
 import Sidebar from "./components/sidebar/Sidebar";
 import Navbar from "./components/navbar/Navbar";
-import Widget from "./components/widget/Widget";
+import Dashboard from "./components/widget/dashboard/Dashboard";
+import Featured from "./components/feature/Featured";
+import Chart from "./components/chart/Chart";
 import "./homepage.scss"
 const HomeAdmin = () => {
 
@@ -11,10 +13,14 @@ const HomeAdmin = () => {
             <div className="homeContainer">
                 <Navbar />
                 <div className="widgets">
-                    <Widget />
-                    <Widget />
-                    <Widget />
-                    <Widget />
+                    <Dashboard type={"user"} />
+                    <Dashboard type={"order"} />
+                    <Dashboard type={"erarning"} />
+                    <Dashboard type={"balance"} />
+                </div>
+                <div className="charts">
+                    <Featured />
+                    <Chart />
                 </div>
             </div>
         </div>

@@ -93,7 +93,7 @@ body {
 	overflow-x: hidden;
 }
 
-h1,
+/* h1, */
 h2,
 h3,
 h4,
@@ -104,10 +104,10 @@ h6 {
 	/* font-weight: 500; */
 }
 
-h1,
+/* h1,
 .h1 {
 	font-size: 2.25rem;
-}
+} */
 
 h2,
 .h2 {
@@ -9550,10 +9550,10 @@ ul.comment-list li ul.children {
 		font-size: 0.875rem;
 	}
 
-	h1,
+	/* h1,
 	.h1 {
 		font-size: 2rem;
-	}
+	} */
 
 	h2,
 	.h2 {

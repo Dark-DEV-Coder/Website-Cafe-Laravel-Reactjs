@@ -1,16 +1,16 @@
 import React from 'react'
 import "./Sidebar.scss";
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
-import StoreMallDirectoryIcon from '@mui/icons-material/StoreMallDirectory';
-import PaymentsIcon from '@mui/icons-material/Payments';
+import LocalCafeIcon from '@mui/icons-material/LocalCafe';
+import CategoryIcon from '@mui/icons-material/Category';
+import GroupsIcon from '@mui/icons-material/Groups';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import SettingsSystemDaydreamIcon from '@mui/icons-material/SettingsSystemDaydream';
+import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import FactCheckIcon from '@mui/icons-material/FactCheck';
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import PsychologyIcon from '@mui/icons-material/Psychology';
-import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
-import RecentActorsIcon from '@mui/icons-material/RecentActors';
+import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
 import LogoutIcon from '@mui/icons-material/Logout';
 const Sidebar = () => {
     return (
@@ -28,49 +28,48 @@ const Sidebar = () => {
                     </li>
                     <p className="title">LISTS</p>
                     <li>
-                        <SupervisedUserCircleIcon className='icon' />
-                        <span>Users</span>
+                        <LocalCafeIcon className='icon' />
+                        <span>Sản phẩm</span>
                     </li>
 
                     <li>
-                        <StoreMallDirectoryIcon className='icon' />
-                        <span>Products</span>
+                        <CategoryIcon className='icon' />
+                        <span>Loại sản phẩm</span>
                     </li>
                     <li>
-                        <PaymentsIcon className='icon' />
-                        <span>Orders</span>
+                        <GroupsIcon className='icon' />
+                        <span>Khách hàng</span>
                     </li>
                     <li>
                         <LocalShippingIcon className='icon' />
-                        <span>Delivery</span>
-                    </li>
-                    <p className="title">USEFUL</p>
-                    <li>
-                        <BarChartIcon className='icon' />
-                        <span>Statistics</span>
+                        <span>Nhà cung cấp</span>
                     </li>
                     <li>
-                        <NotificationsActiveIcon className='icon' />
-                        <span>Notifications</span>
+                        <ContactEmergencyIcon className='icon' />
+                        <span>Nhân viên</span>
                     </li>
-                    <p className="title">SERVICE</p>
                     <li>
-                        <SettingsSystemDaydreamIcon className='icon' />
-                        <span>System Health</span>
+                        <ReceiptLongIcon className='icon' />
+                        <span>Hóa đơn</span>
+                    </li>
+                    <li>
+                        <FactCheckIcon className='icon' />
+                        <span>Phiếu nhập hàng</span>
+                    </li>
+                    <p className="title">ACCOUNT</p>
+                    <li>
+                        <RecordVoiceOverIcon className='icon' />
+                        <span>Tài khoản</span>
                     </li>
                     <li>
                         <PsychologyIcon className='icon' />
-                        <span>Logs</span>
+                        <span>Quyền tài khoản</span>
                     </li>
                     <li>
-                        <SettingsSuggestIcon className='icon' />
-                        <span>Settings</span>
+                        <ThumbsUpDownIcon className='icon' />
+                        <span>Đánh giá</span>
                     </li>
                     <p className="title">USER</p>
-                    <li>
-                        <RecentActorsIcon className='icon' />
-                        <span>Profile</span>
-                    </li>
                     <li>
                         <LogoutIcon className='icon' />
                         <span>Logout</span>
