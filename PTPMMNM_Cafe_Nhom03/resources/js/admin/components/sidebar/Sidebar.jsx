@@ -13,7 +13,7 @@ import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import { Link } from 'react-router-dom';
 const Sidebar = () => {
     const navigate = useNavigate()
     const click = (link) => {
@@ -27,12 +27,10 @@ const Sidebar = () => {
             <hr />
             <div className="center">
                 <ul>
-                    <p className="title">MAIN</p>
                     <li onClick={() => click("home")}>
                         <DashboardIcon className='icon' />
                         <span>Dashboard</span>
                     </li>
-                    <p className="title">LISTS</p>
                     <li>
                         <LocalCafeIcon className='icon' />
                         <span>Sản phẩm</span>
@@ -62,7 +60,6 @@ const Sidebar = () => {
                         <FactCheckIcon className='icon' />
                         <span>Phiếu nhập hàng</span>
                     </li>
-                    <p className="title">ACCOUNT</p>
                     <li>
                         <RecordVoiceOverIcon className='icon' />
                         <span>Tài khoản</span>
@@ -75,7 +72,7 @@ const Sidebar = () => {
                         <ThumbsUpDownIcon className='icon' />
                         <span>Đánh giá</span>
                     </li>
-                    <p className="title">USER</p>
+                    <p className="title">LOG OUT</p>
                     <li>
                         <LogoutIcon className='icon' />
                         <span>Logout</span>
@@ -84,10 +81,10 @@ const Sidebar = () => {
                 </ul>
 
             </div>
-            <div className="bottom">
+            {/* <div className="bottom">
                 <div className="colorOption"></div>
                 <div className="colorOption"></div>
-            </div>
+            </div> */}
         </div>
     )
 }
