@@ -14,10 +14,9 @@ class DanhGiaSanPhamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-        $danhgiasanphams = DanhGiaSanPhamModel::all();
+    public function index() // Lấy danh sách đánh giá sản phẩm
+    {        
+        $danhgiasanphams = DanhGiaSanPhamModel::where('TrangThai','!=',0)->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách đánh giá sản phẩm',
@@ -32,15 +31,14 @@ class DanhGiaSanPhamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) // Hàm thêm mới đánh giá
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaBinhLuan' => 'required','MaTK' => 'required', 
+            'MaBinhLuan' => 'required','MaTK' => 'required', 'MaSP' => 'required',
             'BinhLuan' => 'required','SoSao' => 'required', 
         ]);
-
+        // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -49,11 +47,24 @@ class DanhGiaSanPhamController extends Controller
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
-        $danhgiasanpham = DanhGiaSanPhamModel::create($input);
+            
+        $matk = $input['MaTK'];
+        $masp = $input['MaSP'];
+        $mabl = 'BL' + $matk + $masp;
+        $bl = $input['BinhLuan'];
+        $sosao = $input['SoSao'];
+        DanhGiaSanPhamModel::insert([
+            'MaBinhLuan' => $mabl,
+            'MaTK' => $matk,
+            'MaSP' => $masp,
+            'BinhLuan' => $bl,
+            'SoSao' => $sosao,
+            'TrangThai' => 1,
+        ]);
+
         $arr = [
             'status' => true,
             'message' => 'Đánh giá sản phẩm đã tạo thành công',
-            'data' => new DanhGiaSanPhamResource($danhgiasanpham),
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -64,10 +75,9 @@ class DanhGiaSanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-        $danhgiasanpham = DanhGiaSanPhamModel::find($id);
+    public function show($id) // Tìm thông tin 1 đánh giá
+    {        
+        $danhgiasanpham = DanhGiaSanPhamModel::where('MaBinhLuan',$id)->get();
         if (is_null($danhgiasanpham)){
             $arr = [
                 'status' => false,
@@ -91,14 +101,13 @@ class DanhGiaSanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DanhGiaSanPhamModel $danhgiasanpham)
-    {
-        //
+    public function update(Request $request, $id) // Cập nhật đánh giá
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[            
             'BinhLuan' => 'required','SoSao' => 'required', 
         ]);
-
+        // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -108,13 +117,16 @@ class DanhGiaSanPhamController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $danhgiasanpham->BinhLuan = $input['BinhLuan'];
-        $danhgiasanpham->SoSao = $input['SoSao'];
+        $bl = $input['BinhLuan'];
+        $sosao = $input['SoSao'];
+        DanhGiaSanPhamModel::where('MaBinhLuan',$id)->update([
+            'BinhLuan' => $bl,
+            'SoSao' => $sosao,
+        ]);
 
         $arr = [
             'status' => true,
             'message' => 'Đánh giá sản phẩm đã cập nhật thành công',
-            'data' => new DanhGiaSanPhamResource($danhgiasanpham),
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -125,10 +137,9 @@ class DanhGiaSanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DanhGiaSanPhamModel $danhgiasanpham)
-    {
-        //
-        $danhgiasanpham->delete();
+    public function destroy($id) // Xóa đánh giá (xóa ẩn)
+    {        
+        DanhGiaSanPhamModel::where('MaBinhLuan',$id)->update(['TrangThai' => 0]);
         $arr=[
             'status' => true,
             'message' => 'Đánh giá sản phẩm đã được xóa',

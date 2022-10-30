@@ -14,15 +14,15 @@ class SanPhamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() // Hàm lấy danh sách sản phẩm
     {
-        //
-        $sanphams = SanPhamModel::all();
+        $sanphams = SanPhamModel::where('TrangThai','!=',0)->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách sản phẩm',
             'data' => SanPhamResource::collection($sanphams),
         ];
+        // Trả về dữ liệu dạng json
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
@@ -32,15 +32,14 @@ class SanPhamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) // Hàm thêm mới 1 sản phẩm
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
             'MaSP' => 'required', 'MaLoaiSP' => 'required', 'MaNCC' => 'required', 'TenSP' => 'required',
             'Hinh' => 'required', 'MoTa' => 'required',
         ]);
-
+        // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -49,11 +48,35 @@ class SanPhamController extends Controller
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
-        $sanpham = SanPhamModel::create($input);
+        $masp = $input['MaSP'];
+        $count = SanPhamModel::where('MaSP',$masp)->count();
+        if ($count > 0){ // Kiểm tra sản phẩm đã tồn tại hay chưa
+            $arr = [
+                'status' => false,
+                'message' => 'Mã sản phẩm đã tồn tại',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        }       
+        $loaisp = $input['MaLoaiSP'];
+        $ncc = $input['MaNCC'];
+        $tensp = $input['TenSP'];
+        $hinh = $input['Hinh'];
+        $mota = $input['MoTa'];
+        SanPhamModel::insert([
+                            'MaSP' => $masp,
+                            'MaLoaiSP' => $loaisp,
+                            'MaNCC' => $ncc,
+                            'TenSP' => $tensp,
+                            'Hinh' => $hinh,
+                            'MoTa' => $mota,
+                            'SoLuong' => 0,
+                            'Gia' => 0,
+                            'TrangThai' => 1,
+                            ]);
         $arr = [
             'status' => true,
             'message' => 'Sản phẩm đã tạo thành công',
-            'data' => new SanPhamResource($sanpham),
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -64,10 +87,9 @@ class SanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) // Tìm 1 sản phẩm theo mã sản phẩm
     {
-        //
-        $sanpham = SanPhamModel::find($id);
+        $sanpham = SanPhamModel::where('MaSP',$id)->get();
         if (is_null($sanpham)){
             $arr = [
                 'status' => false,
@@ -91,15 +113,14 @@ class SanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SanPhamModel $sanpham)
-    {
-        //
+    public function update(Request $request, $id) // Hàm cập nhật dữ liệu sản phẩm
+    {    
         $input = $request->all();
         $validator = Validator::make($input,[
             'MaLoaiSP' => 'required', 'MaNCC' => 'required', 'TenSP' => 'required',
             'Hinh' => 'required', 'MoTa' => 'required',
         ]);
-
+        // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -109,16 +130,22 @@ class SanPhamController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $sanpham->MaLoaiSP = $input['MaLoaiSP'];
-        $sanpham->MaNCC = $input['MaNCC'];
-        $sanpham->TenSP = $input['TenSP'];
-        $sanpham->Hinh = $input['Hinh'];
-        $sanpham->MoTa = $input['MoTa'];
+        $masp = $id;        
+        $loaisp = $input['MaLoaiSP'];
+        $ncc = $input['MaNCC'];
+        $tensp = $input['TenSP'];
+        $hinh = $input['Hinh'];
+        $mota = $input['MoTa'];
+        SanPhamModel::where('MaSP',$masp)
+                ->update([
+                        'MaLoaiSP' => $loaisp,'MaNCC' => $ncc,'TenSP' => $tensp,
+                        'Hinh' => $hinh,'MoTa' => $mota
+                    ]);
 
         $arr = [
             'status' => true,
             'message' => 'Sản phẩm đã cập nhật thành công',
-            'data' => new SanPhamResource($sanpham),
+            'data' => [],
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -129,10 +156,10 @@ class SanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SanPhamModel $sanpham)
+    public function destroy($id)
     {
         //
-        $sanpham->delete();
+        SanPhamModel::where('MaSP',$id)->update(['TrangThai' => 0]);
         $arr=[
             'status' => true,
             'message' => 'Sản phẩm đã được xóa',

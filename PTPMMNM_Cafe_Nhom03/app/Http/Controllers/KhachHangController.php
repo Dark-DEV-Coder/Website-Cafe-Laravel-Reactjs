@@ -14,10 +14,9 @@ class KhachHangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-        $khachhangs = KhachHangModel::all();
+    public function index() // Hàm lấy danh sách khách hàng
+    {        
+        $khachhangs = KhachHangModel::where('TrangThai','!=',0)->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách khách hàng',
@@ -32,16 +31,15 @@ class KhachHangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) // Hàm thêm mới thông tin khách hàng
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
             'MaKH' => 'required', 'MaTK' => 'required', 'HoKH' => 'required', 'TenKH' => 'required',
             'NgaySinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
             'Email' => 'required',
         ]);
-        
+        // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -50,11 +48,31 @@ class KhachHangController extends Controller
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
-        $khachhang = KhachHangModel::create($input);
+        
+        $count = KhachHangModel::select('MaKH')->count();
+        $makh = 'KH'+($count+1);
+        $matk = $input['MaTK'];
+        $ho = $input['HoKH'];
+        $ten = $input['TenKH'];
+        $ngay = $input['NgaySinh'];
+        $dc = $input['DiaChi'];
+        $sdt = $input['SoDienThoai'];
+        $email = $input['Email'];
+        KhachHangModel::insert([
+            'MaKH' => $makh,
+            'MaTK' => $matk,
+            'HoKH' => $ho,
+            'TenKH' => $ten,
+            'NgaySinh' => $ngay,
+            'DiaChi' => $dc,
+            'SoDienThoai' => $sdt,
+            'Email' => $email,
+            'TrangThai' => 1,
+        ]);
+
         $arr = [
             'status' => true,
             'message' => 'Khách hàng đã thêm thành công',
-            'data' => new KhachHangResource($khachhang),
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -65,10 +83,9 @@ class KhachHangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-        $khachhang = KhachHangModel::find($id);
+    public function show($id) // Hàm lấy thông tin 1 khách hàng
+    {        
+        $khachhang = KhachHangModel::where('MaKH',$id)->get();
         if (is_null($khachhang)){
             $arr = [
                 'status' => false,
@@ -92,16 +109,15 @@ class KhachHangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KhachHangModel $khachhang)
-    {
-        //
+    public function update(Request $request, $id) // Hàm cập nhật thông tin khách hàng
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
             'HoKH' => 'required', 'TenKH' => 'required',
             'NgaySinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
             'Email' => 'required',
         ]);
-
+        // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -111,17 +127,24 @@ class KhachHangController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $khachhang->HoKH = $input['HoKH'];
-        $khachhang->TenKH = $input['TenKH'];
-        $khachhang->NgaySinh = $input['NgaySinh'];
-        $khachhang->DiaChi = $input['DiaChi'];
-        $khachhang->SoDienThoai = $input['SoDienThoai'];
-        $khachhang->Email = $input['Email'];
+        $ho = $input['HoKH'];
+        $ten = $input['TenKH'];
+        $ngay = $input['NgaySinh'];
+        $dc = $input['DiaChi'];
+        $sdt = $input['SoDienThoai'];
+        $email = $input['Email'];
+        KhachHangModel::where('MaKH',$id)->update([
+            'HoKH' => $ho,
+            'TenKH' => $ten,
+            'NgaySinh' => $ngay,
+            'DiaChi' => $dc,
+            'SoDienThoai' => $sdt,
+            'Email' => $email,
+        ]);
 
         $arr = [
             'status' => true,
             'message' => 'Khách hàng đã cập nhật thành công',
-            'data' => new KhachHangResource($khachhang),
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -132,14 +155,12 @@ class KhachHangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(KhachHangModel $khachhang)
-    {
-        //
-        $khachhang->delete();
+    public function destroy($id) // Xóa khách hàng (xóa ẩn)
+    {        
+        KhachHangModel::where('MaKH',$id)->update(['TrangThai' => 0]);
         $arr=[
             'status' => true,
             'message' => 'Khách hàng đã được xóa',
-            'data' => [],
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }

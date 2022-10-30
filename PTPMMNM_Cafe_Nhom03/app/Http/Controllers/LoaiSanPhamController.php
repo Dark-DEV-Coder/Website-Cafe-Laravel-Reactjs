@@ -14,10 +14,9 @@ class LoaiSanPhamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-        $loaisanphams = LoaiSanPhamModel::all();
+    public function index() // Hàm lấy danh sách loại sản phẩm
+    {        
+        $loaisanphams = LoaiSanPhamModel::where('TrangThai','!=',0)->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách loại sản phẩm',
@@ -32,14 +31,13 @@ class LoaiSanPhamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) // Hàm thêm mới loại sản phẩm
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
             'MaLoaiSP' => 'required', 'TenLoai' => 'required',
         ]);
-
+        // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -48,11 +46,18 @@ class LoaiSanPhamController extends Controller
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
-        $loaisanpham = LoaiSanPhamModel::create($input);
+                
+        $malsp = $input['MaLoaiSP'];
+        $ten = $input['TenLoai'];
+        LoaiSanPhamModel::insert([
+            'MaLoaiSP' => $malsp,
+            'TenLoai' => $ten,
+            'TrangThai' => 1,
+        ]);
+
         $arr = [
             'status' => true,
             'message' => 'Loại sản phẩm đã tạo thành công',
-            'data' => new LoaiSanPhamResource($loaisanpham),
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -63,10 +68,9 @@ class LoaiSanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-        $loaisanpham = LoaiSanPhamModel::find($id);
+    public function show($id) // Hàm tìm thông tin 1 loại sản phẩm
+    {        
+        $loaisanpham = LoaiSanPhamModel::where('MaLoaiSP',$id)->get();
         if (is_null($loaisanpham)){
             $arr = [
                 'status' => false,
@@ -90,14 +94,13 @@ class LoaiSanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LoaiSanPhamModel $loaisanpham)
-    {
-        //
+    public function update(Request $request, $id) // Hàm cập nhật thông tin 1 loại sản phẩm
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
             'TenLoai' => 'required'
         ]);
-
+        // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -107,12 +110,14 @@ class LoaiSanPhamController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $loaisanpham->TenLoai = $input['TenLoai'];
+        $ten = $input['TenLoai'];
+        LoaiSanPhamModel::where('MaLoaiSP',$id)->update([
+            'TenLoai' => $ten,
+        ]);
 
         $arr = [
             'status' => true,
             'message' => 'Loại sản phẩm đã cập nhật thành công',
-            'data' => new LoaiSanPhamResource($loaisanpham),
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -123,14 +128,12 @@ class LoaiSanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LoaiSanPhamModel $loaisanpham)
-    {
-        //
-        $loaisanpham->delete();
+    public function destroy($id) // Xóa loại sản phẩm (xóa ẩn)
+    {        
+        LoaiSanPhamModel::where('MaLoaiSP',$id)->update(['TrangThai' => 0]);
         $arr=[
             'status' => true,
             'message' => 'Loại sản phẩm đã được xóa',
-            'data' => [],
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }

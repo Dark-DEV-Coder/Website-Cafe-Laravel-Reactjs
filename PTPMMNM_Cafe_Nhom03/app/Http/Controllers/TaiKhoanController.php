@@ -19,11 +19,11 @@ class TaiKhoanController extends Controller
     public function index()
     {
         //
-        $taikhoans = DB::table('tai_khoan')->get();
+        $taikhoans = TaiKhoanModel::where('TrangThai',0)->count();
         $arr=[
             'status' => true,
             'message' => 'Danh sách tài khoản',
-            'data' => TaiKhoanResource::collection($taikhoans),
+            'data' => $taikhoans,
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }

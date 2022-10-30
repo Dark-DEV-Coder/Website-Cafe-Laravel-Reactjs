@@ -14,10 +14,9 @@ class PhieuNhapHangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-        $phieunhaphangs = PhieuNhapHangModel::all();
+    public function index() // Hàm lấy danh sách phiếu nhập hàng
+    {        
+        $phieunhaphangs = PhieuNhapHangModel::where('TrangThai','!=',0)->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách phiếu nhập hàng',
@@ -32,14 +31,13 @@ class PhieuNhapHangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) // Hàm tạo mới phiếu nhập hàng
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaPNH' => 'required', 'MaNV' => 'required','MaNCC' => 'required', 'NgayNhapHang' => 'required',
+            'MaNV' => 'required','MaNCC' => 'required', 'NgayNhapHang' => 'required',
         ]);
-
+        // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -48,11 +46,21 @@ class PhieuNhapHangController extends Controller
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
-        $phieunhaphang = PhieuNhapHangModel::create($input);
+        $count = PhieuNhapHangModel::select('MaPNH')->count();
+        $mapnh = 'PNH'+($count+1);
+        $manv = $input['MaNV'];
+        $mancc = $input['MaNCC'];
+        $ngay = $input['NgayNhapHang'];
+        PhieuNhapHangModel::insert([
+            'MaPNH' => $mapnh,
+            'MaNV' => $manv,
+            'MaNCC' => $mancc,
+            'NgayNhapHang' => $ngay,
+            'TrangThai' => 1,
+        ]);
         $arr = [
             'status' => true,
             'message' => 'Phiếu nhập hàng đã tạo thành công',
-            'data' => new PhieuNhapHangResource($phieunhaphang),
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -63,15 +71,13 @@ class PhieuNhapHangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-        $phieunhaphang = PhieuNhapHangModel::find($id);
+    public function show($id) // Hàm tìm 1 phiếu nhập hàng
+    {        
+        $phieunhaphang = PhieuNhapHangModel::where('MaPNH',$id)->get();
         if (is_null($phieunhaphang)){
             $arr = [
                 'status' => false,
                 'message' => 'Không có phiếu nhập hàng này',
-                'data' => [],
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
         }
@@ -90,14 +96,13 @@ class PhieuNhapHangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PhieuNhapHangModel $phieunhaphang)
-    {
-        //
+    public function update(Request $request, $id) // Hàm cập nhật thông tin phiếu nhập hàng
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaNCC' => 'required', 'NgayNhapHang' => 'required',
+            'MaNV' => 'required', 'MaNCC' => 'required', 'NgayNhapHang' => 'required',
         ]);
-
+        // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -107,13 +112,18 @@ class PhieuNhapHangController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $phieunhaphang->MaNCC = $input['MaNCC'];
-        $phieunhaphang->NgayNhapHang = $input['NgayNhapHang'];
+        $manv = $input['MaNV'];
+        $mancc = $input['MaNCC'];
+        $ngay = $input['NgayNhapHang'];
+        PhieuNhapHangModel::where('MaPNH',$id)->update([
+                                                'MaNV' => $manv,
+                                                'MaNCC' => $mancc,
+                                                'NgayNhapHang' => $ngay,
+                                                ]);
 
         $arr = [
             'status' => true,
             'message' => 'Phiếu nhập hàng đã cập nhật thành công',
-            'data' => new PhieuNhapHangResource($phieunhaphang),
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -124,14 +134,12 @@ class PhieuNhapHangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PhieuNhapHangModel $phieunhaphang)
-    {
-        //
-        $phieunhaphang->delete();
+    public function destroy($id) // Xóa phiếu nhập hàng (xóa ẩn)
+    {        
+        PhieuNhapHangModel::where('MaPNH',$id)->update(['TrangThai' => 0]);
         $arr=[
             'status' => true,
             'message' => 'Phiếu nhập hàng đã được xóa',
-            'data' => [],
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }

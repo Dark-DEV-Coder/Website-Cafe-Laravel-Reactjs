@@ -14,10 +14,9 @@ class NhanVienController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-        $nhanviens = NhanVienModel::all();
+    public function index() // Hàm lấy danh sách nhân viên
+    {        
+        $nhanviens = NhanVienModel::where('TrangThai','!=',0)->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách nhân viên',
@@ -32,9 +31,8 @@ class NhanVienController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) // Hàm thêm mới thông tin nhân viên
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
             'MaNV' => 'required', 'HoNV' => 'required', 'TenNV' => 'required',
@@ -50,11 +48,30 @@ class NhanVienController extends Controller
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
-        $nhanvien = NhanVienModel::create($input);
+        $count = NhanVienModel::select('MaNV')->count();
+        $manv = 'NV'+($count+1);
+        $ho = $input['HoNV'];
+        $ten = $input['TenNV'];
+        $ngay = $input['NgaySinh'];
+        $dc = $input['DiaChi'];
+        $sdt = $input['SoDienThoai'];
+        $email = $input['Email'];
+        $luong = $input['Luong'];
+        NhanVienModel::insert([
+            'MaNV' => $manv,
+            'MaTK' => 'null',
+            'HoNV' => $ho,
+            'TenNV' => $ten,
+            'NgaySinh' => $ngay,
+            'DiaChi' => $dc,
+            'SoDienThoai' => $sdt,
+            'Email' => $email,
+            'Luong' => $luong,
+            'TrangThai' => 1,
+        ]);
         $arr = [
             'status' => true,
             'message' => 'Nhân viên đã thêm thành công',
-            'data' => new NhanVienResource($nhanvien),
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -65,15 +82,13 @@ class NhanVienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-        $nhanvien = NhanVienModel::find($id);
+    public function show($id) // Tìm thông tin 1 nhân viên
+    {        
+        $nhanvien = NhanVienModel::where('MaNV',$id)->get();
         if (is_null($nhanvien)){
             $arr = [
                 'status' => false,
                 'message' => 'Không có nhân viên này',
-                'data' => [],
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
@@ -92,16 +107,15 @@ class NhanVienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NhanVienModel $nhanvien)
-    {
-        //
+    public function update(Request $request, $id) // Cập nhật thông tin nhân viên
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'HoNV' => 'required', 'TenNV' => 'required',
+            'MaTK' => 'required', 'HoNV' => 'required', 'TenNV' => 'required',
             'NgaySinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
             'Email' => 'required', 'Luong' => 'required',
         ]);
-
+        // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -111,18 +125,28 @@ class NhanVienController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $nhanvien->HoNV = $input['HoNV'];
-        $nhanvien->TenNV = $input['TenNV'];
-        $nhanvien->NgaySinh = $input['NgaySinh'];
-        $nhanvien->DiaChi = $input['DiaChi'];
-        $nhanvien->SoDienThoai = $input['SoDienThoai'];
-        $nhanvien->Email = $input['Email'];
-        $nhanvien->Luong = $input['Luong'];
+        $matk = $input['MaTK'];
+        $ho = $input['HoNV'];
+        $ten = $input['TenNV'];
+        $ngay = $input['NgaySinh'];
+        $dc = $input['DiaChi'];
+        $sdt = $input['SoDienThoai'];
+        $email = $input['Email'];
+        $luong = $input['Luong'];
+        NhanVienModel::where('MaNV',$id)->update([
+            'MaTK' => $matk,
+            'HoNV' => $ho,
+            'TenNV' => $ten,
+            'NgaySinh' => $ngay,
+            'DiaChi' => $dc,
+            'SoDienThoai' => $sdt,
+            'Email' => $email,
+            'Luong' => $luong,
+        ]);
 
         $arr = [
             'status' => true,
             'message' => 'Nhân viên đã cập nhật thành công',
-            'data' => new NhanVienResource($nhanvien),
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -133,14 +157,12 @@ class NhanVienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NhanVienModel $nhanvien)
-    {
-        //
-        $nhanvien->delete();
+    public function destroy($id) // Hàm xóa nhân viên (xóa ẩn)
+    {        
+        NhanVienModel::where('MaNV',$id)->update(['TrangThai' => 0]);
         $arr=[
             'status' => true,
             'message' => 'Nhân viên đã được xóa',
-            'data' => [],
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }

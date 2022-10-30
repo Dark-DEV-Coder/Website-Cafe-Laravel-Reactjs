@@ -14,10 +14,9 @@ class QuyenTaiKhoanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-        $quyentaikhoans = QuyenTaiKhoanModel::all();
+    public function index() // Hàm lấy danh sách quyền tài khoản
+    {    
+        $quyentaikhoans = QuyenTaiKhoanModel::where('TrangThai','!=',0)->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách quyền tài khoản',
@@ -32,14 +31,13 @@ class QuyenTaiKhoanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) // Hàm thêm mới quyền tài khoản
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
             'MaQuyen' => 'required', 'TenQuyen' => 'required',
         ]);
-
+        //Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -48,11 +46,16 @@ class QuyenTaiKhoanController extends Controller
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
-        $quyentaikhoan = QuyenTaiKhoanModel::create($input);
+        $maq = $input['MaQuyen'];
+        $ten = $input['TenQuyen'];
+        QuyenTaiKhoanModel::insert([
+                                    'MaQuyen' => $maq,
+                                    'TenQuyen' => $ten,
+                                    'TrangThai' => 1,
+                                    ]);
         $arr = [
             'status' => true,
             'message' => 'Quyền tài khoản đã tạo thành công',
-            'data' => new QuyenTaiKhoanResource($quyentaikhoan),
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -63,10 +66,9 @@ class QuyenTaiKhoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-        $quyentaikhoan = QuyenTaiKhoanModel::find($id);
+    public function show($id) // Hàm tìm 1 quyền tài khoản
+    {        
+        $quyentaikhoan = QuyenTaiKhoanModel::where('MaQuyen',$id)->get();
         if (is_null($quyentaikhoan)){
             $arr = [
                 'status' => false,
@@ -90,14 +92,13 @@ class QuyenTaiKhoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, QuyenTaiKhoanModel $quyentaikhoan)
-    {
-        //
+    public function update(Request $request, $id) // Hàm cập nhật thông tin quyền tài khoản
+    {        
         $input = $request->all();
         $validator = Validator::make($input,[
             'TenQuyen' => 'required',
         ]);
-
+        //Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
@@ -107,12 +108,12 @@ class QuyenTaiKhoanController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $quyentaikhoan->TenQuyen = $input['TenQuyen'];
+        $ten = $input['TenQuyen'];
+        QuyenTaiKhoanModel::where('MaQuyen',$id)->update(['TenQuyen' => $ten]);
 
         $arr = [
             'status' => true,
             'message' => 'Quyền tài khoản đã cập nhật thành công',
-            'data' => new QuyenTaiKhoanResource($quyentaikhoan),
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -123,14 +124,12 @@ class QuyenTaiKhoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(QuyenTaiKhoanModel $quyentaikhoan)
-    {
-        //
-        $quyentaikhoan->delete();
+    public function destroy($id) // Hàm xóa quyền tài khoản (xóa ẩn)
+    {        
+        QuyenTaiKhoanModel::where('MaQuyen',$id)->update(['TrangThai' => 0]);
         $arr=[
             'status' => true,
             'message' => 'Quyền tài khoản đã được xóa',
-            'data' => [],
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
