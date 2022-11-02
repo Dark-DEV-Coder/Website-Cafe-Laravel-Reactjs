@@ -6,11 +6,12 @@ import Featured from "./components/feature/Featured";
 import Chart from "./components/chart/Chart";
 import "./homepage.scss"
 import Table from "./components/table/Table";
+import { listChucNang } from "../../../listTest";
 const HomeAdmin = () => {
 
     return (
         <div className="home">
-            <Sidebar />
+            <Sidebar chucNangList={listChucNang} />
             <div className="homeContainer">
                 <Navbar />
                 <div className="widgets">

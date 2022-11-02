@@ -3,11 +3,12 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Datatable from "./components/datatable/Datatable";
 import "./products.scss";
+import { listChucNang } from "../../../listTest";
 const Products = () => {
 
     return (
         <div className="list">
-            <Sidebar />
+            <Sidebar chucNangList={listChucNang} />
             <div className="listContainer">
                 <Navbar />
                 <div className="title">

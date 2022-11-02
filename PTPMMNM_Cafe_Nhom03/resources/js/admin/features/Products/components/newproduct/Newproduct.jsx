@@ -3,12 +3,13 @@ import Navbar from '../../../../components/navbar/Navbar';
 import "./Newproduct.scss";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from 'react';
+import { listChucNang } from '../../../../../listTest';
 const New = ({ inputs, title }) => {
     const [file, setFile] = useState("");
     console.log(file);
     return (
         <div className="new">
-            <Sidebar />
+            <Sidebar chucNangList={listChucNang} />
             <div className="newContainer">
                 <Navbar />
                 <div className="top">
