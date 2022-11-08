@@ -7,6 +7,9 @@ import NotFoundPage from "../components/NotFound";
 import New from "../admin/features/Products/components/newproduct/Newproduct";
 import { productInputs } from "../admin/features/Products/components/newproduct/formSource";
 import Single from "../admin/features/Products/components/singleproduct/Single";
+import Category from "../admin/features/Category";
+import Customer from "../admin/features/Customers";
+import Provider from "../admin/features/Providers";
 const Router = () => {
     return (
         <div>
@@ -21,6 +24,21 @@ const Router = () => {
                         <Route index element={<Products />}></Route>
                         <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
                         <Route path="single" element={<Single />}></Route>
+                    </Route>
+                    <Route path="category">
+                        <Route index element={<Category />}></Route>
+                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
+                        <Route path="single" element={<Single />}></Route> */}
+                    </Route>
+                    <Route path="customer">
+                        <Route index element={<Customer />}></Route>
+                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
+                        <Route path="single" element={<Single />}></Route> */}
+                    </Route>
+                    <Route path="provider">
+                        <Route index element={<Provider />}></Route>
+                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
+                        <Route path="single" element={<Single />}></Route> */}
                     </Route>
                 </Route>
 

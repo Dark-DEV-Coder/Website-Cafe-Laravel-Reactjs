@@ -26,7 +26,7 @@ const Datatable = () => {
     return (
         <div className='datatable'>
             <div className="datatableTitle">
-                Thêm Sản Phẩm
+                Thêm Khách Hàng
                 <Link to="/products/new" className="link">Thêm Mới</Link>
             </div>
             <div className="search">

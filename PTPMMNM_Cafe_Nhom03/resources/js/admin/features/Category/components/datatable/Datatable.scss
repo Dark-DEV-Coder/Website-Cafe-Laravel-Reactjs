@@ -59,41 +59,6 @@
         }
     }
 
-    .cellWithImg {
-        display: flex;
-        align-items: center;
-
-        .cellImg {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 20px;
-
-        }
-    }
-
-    .tableList {
-
-
-        .status {
-            height: max-content;
-            width: max-content;
-            background-color: red;
-            padding: 8px;
-            border-radius: 5px;
-
-            &.Still {
-                color: green;
-                background-color: rgba(0, 128, 0, 0.151);
-            }
-
-            &.Sold {
-                color: goldenrod;
-                background-color: rgba(189, 189, 3, 0.103);
-            }
-        }
-    }
 
     .cellAction {
         display: flex;
