@@ -3,6 +3,7 @@ import "./Datatable.scss";
 import { DataGrid } from '@mui/x-data-grid';
 import { productColumns, productRows } from './dataresource';
 import { Link } from 'react-router-dom';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 const Datatable = () => {
     const actionColumn = [
         {
@@ -26,8 +27,9 @@ const Datatable = () => {
     return (
         <div className='datatable'>
             <div className="datatableTitle">
-                Thêm Sản Phẩm
+                Thêm Loại Sản Phẩm
                 <Link to="/products/new" className="link">Thêm Mới</Link>
+
             </div>
             <div className="search">
                 <input type="text" placeholder="Search ..." />
