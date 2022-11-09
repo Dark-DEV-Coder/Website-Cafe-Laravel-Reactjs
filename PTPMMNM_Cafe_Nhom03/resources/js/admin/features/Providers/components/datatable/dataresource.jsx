@@ -10,7 +10,7 @@ export const productColumns = [
         },
     },
     {
-        field: "sdt", headerName: "Số điện thoại", width: 250,
+        field: "sdt", headerName: "Số điện thoại", width: 160,
     },
 ];
 

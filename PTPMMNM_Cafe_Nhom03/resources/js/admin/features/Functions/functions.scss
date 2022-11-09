@@ -1,0 +1,19 @@
+.list {
+    display: flex;
+
+    .listContainer {
+        background-color: white;
+        flex: 6;
+
+        .title {
+            align-items: center;
+            margin: 20px;
+
+            .titleProduct {
+                font-size: 25px;
+                font-weight: bold;
+                color: gray;
+            }
+        }
+    }
+}

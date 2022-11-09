@@ -35,7 +35,7 @@ const Datatable = () => {
     return (
         <div className='datatable'>
             <div className="datatableTitle">
-                Danh sách phiếu nhập hàng
+                Danh sách quyền tài khoản
                 <Link to="/products/new" className="link">Thêm Mới</Link>
             </div>
             <div className="search">

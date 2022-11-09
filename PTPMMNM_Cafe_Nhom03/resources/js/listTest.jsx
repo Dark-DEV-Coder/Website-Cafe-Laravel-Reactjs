@@ -70,12 +70,12 @@ export const listChucNang = [
         id: 10,
         name: "Quyền tài khoản",
         icon: <PsychologyIcon className='icon' />,
-        link: "kj",
+        link: "functions",
     },
     {
         id: 11,
         name: "Đánh giá",
         icon: <ThumbsUpDownIcon className='icon' />,
-        link: "kjj",
+        link: "votes",
     },
 ]
