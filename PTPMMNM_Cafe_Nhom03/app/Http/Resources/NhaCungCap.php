@@ -20,6 +20,7 @@ class NhaCungCap extends JsonResource
             'DiaChi' => $this->DiaChi,
             'SoDienThoai' => $this->SoDienThoai,
             'TrangThai' => $this->TrangThai,
+            'updated_at' => $this->updated_at,
         ];
         
     }

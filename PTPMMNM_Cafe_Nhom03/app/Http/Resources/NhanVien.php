@@ -25,6 +25,7 @@ class NhanVien extends JsonResource
             'Email' => $this->Email,
             'Luong' => $this->Luong,
             'TrangThai' => $this->TrangThai,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

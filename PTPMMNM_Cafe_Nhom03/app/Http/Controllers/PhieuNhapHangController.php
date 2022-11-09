@@ -57,6 +57,7 @@ class PhieuNhapHangController extends Controller
             'MaNCC' => $mancc,
             'NgayNhapHang' => $ngay,
             'TrangThai' => 1,
+            'updated_at' => date('Y-m-d h-i-s'),
         ]);
         $arr = [
             'status' => true,

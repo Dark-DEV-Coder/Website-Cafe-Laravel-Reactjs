@@ -9,5 +9,5 @@ class NhaCungCapModel extends Model
 {
     use HasFactory;
     protected $table = 'nha_cung_cap';
-    protected $filltable = ['MaNCC','TenNCC','DiaChi','SoDienThoai','TrangThai'];
+    protected $filltable = ['MaNCC','TenNCC','DiaChi','SoDienThoai','TrangThai','updated_at'];
 }

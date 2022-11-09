@@ -20,6 +20,7 @@ class TaiKhoan extends JsonResource
             'TenDangNhap' => $this->TenDangNhap,
             'MatKhau' => $this->MatKhau,
             'TrangThai' => $this->TrangThai,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

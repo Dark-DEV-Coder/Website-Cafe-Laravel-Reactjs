@@ -60,6 +60,7 @@ class DanhGiaSanPhamController extends Controller
             'BinhLuan' => $bl,
             'SoSao' => $sosao,
             'TrangThai' => 1,
+            'updated_at' => date('Y-m-d h-i-s'),
         ]);
 
         $arr = [

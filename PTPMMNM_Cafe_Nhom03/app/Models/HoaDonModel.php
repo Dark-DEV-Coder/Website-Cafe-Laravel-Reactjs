@@ -10,6 +10,6 @@ class HoaDonModel extends Model
     use HasFactory;
     protected $table = 'hoa_don';
     protected $filltable = ['MaHD','MaNV','MaKH','HoKH','TenKH',
-    'NgaySinh','DiaChi','SoDienThoai','Email','NgayLapHD','TongTien','TrangThai'
+    'NgaySinh','DiaChi','SoDienThoai','Email','NgayLapHD','TongTien','TrangThai','updated_at'
     ];
 }

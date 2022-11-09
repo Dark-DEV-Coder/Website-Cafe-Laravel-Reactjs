@@ -72,6 +72,7 @@ class HoaDonController extends Controller
             'Email' => $email,
             'NgayLapHoaDon' => $ngay,
             'TrangThai' => 1,
+            'updated_at' => date('Y-m-d h-i-s'),
         ]);
 
         $arr = [

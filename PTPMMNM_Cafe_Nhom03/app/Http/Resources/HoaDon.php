@@ -26,6 +26,7 @@ class HoaDon extends JsonResource
             'NgayLapHD' => $this->NgayLapHD,
             'TongTien' => $this->TongTien,
             'TrangThai' => $this->TrangThai,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

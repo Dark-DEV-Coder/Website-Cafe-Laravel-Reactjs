@@ -21,6 +21,7 @@ class PhieuNhapHang extends JsonResource
             'NgayNhapHang' => $this->NgayNhapHang,
             'TongTien' => $this->TongTien,
             'TrangThai' => $this->TrangThai,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

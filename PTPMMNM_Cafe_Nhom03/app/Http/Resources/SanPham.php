@@ -24,6 +24,7 @@ class SanPham extends JsonResource
             'SoLuong' => $this->SoLuong,
             'Gia' => $this->Gia,
             'TrangThai' => $this->TrangThai,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

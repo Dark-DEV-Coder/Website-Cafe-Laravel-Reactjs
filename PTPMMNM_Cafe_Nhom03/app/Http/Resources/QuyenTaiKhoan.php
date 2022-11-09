@@ -18,6 +18,7 @@ class QuyenTaiKhoan extends JsonResource
             'MaQuyen' => $this->MaQuyen,
             'TenQuyen' => $this->TenQuyen,            
             'TrangThai' => $this->TrangThai,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

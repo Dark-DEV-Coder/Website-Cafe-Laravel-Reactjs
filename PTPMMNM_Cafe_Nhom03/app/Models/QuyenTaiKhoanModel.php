@@ -9,5 +9,5 @@ class QuyenTaiKhoanModel extends Model
 {
     use HasFactory;
     protected $table = 'quyen_tai_khoan';
-    protected $filltable = ['MaQuyen','TenQuyen','TrangThai'];
+    protected $filltable = ['MaQuyen','TenQuyen','TrangThai','updated_at'];
 }

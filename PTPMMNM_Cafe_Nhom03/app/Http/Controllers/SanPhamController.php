@@ -73,6 +73,7 @@ class SanPhamController extends Controller
                             'SoLuong' => 0,
                             'Gia' => 0,
                             'TrangThai' => 1,
+                            'updated_at' => date('Y-m-d h-i-s'),
                             ]);
         $arr = [
             'status' => true,

@@ -24,6 +24,7 @@ class KhachHang extends JsonResource
             'SoDienThoai' => $this->SoDienThoai,
             'Email' => $this->Email,
             'TrangThai' => $this->TrangThai,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

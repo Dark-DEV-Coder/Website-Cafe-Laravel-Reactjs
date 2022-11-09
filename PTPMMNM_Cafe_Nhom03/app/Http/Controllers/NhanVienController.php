@@ -68,6 +68,7 @@ class NhanVienController extends Controller
             'Email' => $email,
             'Luong' => $luong,
             'TrangThai' => 1,
+            'updated_at' => date('Y-m-d h-i-s'),
         ]);
         $arr = [
             'status' => true,

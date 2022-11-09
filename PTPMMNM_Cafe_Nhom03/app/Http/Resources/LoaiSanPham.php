@@ -18,6 +18,7 @@ class LoaiSanPham extends JsonResource
             'MaLoaiSP' => $this->MaLoaiSP,
             'TenLoai' => $this->TenLoai,
             'TrangThai' => $this->TrangThai,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

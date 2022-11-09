@@ -9,5 +9,5 @@ class LoaiSanPhamModel extends Model
 {
     use HasFactory;
     protected $table = 'loai_sp';
-    protected $filltable = ['MaLoaiSP','TenLoai','TrangThai'];
+    protected $filltable = ['MaLoaiSP','TenLoai','TrangThai','updated_at'];
 }

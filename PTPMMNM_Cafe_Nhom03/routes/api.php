@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KhachHangController;
+use App\Http\Controllers\LoaiSanPhamController;
 use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\SanPhamController;
 use Illuminate\Http\Request;
@@ -26,3 +27,4 @@ Route::resource('tk',TaiKhoanController::class);
 Route::resource('sp',SanPhamController::class);
 Route::resource('nvien',NhanVienController::class);
 Route::resource('khhang',KhachHangController::class);
+Route::resource('lspham',LoaiSanPhamController::class);

@@ -57,6 +57,7 @@ class NhaCungCapController extends Controller
             'DiaChi' => $dc,
             'SoDienThoai' => $sdt,
             'TrangThai' => 1,
+            'updated_at' => date('Y-m-d h-i-s'),
         ]);
 
         $arr = [

@@ -51,7 +51,8 @@ class QuyenTaiKhoanController extends Controller
         QuyenTaiKhoanModel::insert([
                                     'MaQuyen' => $maq,
                                     'TenQuyen' => $ten,
-                                    'TrangThai' => 1,
+                                    'TrangThai' => 1,                                
+                                    'updated_at' => date('Y-m-d h-i-s'),
                                     ]);
         $arr = [
             'status' => true,
