@@ -16,10 +16,10 @@ const Datatable = () => {
                             </div>
                         </Link>
 
-                        <div className="deleteButton">
+                        <div className="deleteButton" style={{ padding: "8px 20px 8px 20px" }} >
                             Xóa
                         </div>
-                    </div>
+                    </div >
                 );
             },
         },
@@ -27,7 +27,7 @@ const Datatable = () => {
     return (
         <div className='datatable'>
             <div className="datatableTitle">
-                Thêm Loại Sản Phẩm
+                Danh sách loại sản phẩm
                 <Link to="/products/new" className="link">Thêm Mới</Link>
 
             </div>

@@ -10,6 +10,10 @@ import Single from "../admin/features/Products/components/singleproduct/Single";
 import Category from "../admin/features/Category";
 import Customer from "../admin/features/Customers";
 import Provider from "../admin/features/Providers";
+import Staff from "../admin/features/Staffs";
+import Bill from "../admin/features/Bills";
+import Import from "../admin/features/Imports";
+import Account from "../admin/features/Accounts";
 const Router = () => {
     return (
         <div>
@@ -37,6 +41,26 @@ const Router = () => {
                     </Route>
                     <Route path="provider">
                         <Route index element={<Provider />}></Route>
+                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
+                        <Route path="single" element={<Single />}></Route> */}
+                    </Route>
+                    <Route path="staff">
+                        <Route index element={<Staff />}></Route>
+                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
+                        <Route path="single" element={<Single />}></Route> */}
+                    </Route>
+                    <Route path="bill">
+                        <Route index element={<Bill />}></Route>
+                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
+                        <Route path="single" element={<Single />}></Route> */}
+                    </Route>
+                    <Route path="imports">
+                        <Route index element={<Import />}></Route>
+                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
+                        <Route path="single" element={<Single />}></Route> */}
+                    </Route>
+                    <Route path="accounts">
+                        <Route index element={<Account />}></Route>
                         {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
                         <Route path="single" element={<Single />}></Route> */}
                     </Route>
