@@ -8,7 +8,11 @@ import New from "../admin/features/Products/components/newproduct/Newproduct";
 import { productInputs } from "../admin/features/Products/components/newproduct/formSource";
 import Single from "../admin/features/Products/components/singleproduct/Single";
 import Category from "../admin/features/Category";
+import NewCategory from "../admin/features/Category/components/newcategory/Newcategory";
+import { categoryInputs } from "../admin/features/Category/components/newcategory/formSource";
 import Customer from "../admin/features/Customers";
+import Newcustomers from "../admin/features/Customers/components/newcustomer/Newcustomers";
+import { customerInputs } from "../admin/features/Customers/components/newcustomer/formSource";
 import Provider from "../admin/features/Providers";
 import Staff from "../admin/features/Staffs";
 import Bill from "../admin/features/Bills";
@@ -33,13 +37,13 @@ const Router = () => {
                     </Route>
                     <Route path="category">
                         <Route index element={<Category />}></Route>
-                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
-                        <Route path="single" element={<Single />}></Route> */}
+                        <Route path="new" element={<NewCategory inputs={categoryInputs} title="Thêm loại sản phẩm" />}></Route>
+                        {/* <Route path="single" element={<Single />}></Route> */}
                     </Route>
                     <Route path="customer">
                         <Route index element={<Customer />}></Route>
-                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
-                        <Route path="single" element={<Single />}></Route> */}
+                        <Route path="new" element={<Newcustomers inputs={customerInputs} title="Thêm khách hàng" />}></Route>
+                        {/* <Route path="single" element={<Single />}></Route> */}
                     </Route>
                     <Route path="provider">
                         <Route index element={<Provider />}></Route>
