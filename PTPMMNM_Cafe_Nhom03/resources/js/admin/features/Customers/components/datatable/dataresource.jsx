@@ -1,6 +1,6 @@
 export const productColumns = [
     { field: 'id', headerName: 'Mã KH', width: 120 }, {
-        field: "customers", headerName: "Tên Khách Hàng", width: 250, renderCell: (params) => {
+        field: "customers", headerName: "Tên Khách Hàng", width: 230, renderCell: (params) => {
             return (
                 <div className="cellWithImg">
                     {params.row.ho + " "}{params.row.ten}
@@ -12,13 +12,13 @@ export const productColumns = [
         field: "ngaysinh", headerName: "Ngày sinh", width: 160,
     },
     {
-        field: "gioitinh", headerName: "Giới tính", width: 150,
+        field: "gioitinh", headerName: "Giới tính", width: 110,
     },
     {
-        field: "sdt", headerName: "Số điện thoại", width: 170,
+        field: "sdt", headerName: "Số điện thoại", width: 140,
     },
     {
-        field: "email", headerName: "Email", width: 280,
+        field: "email", headerName: "Email", width: 250,
     },
 
 ];

@@ -14,6 +14,8 @@ import Staff from "../admin/features/Staffs";
 import Bill from "../admin/features/Bills";
 import Import from "../admin/features/Imports";
 import Account from "../admin/features/Accounts";
+import Function from "../admin/features/Functions";
+import Vote from "../admin/features/Votes";
 const Router = () => {
     return (
         <div>
@@ -61,6 +63,16 @@ const Router = () => {
                     </Route>
                     <Route path="accounts">
                         <Route index element={<Account />}></Route>
+                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
+                        <Route path="single" element={<Single />}></Route> */}
+                    </Route>
+                    <Route path="functions">
+                        <Route index element={<Function />}></Route>
+                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
+                        <Route path="single" element={<Single />}></Route> */}
+                    </Route>
+                    <Route path="votes">
+                        <Route index element={<Vote />}></Route>
                         {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
                         <Route path="single" element={<Single />}></Route> */}
                     </Route>

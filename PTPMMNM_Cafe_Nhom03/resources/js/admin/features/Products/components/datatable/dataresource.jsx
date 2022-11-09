@@ -10,7 +10,7 @@ export const productColumns = [
         },
     },
     {
-        field: "amount", headerName: "Số lượng", width: 160,
+        field: "amount", headerName: "Số lượng", width: 140,
     },
     {
         field: "total", headerName: "Giá tiền", width: 180,
