@@ -36,7 +36,7 @@ const Datatable = () => {
         <div className='datatable'>
             <div className="datatableTitle">
                 Danh sách phiếu nhập hàng
-                <Link to="/products/new" className="link">Thêm Mới</Link>
+                <Link to="/imports/new" className="newimport">Thêm Mới</Link>
             </div>
             <div className="search">
                 <FormControl sx={{ m: 1, minWidth: 220 }} size="small">
