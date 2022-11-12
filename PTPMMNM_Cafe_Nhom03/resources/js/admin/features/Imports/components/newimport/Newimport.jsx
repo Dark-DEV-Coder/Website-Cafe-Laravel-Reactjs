@@ -1,11 +1,14 @@
 import Sidebar from '../../../../components/sidebar/Sidebar';
 import Navbar from '../../../../components/navbar/Navbar';
-import "./Newcustomers.scss";
-import { useState } from 'react';
+import Select from "react-select";
+import "./Newimport.scss";
 import { listChucNang } from '../../../../../listTest';
-const Newcustomers = ({ inputs, title }) => {
-    const [file, setFile] = useState("");
-    console.log(file);
+const NewImport = ({ inputs, title }) => {
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
+    ]
     return (
         <div className="new">
             <Sidebar chucNangList={listChucNang} />
@@ -18,14 +21,18 @@ const Newcustomers = ({ inputs, title }) => {
 
                     <div className="right">
                         <form>
+                            <div className="formInput">
+                                <label>Nhà sản xuất</label>
+                                <Select options={options}></Select>
+                            </div>
                             {inputs.map((input) => (
                                 <div className="formInput" key={input.id}>
                                     <label>{input.label}</label>
                                     <input type={input.type} placeholder={input.placeholder} />
                                 </div>
                             ))}
-                            <div className="formInput" >
-                                <button className='newcus'>Send</button>
+                            <div className="formInput">
+                                <button>Send</button>
                             </div>
 
                         </form>
@@ -37,4 +44,4 @@ const Newcustomers = ({ inputs, title }) => {
     );
 };
 
-export default Newcustomers;
+export default NewImport;

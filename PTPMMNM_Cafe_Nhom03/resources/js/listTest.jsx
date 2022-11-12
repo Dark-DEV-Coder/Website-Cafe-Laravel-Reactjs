@@ -56,7 +56,7 @@ export const listChucNang = [
     },
     {
         id: 8,
-        name: "Phiếu nhâp hàng",
+        name: "Phiếu nhập hàng",
         icon: <FactCheckIcon className='icon' />,
         link: "imports",
     },
