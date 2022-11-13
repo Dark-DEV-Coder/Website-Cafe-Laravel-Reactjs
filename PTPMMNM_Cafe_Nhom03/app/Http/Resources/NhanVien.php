@@ -20,6 +20,7 @@ class NhanVien extends JsonResource
             'HoNV' => $this->HoNV,
             'TenNV' => $this->TenNV,
             'NgaySinh' => $this->NgaySinh,
+            'GioiTinh' => $this->GioiTinh,
             'DiaChi' => $this->DiaChi,
             'SoDienThoai' => $this->SoDienThoai,
             'Email' => $this->Email,

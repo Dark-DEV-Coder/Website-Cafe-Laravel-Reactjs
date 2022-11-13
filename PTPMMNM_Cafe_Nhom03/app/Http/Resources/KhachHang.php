@@ -20,6 +20,7 @@ class KhachHang extends JsonResource
             'HoKH' => $this->HoKH,
             'TenKH' => $this->TenKH,
             'NgaySinh' => $this->NgaySinh,
+            'GioiTinh' => $this->GioiTinh,
             'DiaChi' => $this->DiaChi,
             'SoDienThoai' => $this->SoDienThoai,
             'Email' => $this->Email,

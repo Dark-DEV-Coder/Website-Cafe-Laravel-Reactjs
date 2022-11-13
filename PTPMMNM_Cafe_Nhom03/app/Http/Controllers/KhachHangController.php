@@ -36,7 +36,7 @@ class KhachHangController extends Controller
         $input = $request->all();
         $validator = Validator::make($input,[
             'MaKH' => 'required', 'MaTK' => 'required', 'HoKH' => 'required', 'TenKH' => 'required',
-            'NgaySinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
+            'NgaySinh' => 'required', 'GioiTinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
             'Email' => 'required',
         ]);
         // Kiểm tra dữ liệu
@@ -55,6 +55,7 @@ class KhachHangController extends Controller
         $ho = $input['HoKH'];
         $ten = $input['TenKH'];
         $ngay = $input['NgaySinh'];
+        $gioitinh = $input['GioiTinh'];
         $dc = $input['DiaChi'];
         $sdt = $input['SoDienThoai'];
         $email = $input['Email'];
@@ -64,6 +65,7 @@ class KhachHangController extends Controller
             'HoKH' => $ho,
             'TenKH' => $ten,
             'NgaySinh' => $ngay,
+            'GioiTinh' => $gioitinh,
             'DiaChi' => $dc,
             'SoDienThoai' => $sdt,
             'Email' => $email,
@@ -115,7 +117,7 @@ class KhachHangController extends Controller
         $input = $request->all();
         $validator = Validator::make($input,[
             'HoKH' => 'required', 'TenKH' => 'required',
-            'NgaySinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
+            'NgaySinh' => 'required', 'GioiTinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
             'Email' => 'required',
         ]);
         // Kiểm tra dữ liệu
@@ -131,6 +133,7 @@ class KhachHangController extends Controller
         $ho = $input['HoKH'];
         $ten = $input['TenKH'];
         $ngay = $input['NgaySinh'];
+        $gioitinh = $input['GioiTinh'];
         $dc = $input['DiaChi'];
         $sdt = $input['SoDienThoai'];
         $email = $input['Email'];
@@ -138,6 +141,7 @@ class KhachHangController extends Controller
             'HoKH' => $ho,
             'TenKH' => $ten,
             'NgaySinh' => $ngay,
+            'GioiTinh' => $gioitinh,
             'DiaChi' => $dc,
             'SoDienThoai' => $sdt,
             'Email' => $email,

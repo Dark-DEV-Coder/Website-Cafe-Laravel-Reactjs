@@ -9,5 +9,5 @@ class NhanVienModel extends Model
 {
     use HasFactory;
     protected $table = 'nhan_vien';
-    protected $filltable = ['MaNV','MaTK','HoNV','TenNV','NgaySinh','DiaChi','SoDienThoai','Email','Luong','TrangThai','updated_at'];
+    protected $filltable = ['MaNV','MaTK','HoNV','TenNV','NgaySinh','GioiTinh','DiaChi','SoDienThoai','Email','Luong','TrangThai','updated_at'];
 }

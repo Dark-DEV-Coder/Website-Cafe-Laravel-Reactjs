@@ -36,7 +36,7 @@ class NhanVienController extends Controller
         $input = $request->all();
         $validator = Validator::make($input,[
             'MaNV' => 'required', 'HoNV' => 'required', 'TenNV' => 'required',
-            'NgaySinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
+            'NgaySinh' => 'required', 'GioiTinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
             'Email' => 'required', 'Luong' => 'required',
         ]);
         
@@ -52,7 +52,8 @@ class NhanVienController extends Controller
         $manv = 'NV'+($count+1);
         $ho = $input['HoNV'];
         $ten = $input['TenNV'];
-        $ngay = $input['NgaySinh'];
+        $ngay = $input['NgaySinh'];    
+        $gioitinh = $input['GioiTinh'];
         $dc = $input['DiaChi'];
         $sdt = $input['SoDienThoai'];
         $email = $input['Email'];
@@ -63,6 +64,7 @@ class NhanVienController extends Controller
             'HoNV' => $ho,
             'TenNV' => $ten,
             'NgaySinh' => $ngay,
+            'GioiTinh' => $gioitinh,
             'DiaChi' => $dc,
             'SoDienThoai' => $sdt,
             'Email' => $email,
@@ -113,7 +115,7 @@ class NhanVienController extends Controller
         $input = $request->all();
         $validator = Validator::make($input,[
             'MaTK' => 'required', 'HoNV' => 'required', 'TenNV' => 'required',
-            'NgaySinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
+            'NgaySinh' => 'required', 'GioiTinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
             'Email' => 'required', 'Luong' => 'required',
         ]);
         // Kiểm tra dữ liệu
@@ -130,6 +132,7 @@ class NhanVienController extends Controller
         $ho = $input['HoNV'];
         $ten = $input['TenNV'];
         $ngay = $input['NgaySinh'];
+        $gioitinh = $input['GioiTinh'];
         $dc = $input['DiaChi'];
         $sdt = $input['SoDienThoai'];
         $email = $input['Email'];
@@ -139,6 +142,7 @@ class NhanVienController extends Controller
             'HoNV' => $ho,
             'TenNV' => $ten,
             'NgaySinh' => $ngay,
+            'GioiTinh' => $gioitinh,
             'DiaChi' => $dc,
             'SoDienThoai' => $sdt,
             'Email' => $email,
