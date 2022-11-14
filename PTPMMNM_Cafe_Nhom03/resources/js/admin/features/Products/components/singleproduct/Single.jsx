@@ -1,11 +1,11 @@
 import "./single.scss";
-import Sidebar from '../../../../components/sidebar/Sidebar';
-import Navbar from '../../../../components/navbar/Navbar';
-
-const Single = ({ }) => {
+import Sidebar from "../../../../components/sidebar/Sidebar";
+import Navbar from "../../../../components/navbar/Navbar";
+import { listChucNang } from "../../../../../listTest";
+const SingleProduct = () => {
     return (
         <div className="single">
-            <Sidebar />
+            <Sidebar chucNangList={listChucNang} />
             <div className="singleContainer">
                 <Navbar />
                 <div className="top">
@@ -47,4 +47,4 @@ const Single = ({ }) => {
     );
 };
 
-export default Single;
+export default SingleProduct;

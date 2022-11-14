@@ -6,7 +6,7 @@ import Products from "../admin/features/Products";
 import NotFoundPage from "../components/NotFound";
 import New from "../admin/features/Products/components/newproduct/Newproduct";
 import { productInputs } from "../admin/features/Products/components/newproduct/formSource";
-import Single from "../admin/features/Products/components/singleproduct/Single";
+import SingleProduct from "../admin/features/Products/components/singleproduct/Single";
 import Category from "../admin/features/Category";
 import NewCategory from "../admin/features/Category/components/newcategory/Newcategory";
 import { categoryInputs } from "../admin/features/Category/components/newcategory/formSource";
@@ -29,6 +29,8 @@ import Account from "../admin/features/Accounts";
 import NewAccount from "../admin/features/Accounts/components/newaccount/Newaccount";
 import { accountInputs } from "../admin/features/Accounts/components/newaccount/formSource";
 import Function from "../admin/features/Functions";
+import NewFunction from "../admin/features/Functions/components/newfunction/Newfunction";
+import { functionInputs } from "../admin/features/Functions/components/newfunction/formSource";
 import Vote from "../admin/features/Votes";
 
 const Router = () => {
@@ -44,7 +46,7 @@ const Router = () => {
                     <Route path="products">
                         <Route index element={<Products />}></Route>
                         <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
-                        <Route path="single" element={<Single />}></Route>
+                        <Route path="single" element={<SingleProduct />}></Route>
                     </Route>
                     <Route path="category">
                         <Route index element={<Category />}></Route>
@@ -83,8 +85,8 @@ const Router = () => {
                     </Route>
                     <Route path="functions">
                         <Route index element={<Function />}></Route>
-                        {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
-                        <Route path="single" element={<Single />}></Route> */}
+                        <Route path="new" element={<NewFunction inputs={functionInputs} title="Thêm quyền tài khoản" />}></Route>
+                        {/* <Route path="single" element={<Single />}></Route> */}
                     </Route>
                     <Route path="votes">
                         <Route index element={<Vote />}></Route>

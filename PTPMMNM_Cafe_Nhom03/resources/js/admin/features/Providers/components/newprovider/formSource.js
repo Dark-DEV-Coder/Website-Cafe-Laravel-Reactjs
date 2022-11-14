@@ -15,9 +15,9 @@ export const providerInputs = [
         id: 3,
         label: "Số điện thoại",
         type: "number",
-        placeholder: "0"
+        placeholder: "0328332195"
     },
-        
+
 
 
 ];
