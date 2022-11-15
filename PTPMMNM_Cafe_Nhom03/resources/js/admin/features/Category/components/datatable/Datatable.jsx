@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Datatable.scss";
 import { DataGrid } from '@mui/x-data-grid';
-import { productColumns, productRows } from './dataresource';
+import { productColumns } from './dataresource';
 import { Link } from 'react-router-dom';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import InputLabel from '@mui/material/InputLabel';
@@ -14,6 +14,14 @@ const Datatable = () => {
     const handleChange = (event) => {
         setSearch(event.target.value);
     };
+
+    const [categorys, setCategory] = React.useState([]);
+    React.useEffect(() => {
+        axios.get("http://127.0.0.1:8000/api/lspham").then((response) => {
+            setCategory(response.data.data);
+        });
+    }, []);
+
     const actionColumn = [
         {
             field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
@@ -62,7 +70,8 @@ const Datatable = () => {
                 <button className='timKiem'>Tìm kiếm</button>
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
-                rows={productRows}
+                getRowId={(row) => row.MaLoaiSP} 
+                rows={categorys}
                 columns={productColumns.concat(actionColumn)}
                 pageSize={9}
                 rowsPerPageOptions={[5]}

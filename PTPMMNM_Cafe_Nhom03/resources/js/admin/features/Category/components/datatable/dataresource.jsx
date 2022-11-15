@@ -1,9 +1,9 @@
 export const productColumns = [
-    { field: 'id', headerName: 'Mã SP', width: 120 }, {
-        field: "category", headerName: "Tên sản phẩm", width: 800, renderCell: (params) => {
+    { field: 'MaLoaiSP', headerName: 'Mã loại', width: 120 }, {
+        field: "category", headerName: "Tên loại sản phẩm", width: 800, renderCell: (params) => {
             return (
                 <div className="cellWithImg">
-                    {params.row.name}
+                    {params.row.TenLoai}
                 </div>
             );
         },
@@ -11,56 +11,3 @@ export const productColumns = [
 
 ];
 
-
-export const productRows = [
-    {
-        id: 1,
-        name: "Snow",
-
-    },
-    {
-        id: 2,
-        name: "Jamie Lannister",
-
-    },
-    {
-        id: 3,
-        name: "Lannister",
-
-    },
-    {
-        id: 4,
-        name: "Stark",
-
-    },
-    {
-        id: 5,
-        name: "Targaryen",
-
-    },
-    {
-        id: 6,
-        name: "Melisandre",
-
-    },
-    {
-        id: 7,
-        name: "Clifford",
-
-    },
-    {
-        id: 8,
-        name: "Frances",
-
-    },
-    {
-        id: 9,
-        name: "Roxie",
-
-    },
-    {
-        id: 10,
-        name: "Roxie",
-
-    },
-];
