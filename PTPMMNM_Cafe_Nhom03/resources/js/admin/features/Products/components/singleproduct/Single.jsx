@@ -19,7 +19,7 @@ const SingleProduct = () => {
                                 className="itemImg"
                             />
                             <div className="details">
-                                <h1 className="itemTitle">Jane Doe</h1>
+                                <h1 className="itemTitle">Cẩm Diên</h1>
                                 <div className="detailItem">
                                     <span className="itemKey">Email:</span>
                                     <span className="itemValue">janedoe@gmail.com</span>

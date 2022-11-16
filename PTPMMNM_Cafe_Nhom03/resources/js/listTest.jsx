@@ -78,4 +78,16 @@ export const listChucNang = [
         icon: <ThumbsUpDownIcon className='icon' />,
         link: "votes",
     },
-]
+];
+
+export const testSingle =
+{
+    MaSP: "SP1",
+    MaLoaiSP: "LSP1",
+    MaNCC: "NCC1",
+    TenSP: "Cafe 123",
+    Hinh: "abcs",
+    MoTa: "ẻgegsdfgsdfg",
+    SoLuong: 12,
+    Gia: 50000,
+};

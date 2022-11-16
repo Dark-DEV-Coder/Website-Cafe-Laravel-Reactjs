@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import SingleProduct from '../singleproduct/Single';
 const Datatable = () => {
     const [age, setAge] = React.useState('');
 
@@ -26,8 +27,14 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/products/single/" >
-                            <div className="viewButton">
+                        <Link to="/products/single" >
+
+                            <div className="viewButton"
+                            // onClick={() => {
+                            //     <SingleProduct inputs={params.row}></SingleProduct>
+                            //     console.log(params.row);
+                            // }}
+                            >
                                 Xem chi tiết
                             </div>
                         </Link>
@@ -69,7 +76,7 @@ const Datatable = () => {
                 <button className='timKiem'>Tìm kiếm</button>
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
-                getRowId={(row) => row.MaSP} 
+                getRowId={(row) => row.MaSP}
                 rows={products}
                 columns={productColumns.concat(actionColumn)}
                 pageSize={9}
@@ -81,4 +88,4 @@ const Datatable = () => {
     )
 }
 
-export default Datatable
+export default Datatable;

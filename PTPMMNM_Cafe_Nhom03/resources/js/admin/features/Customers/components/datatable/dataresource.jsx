@@ -6,7 +6,7 @@ export const productColumns = [
                     {params.row.HoKH + " "}{params.row.TenKH}
                 </div>
             );
-        },
+        }
     },
     {
         field: "NgaySinh", headerName: "Ngày sinh", width: 160,
