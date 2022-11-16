@@ -16,11 +16,33 @@ const Datatable = () => {
     };
     
     const [providers, setProvider] = React.useState([]);
-    React.useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/nccap").then((response) => {
-            setProvider(response.data.data);
-        });
+    const [error, setError] = React.useState("");
+    const [loaded, setLoaded] = React.useState(false);
+    React.useEffect(() =>  {
+        (async() => {
+            try{
+                await axios.get("http://127.0.0.1:8000/api/nccap").then((response) => {
+                    setProvider(response.data.data);
+                });
+            }
+            catch(error){
+                setError(error.message);
+            }
+            finally{
+                setLoaded(true);
+            }
+        })();
+        
     }, []);
+
+    const   [deleteprovider, setDeleteProvider] = React.useState(null);
+    function DeleteProvider(id){
+        axios.delete("http://127.0.0.1:8000/api/nccap/"+ id).then((response) => {                    
+            setDeleteProvider(response.data);
+            alert(JSON.stringify(response.data.message));
+            window.location.reload();                        
+        });
+    }
 
     const actionColumn = [
         {
@@ -33,7 +55,7 @@ const Datatable = () => {
                             </div>
                         </Link>
 
-                        <div className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
+                        <div onClick={() => DeleteProvider(params.row.MaNCC)} className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
                             Xóa
                         </div>
                     </div>

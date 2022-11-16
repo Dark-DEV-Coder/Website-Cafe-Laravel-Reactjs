@@ -35,22 +35,44 @@ class NhaCungCapController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaNCC' => 'required', 'TenNCC' => 'required','DiaChi' => 'required', 'SoDienThoai' => 'required',
+            'mancc' => 'required','tenncc' => 'required','diachincc' => 'required', 'sdtncc' => 'required',
         ]);
 
         if ($validator->fails()){
             $arr = [
                 'status' => false,
-                'message' => 'Lỗi kiểm tra dữ liệu',
+                'message' => 'Chưa nhập đủ dữ liệu',
                 'data' => $validator->errors()
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $mancc = $input['MaNCC'];
-        $ten = $input['TenNCC'];
-        $dc = $input['DiaChi'];
-        $sdt = $input['SoDienThoai'];
+        $checkphone = Validator::make($input,[
+            'sdtncc' => 'regex:/^(0)+([0-9]{9})$/',
+        ]);
+        if ($checkphone->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Số điện thoại không đúng định dạng hoặc không đủ 10 chữ số',
+                'data' => $checkphone->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+       
+        $mancc = $input['mancc'];
+
+        $checkmancc = NhaCungCapModel::where('MaNCC',$mancc)->get();
+        if (!is_null($checkmancc)){
+            $arr = [
+                'status' => false,
+                'message' => 'Mã nhà cung cấp đã tồn tại',
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE); 
+        }
+
+        $ten = $input['tenncc'];
+        $dc = $input['diachincc'];
+        $sdt = $input['sdtncc'];
         NhaCungCapModel::insert([
             'MaNCC' => $mancc,
             'TenNCC' => $ten,
