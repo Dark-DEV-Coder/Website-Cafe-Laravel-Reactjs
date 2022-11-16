@@ -16,7 +16,6 @@ import Newcustomers from "../admin/features/Customers/components/newcustomer/New
 import { customerInputs } from "../admin/features/Customers/components/newcustomer/formSource";
 import Provider from "../admin/features/Providers";
 import Newprovider from "../admin/features/Providers/components/newprovider/Newprovider";
-import { providerInputs } from "../admin/features/Providers/components/newprovider/formSource";
 import Staff from "../admin/features/Staffs";
 import NewStaff from "../admin/features/Staffs/components/newstaff/Newstaff";
 import { staffInputs } from "../admin/features/Staffs/components/newstaff/formSource";
@@ -61,7 +60,7 @@ const Router = () => {
                     </Route>
                     <Route path="provider">
                         <Route index element={<Provider />}></Route>
-                        <Route path="new" element={<Newprovider inputs={providerInputs} title="Thêm nhà cung cấp" />}></Route>
+                        <Route path="new" element={<Newprovider title="Thêm nhà cung cấp" />}></Route>
                         {/* <Route path="single" element={<Single />}></Route> */}
                     </Route>
                     <Route path="staff">
