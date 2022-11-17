@@ -37,11 +37,13 @@ const Datatable = () => {
 
     const   [deleteprovider, setDeleteProvider] = React.useState(null);
     function DeleteProvider(id){
-        axios.delete("http://127.0.0.1:8000/api/nccap/"+ id).then((response) => {                    
-            setDeleteProvider(response.data);
-            alert(JSON.stringify(response.data.message));
-            window.location.reload();                        
-        });
+        if (window.confirm('Bạn có chắc muốn xóa nhà cung cấp này?')){
+            axios.delete("http://127.0.0.1:8000/api/nccap/"+ id).then((response) => {                    
+                setDeleteProvider(response.data);
+                alert(JSON.stringify(response.data.message));
+                window.location.reload();                        
+            });
+        }
     }
 
     const actionColumn = [
@@ -69,25 +71,8 @@ const Datatable = () => {
                 Danh sách nhà cung cấp
                 <Link to="/provider/new" className="newprovider">Thêm Mới</Link>
             </div>
-            <div className="search">
-                <FormControl sx={{ m: 1, minWidth: 220 }} size="small">
-                    <InputLabel id="demo-select-small">Chọn kiểu tìm kiếm</InputLabel>
-                    <Select
-                        labelId="demo-select-small"
-                        id="demo-select-small"
-                        value={search}
-                        label="Chọn kiểu tìm kiếm"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl>
-                <input type="text" placeholder="Search ..." />
+            <div className="search">                
+                <input type="text" placeholder="Nhập tên cần tìm" />
                 <button className='timKiem'>Tìm kiếm</button>
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}

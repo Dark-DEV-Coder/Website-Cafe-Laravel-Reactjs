@@ -35,20 +35,29 @@ class LoaiSanPhamController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaLoaiSP' => 'required', 'TenLoai' => 'required',
+            'maloai' => 'required', 'tenloai' => 'required',
         ]);
         // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
-                'message' => 'Lỗi kiểm tra dữ liệu',
+                'message' => 'Chưa nhập đủ dữ liệu',
                 'data' => $validator->errors()
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
                 
-        $malsp = $input['MaLoaiSP'];
-        $ten = $input['TenLoai'];
+        $malsp = $input['maloai'];
+        $checkmalsp = LoaiSanPhamModel::where('MaLoaiSP',$malsp)->count();
+        if ($checkmalsp!=0){
+            $arr = [
+                'status' => false,
+                'message' => 'Mã loại sản phẩm đã tồn tại',
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE); 
+        }
+
+        $ten = $input['tenloai'];
         LoaiSanPhamModel::insert([
             'MaLoaiSP' => $malsp,
             'TenLoai' => $ten,

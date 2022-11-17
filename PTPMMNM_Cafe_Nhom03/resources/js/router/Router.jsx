@@ -9,7 +9,6 @@ import { productInputs } from "../admin/features/Products/components/newproduct/
 import SingleProduct from "../admin/features/Products/components/singleproduct/Single";
 import Category from "../admin/features/Category";
 import NewCategory from "../admin/features/Category/components/newcategory/Newcategory";
-import { categoryInputs } from "../admin/features/Category/components/newcategory/formSource";
 import Customer from "../admin/features/Customers";
 import Newcustomers from "../admin/features/Customers/components/newcustomer/Newcustomers";
 import { customerInputs } from "../admin/features/Customers/components/newcustomer/formSource";
@@ -49,7 +48,7 @@ const Router = () => {
                     </Route>
                     <Route path="category">
                         <Route index element={<Category />}></Route>
-                        <Route path="new" element={<NewCategory inputs={categoryInputs} title="Thêm loại sản phẩm" />}></Route>
+                        <Route path="new" element={<NewCategory  title="Thêm loại sản phẩm" />}></Route>
                         {/* <Route path="single" element={<Single />}></Route> */}
                     </Route>
                     <Route path="customer">
