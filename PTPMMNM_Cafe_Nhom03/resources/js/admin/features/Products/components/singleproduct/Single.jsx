@@ -1,65 +1,60 @@
+import Sidebar from '../../../../components/sidebar/Sidebar';
+import Navbar from '../../../../components/navbar/Navbar';
 import "./Single.scss";
-import Sidebar from "../../../../components/sidebar/Sidebar";
-import Navbar from "../../../../components/navbar/Navbar";
-import { listChucNang } from "../../../../../listTest";
-import Select from "react-select";
-import { Input } from "@mui/material";
-const SingleProduct = ({ inputs }) => {
-    const options = [
-        { value: 'ad', label: 'Admin' },
-        { value: 'nv', label: 'Nhân viên' },
-        { value: 'ql', label: 'Quản lý' }
-    ]
+import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
+import { useState } from 'react';
+import { listChucNang } from '../../../../../listTest';
+const SingleProduct = ({ inputs, title }) => {
+    const [file, setFile] = useState("");
+    console.log(file);
     return (
-        <div className="single">
+        <div className="new">
             <Sidebar chucNangList={listChucNang} />
-            <div className="singleContainer">
+            <div className="newContainer">
                 <Navbar />
                 <div className="top">
+                    <h1>{title}</h1>
+                </div>
+                <div className="bottom">
                     <div className="left">
-                        <div className="editButton">Edit</div>
-                        <h1 className="title">Information</h1>
-                        <div className="item">
-                            <img
-                                src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                                alt=""
-                                className="itemImg"
-                            />
-                            <div className="details">
-                                <div>
-                                    <h1 style={{ float: "left" }} className="itemTitle">Mã SP : </h1>
-                                    <Input style={{ float: "right" }} type="text"></Input>
-                                </div>
-
-                                <div>
-                                    <h1 style={{ marginTop: "100px" }} className="itemTitle">Tên SP : Cẩm Diên</h1>
-                                </div>
-
-                                <div className="selectItem">
-                                    <Select className="selectMaLoaiSP" options={options} placeholder="Mã Loại Sản Phẩm"></Select>
-                                    <Select className="selectMaNCC" options={options} placeholder="Mã Nhà Cung Cấp"></Select>
-                                </div>
-
-                                <div className="detailItem">
-                                    <span className="itemKey">Email:</span>
-                                    <span className="itemValue">janedoe@gmail.com</span>
-                                </div>
-                                <div className="detailItem">
-                                    <span className="itemKey">Phone:</span>
-                                    <span className="itemValue">+1 2345 67 89</span>
-                                </div>
-                                <div className="detailItem">
-                                    <span className="itemKey">Address:</span>
-                                    <span className="itemValue">
-                                        Elton St. 234 Garden Yd. NewYork
-                                    </span>
-                                </div>
-                                <div className="detailItem">
-                                    <span className="itemKey">Country:</span>
-                                    <span className="itemValue">USA</span>
-                                </div>
+                        <img
+                            src={
+                                file
+                                    ? URL.createObjectURL(file)
+                                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                            }
+                            alt=""
+                        />
+                    </div>
+                    <div className="right">
+                        <form>
+                            <div className="formInput">
+                                <label htmlFor="file">
+                                    Image: <DriveFolderUploadOutlinedIcon className="icon" />
+                                </label>
+                                <input
+                                    type="file"
+                                    id="file"
+                                    onChange={(e) => setFile(e.target.files[0])}
+                                    style={{ display: "none" }}
+                                />
                             </div>
-                        </div>
+
+                            {inputs.map((input) => (
+                                <div className="formInput" key={input.id}>
+                                    <label>{input.label}</label>
+                                    <input type={input.type} placeholder={input.placeholder} />
+                                </div>
+                            ))}
+                            <div className="formInput" >
+
+                            </div>
+
+                            <div className="formInput" >
+                                <button>Send</button>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
             </div>
