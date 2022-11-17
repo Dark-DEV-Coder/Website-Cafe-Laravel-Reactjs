@@ -15,11 +15,35 @@ const Datatable = () => {
     };
 
     const [staffs, setStaff] = React.useState([]);
-    React.useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/nvien").then((response) => {
-            setStaff(response.data.data);
-        });
+    const [error, setError] = React.useState("");
+    const [loaded, setLoaded] = React.useState(false);
+    React.useEffect(() =>  {
+        (async() => {
+            try{
+                await axios.get("http://127.0.0.1:8000/api/nvien").then((response) => {
+                    setStaff(response.data.data);
+                });
+            }
+            catch(error){
+                setError(error.message);
+            }
+            finally{
+                setLoaded(true);
+            }
+        })();
+        
     }, []);
+
+    const   [deletestaff, setDeleteStaff] = React.useState(null);
+    function DeleteStaff(id){
+        if (window.confirm('Bạn có chắc muốn xóa nhân viên này?')){
+            axios.delete("http://127.0.0.1:8000/api/nvien/"+ id).then((response) => {                    
+                setDeleteStaff(response.data);
+                alert(JSON.stringify(response.data.message));
+                window.location.reload();                        
+            });
+        }
+    }
 
     const actionColumn = [
         {
@@ -32,7 +56,7 @@ const Datatable = () => {
                             </div>
                         </Link>
 
-                        <div className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
+                        <div onClick={() => DeleteStaff(params.row.MaNV)} className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
                             Xóa
                         </div>
                     </div>
@@ -46,25 +70,8 @@ const Datatable = () => {
                 Danh sách nhân viên
                 <Link to="/staff/new" className="newstaff">Thêm Mới</Link>
             </div>
-            <div className="search">
-                <FormControl sx={{ m: 1, minWidth: 220 }} size="small">
-                    <InputLabel id="demo-select-small">Chọn kiểu tìm kiếm</InputLabel>
-                    <Select
-                        labelId="demo-select-small"
-                        id="demo-select-small"
-                        value={search}
-                        label="Chọn kiểu tìm kiếm"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl>
-                <input type="text" placeholder="Search ..." />
+            <div className="search">                
+                <input type="text" placeholder="Nhập tên nhân viên cần tìm" />
                 <button className='timKiem'>Tìm kiếm</button>
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
