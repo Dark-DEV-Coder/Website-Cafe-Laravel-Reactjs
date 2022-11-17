@@ -7,7 +7,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import SingleProduct from '../singleproduct/Single';
 const Datatable = () => {
     const [age, setAge] = React.useState('');
 
@@ -22,6 +21,7 @@ const Datatable = () => {
         });
     }, []);
 
+
     const actionColumn = [
         {
             field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
@@ -29,20 +29,15 @@ const Datatable = () => {
                     <div className="cellAction">
                         <Link to="/products/single" >
 
-                            <div className="viewButton"
-                            // onClick={() => {
-                            //     <SingleProduct inputs={params.row}></SingleProduct>
-                            //     console.log(params.row);
-                            // }}
-                            >
+                            <button className="viewButtonProduct"  >
                                 Xem chi tiết
-                            </div>
+                            </button>
                         </Link>
 
                         <div className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
                             Xóa
                         </div>
-                    </div>
+                    </div >
                 );
             },
         },

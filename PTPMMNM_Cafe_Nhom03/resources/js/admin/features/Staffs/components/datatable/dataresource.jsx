@@ -12,7 +12,13 @@ export const productColumns = [
         field: "NgaySinh", headerName: "Ngày sinh", width: 140,
     },
     {
-        field: "GioiTinh", headerName: "Giới tính", width: 110,
+        field: "GioiTinh", headerName: "Giới tính", width: 110, renderCell: (params) => {
+            return (
+                <div >
+                    {params.row.GioiTinh === 1 ? "Nữ" : "Nam"}
+                </div>
+            );
+        }
     },
     {
         field: "SoDienThoai", headerName: "Số điện thoại", width: 170,

@@ -7,7 +7,6 @@ import NotFoundPage from "../components/NotFound";
 import New from "../admin/features/Products/components/newproduct/Newproduct";
 import { productInputs } from "../admin/features/Products/components/newproduct/formSource";
 import SingleProduct from "../admin/features/Products/components/singleproduct/Single";
-import { testSingle } from "../listTest";
 import Category from "../admin/features/Category";
 import NewCategory from "../admin/features/Category/components/newcategory/Newcategory";
 import { categoryInputs } from "../admin/features/Category/components/newcategory/formSource";
