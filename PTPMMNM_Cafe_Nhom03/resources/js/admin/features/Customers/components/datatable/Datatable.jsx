@@ -26,11 +26,13 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 200, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/products/single">
-                            <div className="viewButton">
-                                Xem chi tiết
-                            </div>
-                        </Link>
+                        {/* <Link to="/products/single"> */}
+                        <div className="viewButton" onClick={() => {
+                            console.log(params.row);
+                        }}>
+                            Xem chi tiết
+                        </div>
+                        {/* </Link> */}
 
                         <div className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
                             Xóa
@@ -68,7 +70,7 @@ const Datatable = () => {
                 <button className='timKiem'>Tìm kiếm</button>
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
-                getRowId={(row) => row.MaKH} 
+                getRowId={(row) => row.MaKH}
                 rows={customers}
                 columns={productColumns.concat(actionColumn)}
                 pageSize={9}

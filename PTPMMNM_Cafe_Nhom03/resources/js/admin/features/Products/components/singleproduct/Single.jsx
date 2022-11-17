@@ -1,8 +1,15 @@
-import "./single.scss";
+import "./Single.scss";
 import Sidebar from "../../../../components/sidebar/Sidebar";
 import Navbar from "../../../../components/navbar/Navbar";
 import { listChucNang } from "../../../../../listTest";
-const SingleProduct = () => {
+import Select from "react-select";
+import { Input } from "@mui/material";
+const SingleProduct = ({ inputs }) => {
+    const options = [
+        { value: 'ad', label: 'Admin' },
+        { value: 'nv', label: 'Nhân viên' },
+        { value: 'ql', label: 'Quản lý' }
+    ]
     return (
         <div className="single">
             <Sidebar chucNangList={listChucNang} />
@@ -19,7 +26,20 @@ const SingleProduct = () => {
                                 className="itemImg"
                             />
                             <div className="details">
-                                <h1 className="itemTitle">Cẩm Diên</h1>
+                                <div>
+                                    <h1 style={{ float: "left" }} className="itemTitle">Mã SP : </h1>
+                                    <Input style={{ float: "right" }} type="text"></Input>
+                                </div>
+
+                                <div>
+                                    <h1 style={{ marginTop: "100px" }} className="itemTitle">Tên SP : Cẩm Diên</h1>
+                                </div>
+
+                                <div className="selectItem">
+                                    <Select className="selectMaLoaiSP" options={options} placeholder="Mã Loại Sản Phẩm"></Select>
+                                    <Select className="selectMaNCC" options={options} placeholder="Mã Nhà Cung Cấp"></Select>
+                                </div>
+
                                 <div className="detailItem">
                                     <span className="itemKey">Email:</span>
                                     <span className="itemValue">janedoe@gmail.com</span>
