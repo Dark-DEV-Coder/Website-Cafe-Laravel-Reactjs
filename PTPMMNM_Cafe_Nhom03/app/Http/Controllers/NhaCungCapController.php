@@ -61,8 +61,8 @@ class NhaCungCapController extends Controller
        
         $mancc = $input['mancc'];
 
-        $checkmancc = NhaCungCapModel::where('MaNCC',$mancc)->get();
-        if (!is_null($checkmancc)){
+        $checkmancc = NhaCungCapModel::where('MaNCC',$mancc)->count();
+        if ($checkmancc!=0){
             $arr = [
                 'status' => false,
                 'message' => 'Mã nhà cung cấp đã tồn tại',
