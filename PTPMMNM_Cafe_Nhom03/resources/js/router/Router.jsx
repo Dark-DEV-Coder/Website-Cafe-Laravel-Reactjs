@@ -16,7 +16,6 @@ import Provider from "../admin/features/Providers";
 import Newprovider from "../admin/features/Providers/components/newprovider/Newprovider";
 import Staff from "../admin/features/Staffs";
 import NewStaff from "../admin/features/Staffs/components/newstaff/Newstaff";
-import { staffInputs } from "../admin/features/Staffs/components/newstaff/formSource";
 import Bill from "../admin/features/Bills";
 import NewBill from "../admin/features/Bills/components/newbill/Newbill";
 import { billInputs } from "../admin/features/Bills/components/newbill/formSource";
@@ -63,7 +62,7 @@ const Router = () => {
                     </Route>
                     <Route path="staff">
                         <Route index element={<Staff />}></Route>
-                        <Route path="new" element={<NewStaff inputs={staffInputs} title="Thêm nhân viên" />}></Route>
+                        <Route path="new" element={<NewStaff title="Thêm nhân viên" />}></Route>
                         {/* <Route path="single" element={<Single />}></Route> */}
                     </Route>
                     <Route path="bill">

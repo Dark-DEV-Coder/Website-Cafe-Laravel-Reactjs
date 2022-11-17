@@ -35,29 +35,54 @@ class NhanVienController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaNV' => 'required', 'HoNV' => 'required', 'TenNV' => 'required',
-            'NgaySinh' => 'required', 'GioiTinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
-            'Email' => 'required', 'Luong' => 'required',
+            'honv' => 'required', 'tennv' => 'required',
+            'ngaysinhnv' => 'required', 'gioitinhnv' => 'required', 'diachinv' => 'required','sdtnv' => 'required', 
+            'emailnv' => 'required', 'luong' => 'required',
         ]);
         
         if ($validator->fails()){
             $arr = [
                 'status' => false,
-                'message' => 'Lỗi kiểm tra dữ liệu',
+                'message' => 'Chưa nhập đủ dữ liệu',
                 'data' => $validator->errors(),
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
+
+        $checkphone = Validator::make($input,[
+            'sdtnv' => 'regex:/^(0)+([0-9]{9})$/',
+        ]);
+        if ($checkphone->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Số điện thoại không đúng định dạng hoặc không đủ 10 chữ số',
+                'data' => $checkphone->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
+        $checkmail = Validator::make($input,[
+            'emailnv' => 'email',
+        ]);
+        if ($checkmail->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Email không đúng định dạng',
+                'data' => $checkphone->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
         $count = NhanVienModel::select('MaNV')->count();
-        $manv = 'NV'+($count+1);
-        $ho = $input['HoNV'];
-        $ten = $input['TenNV'];
-        $ngay = $input['NgaySinh'];    
-        $gioitinh = $input['GioiTinh'];
-        $dc = $input['DiaChi'];
-        $sdt = $input['SoDienThoai'];
-        $email = $input['Email'];
-        $luong = $input['Luong'];
+        $manv = 'NV'.strval($count+1);
+        $ho = $input['honv'];
+        $ten = $input['tennv'];
+        $ngay = $input['ngaysinhnv'];    
+        $gioitinh = $input['gioitinhnv'];
+        $dc = $input['diachinv'];
+        $sdt = $input['sdtnv'];
+        $email = $input['emailnv'];
+        $luong = $input['luong'];
         NhanVienModel::insert([
             'MaNV' => $manv,
             'MaTK' => 'null',
