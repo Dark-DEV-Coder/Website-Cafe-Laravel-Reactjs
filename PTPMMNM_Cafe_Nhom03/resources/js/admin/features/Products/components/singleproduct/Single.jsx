@@ -15,22 +15,22 @@ const SingleProduct = ({ title }) => {
     const handleEditClick = () => {
         setInput(false);
         setShowButtonEdit(true);
-    }    
+    }
 
-    const   [inputmasp, setInputMaSP] = React.useState("");
-    const   [inputtensp, setInputTenSP] = React.useState("");
-    const   [inputncccap, setInputNCCSP] = React.useState("");
-    const   [inputlsp, setInputLoaiSP] = React.useState("");
-    const   [inputmotasp, setInputMotaSP] = React.useState("");
-    const   [inputhinhsp, setInputHinhSP] = React.useState("");
-    const   [doihinh, setDoiHinhSP] = React.useState(0);
-    const   [inputsoluong, setInputSoLuong] = React.useState("");
-    const   [inputgianhap, setInputGiaNhap] = React.useState("");
-    const   [inputgiaban, setInputGiaBan] = React.useState("");
+    const [inputmasp, setInputMaSP] = React.useState("");
+    const [inputtensp, setInputTenSP] = React.useState("");
+    const [inputncccap, setInputNCCSP] = React.useState("");
+    const [inputlsp, setInputLoaiSP] = React.useState("");
+    const [inputmotasp, setInputMotaSP] = React.useState("");
+    const [inputhinhsp, setInputHinhSP] = React.useState("");
+    const [doihinh, setDoiHinhSP] = React.useState(0);
+    const [inputsoluong, setInputSoLuong] = React.useState("");
+    const [inputgianhap, setInputGiaNhap] = React.useState("");
+    const [inputgiaban, setInputGiaBan] = React.useState("");
 
     const params = useParams();
     const [categorys, setCategory] = React.useState([]);
-    const [providers, setProvider] = React.useState([]); 
+    const [providers, setProvider] = React.useState([]);
     const [error, setError] = React.useState("");
     const [loaded, setLoaded] = React.useState(false);
     // React.useEffect(() => {                                    
@@ -56,7 +56,7 @@ const SingleProduct = ({ title }) => {
                     setProvider(response.data.data);
                 });
                 await axios.get("http://127.0.0.1:8000/api/chitietsp/" + params.id).then((response) => {
-                    setInputMaSP(response.data.data.MaSP);          
+                    setInputMaSP(response.data.data.MaSP);
                     setInputTenSP(response.data.data.TenSP);
                     setInputNCCSP(response.data.data.MaNCC);
                     setInputLoaiSP(response.data.data.MaLoaiSP);
@@ -79,63 +79,63 @@ const SingleProduct = ({ title }) => {
 
     const onChangeMaSP = event => {
         setInputMaSP(event.target.value);
-     };
-     const onChangeTenSP = event => {
+    };
+    const onChangeTenSP = event => {
         setInputTenSP(event.target.value);
-     };
-     const onChangeNCCSP = event => {
+    };
+    const onChangeNCCSP = event => {
         setInputNCCSP(event.target.value);
-     };
-     const onChangeLoaiSP = event => {
+    };
+    const onChangeLoaiSP = event => {
         setInputLoaiSP(event.target.value);
-     };
-     const onChangeMotaSP = event => {
+    };
+    const onChangeMotaSP = event => {
         setInputMotaSP(event.target.value);
-     };
-     const onChangeHinhSP = event => {
+    };
+    const onChangeHinhSP = event => {
         setInputHinhSP(event.target.files[0]);
         setFile(event.target.files[0])
         setDoiHinhSP(1);
-     };
-     const onChangeSoLuongSP = event => {
+    };
+    const onChangeSoLuongSP = event => {
         setInputSoLuong(event.target.value);
-     };
-     const onChangeGiaNhapSP = event => {
+    };
+    const onChangeGiaNhapSP = event => {
         setInputGiaNhap(event.target.value);
-     };
-     const onChangeGiaBanSP = event => {
+    };
+    const onChangeGiaBanSP = event => {
         setInputGiaBan(event.target.value);
-     };
-    
-    const   [editproduct, setEditProduct] = React.useState(null);
-    async function EditProduct(){
-        if (inputlsp == -1){
+    };
+
+    const [editproduct, setEditProduct] = React.useState(null);
+    async function EditProduct() {
+        if (inputlsp == -1) {
             alert('Chưa chọn loại sản phẩm');
             return false;
         }
-        if (inputncccap == -1){
+        if (inputncccap == -1) {
             alert('Chưa chọn nhà cung cấp');
             return false;
         }
         const data = new FormData();
-        data.append('masp',inputmasp);
-        data.append('tensp',inputtensp);
-        data.append('nccap',inputncccap);
-        data.append('lsp',inputlsp);
-        data.append('motasp',inputmotasp);
-        data.append('hinhsp',inputhinhsp);
-        data.append('doihinh',doihinh);
-        data.append('Method','PUT');
-        await axios.post("http://127.0.0.1:8000/api/sp",data).then((response) => {        
-            if (response.data.status == false){
-                alert(JSON.stringify(response.data.message));                            
-            }    
-            else{
+        data.append('masp', inputmasp);
+        data.append('tensp', inputtensp);
+        data.append('nccap', inputncccap);
+        data.append('lsp', inputlsp);
+        data.append('motasp', inputmotasp);
+        data.append('hinhsp', inputhinhsp);
+        data.append('doihinh', doihinh);
+        data.append('Method', 'PUT');
+        await axios.post("http://127.0.0.1:8000/api/sp", data).then((response) => {
+            if (response.data.status == false) {
+                alert(JSON.stringify(response.data.message));
+            }
+            else {
                 setEditProduct(response.data);
                 alert(JSON.stringify(response.data.message));
                 window.location.reload();
             }
-            
+
         });
     }
 
@@ -147,14 +147,14 @@ const SingleProduct = ({ title }) => {
                 <div className="singletop">
                     <h1>{title}</h1>
                 </div>
-                <div className="singlebottom" style={{ height: "550px" }}>
+                <div className="singlebottom" style={{ height: "570px" }}>
 
                     <div className="singleleft">
                         <img
                             src={
                                 file
                                     ? URL.createObjectURL(file)
-                                    : "http://127.0.0.1:8000/"+inputhinhsp
+                                    : "http://127.0.0.1:8000/" + inputhinhsp
                             }
                             alt=""
                         />
@@ -173,7 +173,7 @@ const SingleProduct = ({ title }) => {
                                     style={{ display: "none" }}
                                     accept='image/*'
                                 />
-                            </div>                            
+                            </div>
                             <div className='singleformInput' key='masp'>
                                 <label>Mã Sản Phẩm</label>
                                 <input type={"text"} value={inputmasp} onChange={onChangeMaSP} disabled />

@@ -32,7 +32,7 @@ const NewImport = ({ inputs, title }) => {
                                 </div>
                             ))}
                             <div className="formInput">
-                                <button>Send</button>
+                                <button className='buttonCreateImport'>Thêm Mới</button>
                             </div>
 
                         </form>

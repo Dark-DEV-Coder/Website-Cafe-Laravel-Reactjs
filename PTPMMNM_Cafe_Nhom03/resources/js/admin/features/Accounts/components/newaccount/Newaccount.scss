@@ -64,18 +64,19 @@
                             border: none;
                             border-bottom: 1px solid gray;
                         }
+                        
                     }
 
-                    button {
+                    .buttonCreateAccount {
                         width: 150px;
                         height: max-content;
                         padding: 10px;
                         border: none;
-                        background-color: teal;
+                        background-color: #82ae46;
                         color: white;
                         font-weight: bold;
                         cursor: pointer;
-                        margin-top: 20px;
+                        margin-top: 0px;
                     }
                 }
             }

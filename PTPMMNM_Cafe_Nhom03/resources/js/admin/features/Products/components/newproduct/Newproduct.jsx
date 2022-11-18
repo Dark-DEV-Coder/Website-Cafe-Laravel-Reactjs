@@ -10,7 +10,7 @@ const NewProduct = ({ title }) => {
 
     const [file, setFile] = useState("");
     const [categorys, setCategory] = React.useState([]);
-    const [providers, setProvider] = React.useState([]); 
+    const [providers, setProvider] = React.useState([]);
     const [error, setError] = React.useState("");
     const [loaded, setLoaded] = React.useState(false);
 
@@ -34,64 +34,64 @@ const NewProduct = ({ title }) => {
 
     }, []);
 
-    const   [createproduct, setCreateProduct] = React.useState(null);
-    const   [inputmasp, setInputMaSP] = React.useState("");
-    const   [inputtensp, setInputTenSP] = React.useState("");
-    const   [inputncccap, setInputNCCSP] = React.useState("");
-    const   [inputlsp, setInputLoaiSP] = React.useState("");
-    const   [inputmotasp, setInputMotaSP] = React.useState("");
-    const   [inputhinhsp, setInputHinhSP] = React.useState("");
+    const [createproduct, setCreateProduct] = React.useState(null);
+    const [inputmasp, setInputMaSP] = React.useState("");
+    const [inputtensp, setInputTenSP] = React.useState("");
+    const [inputncccap, setInputNCCSP] = React.useState("");
+    const [inputlsp, setInputLoaiSP] = React.useState("");
+    const [inputmotasp, setInputMotaSP] = React.useState("");
+    const [inputhinhsp, setInputHinhSP] = React.useState("");
 
     const onChangeMaSP = event => {
         setInputMaSP(event.target.value);
-     };
-     const onChangeTenSP = event => {
+    };
+    const onChangeTenSP = event => {
         setInputTenSP(event.target.value);
-     };
-     const onChangeNCCSP = event => {
+    };
+    const onChangeNCCSP = event => {
         setInputNCCSP(event.target.value);
-     };
-     const onChangeLoaiSP = event => {
+    };
+    const onChangeLoaiSP = event => {
         setInputLoaiSP(event.target.value);
-     };
-     const onChangeMotaSP = event => {
+    };
+    const onChangeMotaSP = event => {
         setInputMotaSP(event.target.value);
-     };
-     const onChangeHinhSP = event => {
+    };
+    const onChangeHinhSP = event => {
         setInputHinhSP(event.target.files[0]);
         setFile(event.target.files[0])
-     };
+    };
 
-    async function createProduct(){
-        if (inputlsp == -1){
+    async function createProduct() {
+        if (inputlsp == -1) {
             alert('Chưa chọn loại sản phẩm');
             return false;
         }
-        if (inputncccap == -1){
+        if (inputncccap == -1) {
             alert('Chưa chọn nhà cung cấp');
             return false;
         }
         const formData = new FormData();
-        formData.append('masp',inputmasp);
-        formData.append('tensp',inputtensp);
-        formData.append('nccap',inputncccap);
-        formData.append('lsp',inputlsp);
-        formData.append('motasp',inputmotasp);
-        formData.append('hinhsp',inputhinhsp);       
-        formData.append('Method','POST');
-        await axios.post("http://127.0.0.1:8000/api/sp",formData).then((response) => {        
-            if (response.data.status == false){
-                alert(JSON.stringify(response.data.message));                
-            }    
-            else{
+        formData.append('masp', inputmasp);
+        formData.append('tensp', inputtensp);
+        formData.append('nccap', inputncccap);
+        formData.append('lsp', inputlsp);
+        formData.append('motasp', inputmotasp);
+        formData.append('hinhsp', inputhinhsp);
+        formData.append('Method', 'POST');
+        await axios.post("http://127.0.0.1:8000/api/sp", formData).then((response) => {
+            if (response.data.status == false) {
+                alert(JSON.stringify(response.data.message));
+            }
+            else {
                 setCreateProduct(response.data);
                 alert(JSON.stringify(response.data.message));
                 window.location.reload();
             }
-            
+
         });
     }
-      
+
     return (
         <div className="new">
             <Sidebar chucNangList={listChucNang} />
@@ -128,7 +128,7 @@ const NewProduct = ({ title }) => {
                             <div className="formInput" key='masp'>
                                 <label>Mã sản phẩm</label>
                                 <input type='text' placeholder='Nhập mã sản phẩm' value={inputmasp} onChange={onChangeMaSP} />
-                            </div>                            
+                            </div>
                             <div className="formInput" key='lsp'>
                                 <label>Loại sản phẩm</label>
                                 <select value={inputlsp} onChange={onChangeLoaiSP}>
@@ -155,9 +155,9 @@ const NewProduct = ({ title }) => {
                                 <label>Mô tả</label>
                                 <textarea rows='2' placeholder='Nhập mô tả sản phẩm' value={inputmotasp} onChange={onChangeMotaSP}></textarea>
                             </div>
- 
+
                             <div className="formInput" >
-                                <button type='button' onClick={createProduct}>Thêm mới</button>
+                                <button type='button' onClick={createProduct} className="buttonCreate">Thêm mới</button>
                             </div>
 
                         </form>

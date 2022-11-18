@@ -22,7 +22,10 @@ const NewAccount = ({ inputs, title }) => {
                         <form>
                             <div className="formInput">
                                 <label>Quyền tài khoản</label>
-                                <Select options={options}></Select>
+                                <select value={13} className="select-css" >
+                                    <option value='-1'>Chọn Quyền Tài Khoản</option>
+
+                                </select>
                             </div>
                             <div className="formInput">
                             </div>
@@ -35,7 +38,7 @@ const NewAccount = ({ inputs, title }) => {
                             <div className="formInput">
                             </div>
                             <div className="formInput">
-                                <button>Send</button>
+                                <button className='buttonCreateAccount'>Thêm Mới</button>
                             </div>
 
                         </form>

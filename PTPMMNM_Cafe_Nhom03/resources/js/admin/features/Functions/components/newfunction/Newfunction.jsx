@@ -16,17 +16,19 @@ const NewFunction = ({ inputs, title }) => {
                 <div className="bottom">
                     <div className="right">
                         <form>
-                            <Checkbox label="Label"></Checkbox>
+
                             {inputs.map((input) => (
                                 <div className="formInput" key={input.id}>
                                     <label>{input.label}</label>
                                     <input type={input.type} placeholder={input.placeholder} />
                                 </div>
                             ))}
+                            <div className="formInput" >
 
+                            </div>
 
                             <div className="formInput" >
-                                <button>Send</button>
+                                <button className='buttonCreateFunction'>Thêm Mới</button>
                             </div>
 
                         </form>
