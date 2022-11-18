@@ -28,10 +28,14 @@ const Newcustomers = ({ inputs, title }) => {
                             ))}
                             <div className="formInput">
                                 <label>Giới tính</label>
-                                <Select options={options}></Select>
+                                <select value={13} className="select-css" >
+                                    <option value='-1'>Chọn giới tính</option>
+                                    <option value='0'>Nam</option>
+                                    <option value='1'>Nữ</option>
+                                </select>
                             </div>
                             <div className="formInput" >
-                                <button className='newcus'>Send</button>
+                                <button className='newcus'>Thêm Mới</button>
                             </div>
 
                         </form>

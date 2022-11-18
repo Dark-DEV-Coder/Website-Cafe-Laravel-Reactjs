@@ -118,8 +118,11 @@ const NewStaff = ({ inputs, title }) => {
                                 <label>Địa chỉ</label>
                                 <textarea rows='1' placeholder='Nhập địa chỉ' value={inputdiachinv} onChange={onChangeDiaChiNV}></textarea>
                             </div>
+                            <div className="formInput" key='diachinv'>
+
+                            </div>
                             <div className="formInput">
-                                <button type='button' onClick={createStaff}>Create</button>
+                                <button className='buttonCreateStaff' type='button' onClick={createStaff}>Thêm Mới</button>
                             </div>
 
                         </form>

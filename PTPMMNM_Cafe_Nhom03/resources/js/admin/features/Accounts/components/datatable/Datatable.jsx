@@ -39,23 +39,7 @@ const Datatable = () => {
                 <Link to="/accounts/new" className="newaccount">Thêm Mới</Link>
             </div>
             <div className="search">
-                <FormControl sx={{ m: 1, minWidth: 220 }} size="small">
-                    <InputLabel id="demo-select-small">Chọn kiểu tìm kiếm</InputLabel>
-                    <Select
-                        labelId="demo-select-small"
-                        id="demo-select-small"
-                        value={search}
-                        label="Chọn kiểu tìm kiếm"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl>
+
                 <input type="text" placeholder="Search ..." />
                 <button className='timKiem'>Tìm kiếm</button>
             </div>
