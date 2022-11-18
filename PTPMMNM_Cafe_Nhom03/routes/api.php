@@ -28,13 +28,34 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// API tài khoản
 Route::resource('tk',TaiKhoanController::class);
+
+// API sản phẩm
 Route::resource('sp',SanPhamController::class);
+Route::get('chitietsp/{id}', [SanPhamController::class, 'detail']);
+
+
+// API nhân viên
 Route::resource('nvien',NhanVienController::class);
+
+// API khách hàng
 Route::resource('khhang',KhachHangController::class);
+
+// API loại sản phẩm
 Route::resource('lspham',LoaiSanPhamController::class);
+
+// API quyền tài khoản
 Route::resource('qtkhoan',QuyenTaiKhoanController::class);
+
+// API phiếu nhập hàng
 Route::resource('pnhang',PhieuNhapHangController::class);
+
+// API nhà cung cấp
 Route::resource('nccap',NhaCungCapController::class);
+
+// API hóa đơn
 Route::resource('hdon',HoaDonController::class);
+
+// API đánh giá sản phẩm
 Route::resource('dgspham',DanhGiaSanPhamController::class);
