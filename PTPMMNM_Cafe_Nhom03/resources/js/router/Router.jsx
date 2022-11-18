@@ -22,6 +22,7 @@ import SingleStaff from "../admin/features/Staffs/components/singlestaff/Single"
 import Bill from "../admin/features/Bills";
 import NewBill from "../admin/features/Bills/components/newbill/Newbill";
 import { billInputs } from "../admin/features/Bills/components/newbill/formSource";
+import Statistical from "../admin/features/Bills/components/statistical/Statistical";
 import Import from "../admin/features/Imports";
 import NewImport from "../admin/features/Imports/components/newimport/Newimport";
 import { importInputs } from "../admin/features/Imports/components/newimport/formSource";
@@ -73,6 +74,10 @@ const Router = () => {
                         <Route index element={<Bill />}></Route>
                         <Route path="new" element={<NewBill inputs={billInputs} title="Thêm hóa đơn" />}></Route>
                         {/* <Route path="single" element={<Single />}></Route> */}
+                    </Route>
+                    <Route path="statistical">
+                        <Route index element={<Statistical />}></Route>
+
                     </Route>
                     <Route path="imports">
                         <Route index element={<Import />}></Route>
