@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import axios from 'axios';
 const Datatable = () => {
     const [age, setAge] = React.useState('');
 
@@ -15,26 +16,58 @@ const Datatable = () => {
     };
 
     const [products, setProduct] = React.useState([]);
-    React.useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/sp").then((response) => {
-            setProduct(response.data.data);
-        });
+    const [error, setError] = React.useState("");
+    const [loaded, setLoaded] = React.useState(false);
+    React.useEffect(() =>  {
+        (async() => {
+            try{
+                await axios.get("http://127.0.0.1:8000/api/sp").then((response) => {
+                    setProduct(response.data.data);
+                });
+            }
+            catch(error){
+                setError(error.message);
+            }
+            finally{
+                setLoaded(true);
+            }
+        })();
+        
     }, []);
 
+    const   [deleteproduct, setDeleteProduct] = React.useState(null);
+    async function DeleteProduct(id){
+        if (window.confirm('Bạn có chắc muốn xóa sản phẩm này?')){
+            await axios.delete("http://127.0.0.1:8000/api/sp/"+ id).then((response) => {                    
+                setDeleteProduct(response.data);
+                alert(JSON.stringify(response.data.message));
+                window.location.reload();                        
+            });
+        }
+    }
+
+    const   [inputtensp, setInputTenSP] = React.useState("");
+    const onChangeTenSP = event => {
+        setInputTenSP(event.target.value);
+     };
+    async function FindProduct(){
+        await axios.get("http://127.0.0.1:8000/api/sp/"+ inputtensp).then((response) => {                    
+            setProduct(response.data.data);                     
+        });        
+    }
 
     const actionColumn = [
         {
             field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/products/single" >
-
+                        <Link to={'/products/single/'+params.row.MaSP}  >
                             <button className="viewButtonProduct"  >
                                 Xem chi tiết
                             </button>
                         </Link>
 
-                        <div className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
+                        <div onClick={() => DeleteProduct(params.row.MaSP)} className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
                             Xóa
                         </div>
                     </div >
@@ -48,27 +81,8 @@ const Datatable = () => {
                 Danh sách sản phẩm
                 <Link to="/products/new" className="newproduct">Thêm Mới</Link>
             </div>
-            <div className="search">
-                <FormControl sx={{ m: 1, minWidth: 220 }} size="small">
-                    <InputLabel id="demo-select-small">Chọn kiểu tìm kiếm</InputLabel>
-                    <Select
-                        labelId="demo-select-small"
-                        id="demo-select-small"
-                        value={age}
-                        label="Chọn kiểu tìm kiếm"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <input type="text" placeholder="Search ..." />
-                <button className='timKiem'>Tìm kiếm</button>
+            <div className="search">               
+                <input type="text" placeholder="Nhập tên sản phẩm cần tìm" value={inputtensp} onChange={onChangeTenSP} onKeyUp={FindProduct} />
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaSP}

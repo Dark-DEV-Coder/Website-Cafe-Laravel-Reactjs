@@ -5,7 +5,6 @@ import HomeAdmin from "../admin/features/HomePage/index";
 import Products from "../admin/features/Products";
 import NotFoundPage from "../components/NotFound";
 import New from "../admin/features/Products/components/newproduct/Newproduct";
-import { productInputs } from "../admin/features/Products/components/newproduct/formSource";
 import SingleProduct from "../admin/features/Products/components/singleproduct/Single";
 import Category from "../admin/features/Category";
 import NewCategory from "../admin/features/Category/components/newcategory/Newcategory";
@@ -46,8 +45,8 @@ const Router = () => {
                     <Route path="/404" element={<NotFoundPage />}></Route>
                     <Route path="products">
                         <Route index element={<Products />}></Route>
-                        <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
-                        <Route path="single" element={<SingleProduct title="Thông tin chi tiết sản phẩm" />}></Route>
+                        <Route path="new" element={<New title="Thêm sản phẩm" />}></Route>
+                        <Route path="single/:id" element={<SingleProduct title="Thông tin chi tiết sản phẩm" />}></Route>
 
                     </Route>
                     <Route path="category">

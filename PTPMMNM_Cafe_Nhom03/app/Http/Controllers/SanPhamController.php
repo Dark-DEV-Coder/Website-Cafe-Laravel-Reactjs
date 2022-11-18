@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\SanPhamModel;
 use App\Http\Resources\SanPham as SanPhamResource;
 
+
 class SanPhamController extends Controller
-{
+{    
     /**
      * Display a listing of the resource.
      *
@@ -36,50 +37,88 @@ class SanPhamController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaSP' => 'required', 'MaLoaiSP' => 'required', 'MaNCC' => 'required', 'TenSP' => 'required',
-            'Hinh' => 'required', 'MoTa' => 'required',
+            'masp' => 'required', 'lsp' => 'required', 'nccap' => 'required', 'tensp' => 'required',
+            'motasp' => 'required', 'hinhsp' => 'required',
         ]);
         // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
-                'message' => 'Lỗi kiểm tra dữ liệu',
+                'message' => 'Chưa nhập đủ dữ liệu',
                 'data' => $validator->errors()
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
-        $masp = $input['MaSP'];
-        $count = SanPhamModel::where('MaSP',$masp)->count();
-        if ($count > 0){ // Kiểm tra sản phẩm đã tồn tại hay chưa
+        $masp = $input['masp'];
+        if ($input['Method']=='PUT'){             
+            $hinhsp = $request->file('hinhsp');  
+            $loaisp = $input['lsp'];
+            $ncc = $input['nccap'];
+            $tensp = $input['tensp'];        
+            $mota = $input['motasp'];      
+            if ($input['doihinh'] == 1){
+                $filename= date('YmdHis').'-'.$hinhsp->getClientOriginalName();        
+                $hinhsp->move('uploads/product/', $filename); 
+                $hinh = 'uploads/product/'.$filename;     
+                SanPhamModel::where('MaSP',$masp)
+                    ->update([
+                            'MaLoaiSP' => $loaisp,'MaNCC' => $ncc,'TenSP' => $tensp,
+                            'Hinh' => $hinh,'MoTa' => $mota
+                        ]);
+            }  
+            else{
+                SanPhamModel::where('MaSP',$masp)
+                    ->update([
+                            'MaLoaiSP' => $loaisp,'MaNCC' => $ncc,'TenSP' => $tensp,'MoTa' => $mota
+                        ]);       
+            }
+            
             $arr = [
-                'status' => false,
-                'message' => 'Mã sản phẩm đã tồn tại',
+                'status' => true,
+                'message' => 'Sản phẩm đã cập nhật thành công',
                 'data' => [],
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
-        }       
-        $loaisp = $input['MaLoaiSP'];
-        $ncc = $input['MaNCC'];
-        $tensp = $input['TenSP'];
-        $hinh = $input['Hinh'];
-        $mota = $input['MoTa'];
-        SanPhamModel::insert([
-                            'MaSP' => $masp,
-                            'MaLoaiSP' => $loaisp,
-                            'MaNCC' => $ncc,
-                            'TenSP' => $tensp,
-                            'Hinh' => $hinh,
-                            'MoTa' => $mota,
-                            'SoLuong' => 0,
-                            'Gia' => 0,
-                            'TrangThai' => 1,
-                            'updated_at' => date('Y-m-d h-i-s'),
-                            ]);
-        $arr = [
-            'status' => true,
-            'message' => 'Sản phẩm đã tạo thành công',
-        ];
-        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        }
+        else{            
+            $count = SanPhamModel::where('MaSP',$masp)->count();
+            if ($count != 0){ // Kiểm tra sản phẩm đã tồn tại hay chưa
+                $arr = [
+                    'status' => false,
+                    'message' => 'Mã sản phẩm đã tồn tại',
+                    'data' => [],
+                ];
+                return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+            }       
+            
+            $hinhsp = $request->file('hinhsp');        
+            $filename= date('YmdHis').'-'.$hinhsp->getClientOriginalName();        
+            $hinhsp->move('uploads/product/', $filename);                
+
+            $loaisp = $input['lsp'];
+            $ncc = $input['nccap'];
+            $tensp = $input['tensp'];
+            $hinh = 'uploads/product/'.$filename;
+            $mota = $input['motasp'];
+            SanPhamModel::insert([
+                                'MaSP' => $masp,
+                                'MaLoaiSP' => $loaisp,
+                                'MaNCC' => $ncc,
+                                'TenSP' => $tensp,
+                                'Hinh' => $hinh,
+                                'MoTa' => $mota,
+                                'SoLuong' => 0,
+                                'Gia' => 0,
+                                'GiaBan' => 0,
+                                'TrangThai' => 1,
+                                'updated_at' => date('Y-m-d h-i-s'),
+                                ]);
+            $arr = [
+                'status' => true,
+                'message' => 'Sản phẩm đã tạo thành công',
+            ];
+            return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        }        
     }
 
     /**
@@ -88,9 +127,9 @@ class SanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    public function show($ten) // Tìm 1 sản phẩm theo mã sản phẩm
     {
-        $sanpham = SanPhamModel::where('MaSP',$id)->get();
+        $sanpham = SanPhamModel::where('TenSP','like',"%$ten%")->get();
         if (is_null($sanpham)){
             $arr = [
                 'status' => false,
@@ -101,8 +140,45 @@ class SanPhamController extends Controller
         }
         $arr = [
             'status' => true,
-            'message' => 'Chi tiết sản phẩm',
+            'message' => 'Các sản phẩm cần tìm',
+            'data' => SanPhamResource::collection($sanpham),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $sanpham = SanPhamModel::where('MaSP',$id)->first();
+                                // join('loai_sp','san_pham.MaLoaiSP','=','loai_sp.MaLoaiSP')
+                                // ->join('nha_cung_cap','san_pham.MaNCC','=','nha_cung_cap.MaNCC')
+                                // ->where('san_pham.MaSP',$id)
+                                // ->select('san_pham.MaSP','loai_sp.MaLoaiSP','loai_sp.TenLoai',
+                                //         'nha_cung_cap.MaNCC','nha_cung_cap.TenNCC','san_pham.TenSP'
+                                //         ,'san_pham.Hinh','san_pham.MoTa','san_pham.SoLuong',
+                                //         'san_pham.Gia','san_pham.GiaBan')
+                                // ->first();
+        if (is_null($sanpham)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có sản phẩm này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Các sản phẩm cần tìm',
             'data' => new SanPhamResource($sanpham),
+                        // ['MaSP' => $sanpham->MaSP,'MaLoaiSP' => $sanpham->MaLoaiSP,'TenLoai' => $sanpham->TenLoai,
+                        // 'MaNCC' => $sanpham->MaNCC,'TenNCC' => $sanpham->TenNCC,'TenSP' => $sanpham->TenSP
+                        // ,'Hinh' => $sanpham->Hinh,'MoTa' => $sanpham->MoTa,'SoLuong' => $sanpham->SoLuong
+                        // ,'Gia' => $sanpham->Gia,'GiaBan' => $sanpham->GiaBan],
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -118,25 +194,34 @@ class SanPhamController extends Controller
     {    
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaLoaiSP' => 'required', 'MaNCC' => 'required', 'TenSP' => 'required',
-            'Hinh' => 'required', 'MoTa' => 'required',
+            'masp' => 'required', 'lsp' => 'required', 'nccap' => 'required', 'tensp' => 'required',
+            'motasp' => 'required', 'hinhsp' => 'required',
         ]);
         // Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
-                'message' => 'Lỗi kiểm tra dữ liệu',
-                'data' => $validator->errors()
+                'message' => 'Chưa nhập đủ dữ liệu',
+                'data' => $input
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $masp = $id;        
-        $loaisp = $input['MaLoaiSP'];
-        $ncc = $input['MaNCC'];
-        $tensp = $input['TenSP'];
-        $hinh = $input['Hinh'];
-        $mota = $input['MoTa'];
+        $masp = $id;    
+        $checkhinh = SanPhamModel::where('MaSP',$masp)->first();
+        $hinhsp = $request->file('hinhsp');        
+        if ($checkhinh->Hinh != $hinhsp){
+            $filename= date('YmdHis').'-'.$hinhsp->getClientOriginalName();        
+            $hinhsp->move('uploads/product/', $filename); 
+            $hinh = 'uploads/product/'.$filename;      
+        }  
+        else
+            $hinh=$hinhsp;       
+
+        $loaisp = $input['lsp'];
+        $ncc = $input['nccap'];
+        $tensp = $input['tensp'];        
+        $mota = $input['motasp'];
         SanPhamModel::where('MaSP',$masp)
                 ->update([
                         'MaLoaiSP' => $loaisp,'MaNCC' => $ncc,'TenSP' => $tensp,
