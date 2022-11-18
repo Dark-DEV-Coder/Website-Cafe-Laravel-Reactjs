@@ -130,6 +130,31 @@ class NhanVienController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $nhanvien = NhanVienModel::where('MaNV',$id)->first();
+        if (is_null($nhanvien)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có nhân viên này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Nhân viên cần tìm',
+            'data' => new NhanVienResource($nhanvien),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -140,9 +165,9 @@ class NhanVienController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaTK' => 'required', 'HoNV' => 'required', 'TenNV' => 'required',
-            'NgaySinh' => 'required', 'GioiTinh' => 'required', 'DiaChi' => 'required','SoDienThoai' => 'required', 
-            'Email' => 'required', 'Luong' => 'required',
+            'honv' => 'required', 'tennv' => 'required', 'matk' =>'required',
+            'ngaysinhnv' => 'required', 'gioitinhnv' => 'required', 'diachinv' => 'required','sdtnv' => 'required', 
+            'emailnv' => 'required', 'luong' => 'required',
         ]);
         // Kiểm tra dữ liệu
         if ($validator->fails()){
@@ -154,15 +179,39 @@ class NhanVienController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $matk = $input['MaTK'];
-        $ho = $input['HoNV'];
-        $ten = $input['TenNV'];
-        $ngay = $input['NgaySinh'];
-        $gioitinh = $input['GioiTinh'];
-        $dc = $input['DiaChi'];
-        $sdt = $input['SoDienThoai'];
-        $email = $input['Email'];
-        $luong = $input['Luong'];
+        $checkphone = Validator::make($input,[
+            'sdtnv' => 'regex:/^(0)+([0-9]{9})$/',
+        ]);
+        if ($checkphone->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Số điện thoại không đúng định dạng hoặc không đủ 10 chữ số',
+                'data' => $checkphone->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
+        $checkmail = Validator::make($input,[
+            'emailnv' => 'email',
+        ]);
+        if ($checkmail->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Email không đúng định dạng',
+                'data' => $checkphone->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
+        $matk = $input['matk'];
+        $ho = $input['honv'];
+        $ten = $input['tennv'];
+        $ngay = $input['ngaysinhnv'];    
+        $gioitinh = $input['gioitinhnv'];
+        $dc = $input['diachinv'];
+        $sdt = $input['sdtnv'];
+        $email = $input['emailnv'];
+        $luong = $input['luong'];
         NhanVienModel::where('MaNV',$id)->update([
             'MaTK' => $matk,
             'HoNV' => $ho,

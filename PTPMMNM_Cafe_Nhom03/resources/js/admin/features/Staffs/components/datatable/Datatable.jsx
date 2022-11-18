@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import axios from 'axios';
 const Datatable = () => {
     const [search, setSearch] = React.useState('');
 
@@ -60,7 +61,7 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 200, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/staff/single">
+                        <Link to={"/staff/single/"+params.row.MaNV}>
                             <div className="viewButton">
                                 Xem chi tiết
                             </div>
@@ -81,7 +82,7 @@ const Datatable = () => {
                 <Link to="/staff/new" className="newstaff">Thêm Mới</Link>
             </div>
             <div className="search">
-                <input type="text" placeholder="Nhập tên nhân viên cần tìm" value={inputtennv} onChange={onChangeTenNV} onKeyUp={FindStaff} />
+                <input type="text" placeholder="Nhập tên nhân viên cần tìm ..." value={inputtennv} onChange={onChangeTenNV} onKeyUp={FindStaff} />
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaNV}

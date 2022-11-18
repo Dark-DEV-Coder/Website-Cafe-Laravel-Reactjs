@@ -115,6 +115,31 @@ class NhaCungCapController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $nhacungcap = NhaCungCapModel::where('MaNCC',$id)->first();
+        if (is_null($nhacungcap)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có nhà cung cấp này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Nhà cung cấp cần tìm',
+            'data' => new NhaCungCapResource($nhacungcap),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -125,7 +150,7 @@ class NhaCungCapController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'TenNCC' => 'required','DiaChi' => 'required', 'SoDienThoai' => 'required',
+            'tenncc' => 'required','diachincc' => 'required', 'sdtncc' => 'required',
         ]);
         // Kiểm tra dữ liệu
         if ($validator->fails()){
@@ -137,9 +162,21 @@ class NhaCungCapController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $ten = $input['TenNCC'];
-        $dc = $input['DiaChi'];
-        $sdt = $input['SoDienThoai'];
+        $checkphone = Validator::make($input,[
+            'sdtncc' => 'regex:/^(0)+([0-9]{9})$/',
+        ]);
+        if ($checkphone->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Số điện thoại không đúng định dạng hoặc không đủ 10 chữ số',
+                'data' => $checkphone->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
+        $ten = $input['tenncc'];
+        $dc = $input['diachincc'];
+        $sdt = $input['sdtncc'];
         NhaCungCapModel::where('MaNCC',$id)->update([
             'TenNCC' => $ten,
             'DiaChi' => $dc,

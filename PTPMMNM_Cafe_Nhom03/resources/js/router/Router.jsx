@@ -53,22 +53,22 @@ const Router = () => {
                     <Route path="category">
                         <Route index element={<Category />}></Route>
                         <Route path="new" element={<NewCategory title="Thêm loại sản phẩm" />}></Route>
-                        <Route path="single" element={<SingleCategory title="Thông tin chi tiết loại sản phẩm" />}></Route>
+                        <Route path="single/:id" element={<SingleCategory title="Thông tin chi tiết loại sản phẩm" />}></Route>
                     </Route>
                     <Route path="customer">
                         <Route index element={<Customer />}></Route>
                         <Route path="new" element={<Newcustomers inputs={customerInputs} title="Thêm khách hàng" />}></Route>
-                        <Route path="single" element={<SingleCustomer title="Thông tin chi tiết khách hàng" />}></Route>
+                        <Route path="single/:id" element={<SingleCustomer title="Thông tin chi tiết khách hàng" />}></Route>
                     </Route>
                     <Route path="provider">
                         <Route index element={<Provider />}></Route>
                         <Route path="new" element={<Newprovider title="Thêm nhà cung cấp" />}></Route>
-                        <Route path="single" element={<SingleProvider title="Thông tin chi tiết nhà cung cấp" />}></Route>
+                        <Route path="single/:id" element={<SingleProvider title="Thông tin chi tiết nhà cung cấp" />}></Route>
                     </Route>
                     <Route path="staff">
                         <Route index element={<Staff />}></Route>
                         <Route path="new" element={<NewStaff title="Thêm nhân viên" />}></Route>
-                        <Route path="single" element={<SingleStaff title="Thông tin chi tiết nhân viên" />}></Route>
+                        <Route path="single/:id" element={<SingleStaff title="Thông tin chi tiết nhân viên" />}></Route>
                     </Route>
                     <Route path="bill">
                         <Route index element={<Bill />}></Route>

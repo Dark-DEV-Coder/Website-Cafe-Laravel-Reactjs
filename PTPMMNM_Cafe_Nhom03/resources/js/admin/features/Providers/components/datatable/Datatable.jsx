@@ -61,7 +61,7 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/provider/single">
+                        <Link to={"/provider/single/"+params.row.MaNCC}>
                             <div className="viewButton">
                                 Xem chi tiết
                             </div>
@@ -82,7 +82,7 @@ const Datatable = () => {
                 <Link to="/provider/new" className="newprovider">Thêm Mới</Link>
             </div>
             <div className="search">                
-                <input type="text" placeholder="Nhập tên cần tìm" value={inputtenncc} onChange={onChangeTenNCC} onKeyUp={FindProvider} />                
+                <input type="text" placeholder="Nhập tên cần tìm ..." value={inputtenncc} onChange={onChangeTenNCC} onKeyUp={FindProvider} />                
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaNCC} 

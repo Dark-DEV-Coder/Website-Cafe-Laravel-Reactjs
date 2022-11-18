@@ -98,6 +98,31 @@ class LoaiSanPhamController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $loaisanpham = LoaiSanPhamModel::where('MaLoaiSP',$id)->first();
+        if (is_null($loaisanpham)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có loại sản phẩm này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Loại sản phẩm cần tìm',
+            'data' => new LoaiSanPhamResource($loaisanpham),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -108,7 +133,7 @@ class LoaiSanPhamController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'TenLoai' => 'required'
+            'tenlsp' => 'required'
         ]);
         // Kiểm tra dữ liệu
         if ($validator->fails()){
@@ -120,7 +145,7 @@ class LoaiSanPhamController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $ten = $input['TenLoai'];
+        $ten = $input['tenlsp'];
         LoaiSanPhamModel::where('MaLoaiSP',$id)->update([
             'TenLoai' => $ten,
         ]);

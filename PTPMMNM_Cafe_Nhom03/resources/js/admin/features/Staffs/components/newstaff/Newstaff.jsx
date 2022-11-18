@@ -44,10 +44,10 @@ const NewStaff = ({ inputs, title }) => {
 
 
     async function createStaff() {
-        // if (inputgioitinhnv == -1){
-        //     alert('Chưa chọn giới tính');
-        //     return false;
-        // }
+        if (inputgioitinhnv == -1){
+            alert('Chưa chọn giới tính');
+            return false;
+        }
         const staff = {
             honv: inputhonv,
             tennv: inputtennv,

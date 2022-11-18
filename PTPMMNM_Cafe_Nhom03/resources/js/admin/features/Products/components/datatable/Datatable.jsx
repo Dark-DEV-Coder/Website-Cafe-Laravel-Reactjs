@@ -82,7 +82,7 @@ const Datatable = () => {
                 <Link to="/products/new" className="newproduct">Thêm Mới</Link>
             </div>
             <div className="search">               
-                <input type="text" placeholder="Nhập tên sản phẩm cần tìm" value={inputtensp} onChange={onChangeTenSP} onKeyUp={FindProduct} />
+                <input type="text" placeholder="Nhập tên sản phẩm cần tìm ..." value={inputtensp} onChange={onChangeTenSP} onKeyUp={FindProduct} />
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaSP}

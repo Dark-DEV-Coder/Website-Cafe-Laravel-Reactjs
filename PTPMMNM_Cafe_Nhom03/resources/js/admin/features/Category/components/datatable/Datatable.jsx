@@ -62,7 +62,7 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/category/single">
+                        <Link to={"/category/single/"+params.row.MaLoaiSP}>
                             <div className="viewButton">
                                 Xem chi tiết
                             </div>
@@ -84,7 +84,7 @@ const Datatable = () => {
 
             </div>
             <div className="search">
-                <input type="text" placeholder="Nhập tên cần tìm" value={inputtenlsp} onChange={onChangeTenLSP} onKeyUp={FindCategory} />
+                <input type="text" placeholder="Nhập tên cần tìm ..." value={inputtenlsp} onChange={onChangeTenLSP} onKeyUp={FindCategory} />
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaLoaiSP}

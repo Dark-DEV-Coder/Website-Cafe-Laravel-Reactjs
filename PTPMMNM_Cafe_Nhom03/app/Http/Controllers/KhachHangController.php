@@ -86,9 +86,9 @@ class KhachHangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) // Hàm lấy thông tin 1 khách hàng
+    public function show($ten) // Hàm lấy thông tin 1 khách hàng
     {        
-        $khachhang = KhachHangModel::where('MaKH',$id)->get();
+        $khachhang = KhachHangModel::where('HoKH','like',"%$ten%")->orWhere('TenKH','like',"%$ten%")->get();
         if (is_null($khachhang)){
             $arr = [
                 'status' => false,
@@ -99,7 +99,32 @@ class KhachHangController extends Controller
         }
         $arr = [
             'status' => true,
-            'message' => 'Chi tiết khách hàng',
+            'message' => 'Các khách hàng cần tìm',
+            'data' => KhachHangResource::collection($khachhang),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $khachhang = KhachHangModel::where('MaKH',$id)->first();
+        if (is_null($khachhang)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có khách hàng này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Khách hàng cần tìm',
             'data' => new KhachHangResource($khachhang),
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);

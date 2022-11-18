@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import axios from 'axios';
 const Datatable = () => {
     const [search, setSearch] = React.useState('');
 
@@ -26,33 +27,34 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 200, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/customer/single">
-                            <div className="viewButton"
-                            // onClick={() => {
-                            //     console.log(params.row);
-                            // }}
-                            >
+                        <Link to={"/customer/single/"+params.row.MaKH}>
+                            <div className="viewButton">
                                 Xem chi tiết
                             </div>
                         </Link>
-
-                        <div className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
-                            Xóa
-                        </div>
                     </div>
                 );
             },
         },
     ]
+
+    const [inputtenkh, setInputTenKH] = React.useState("");
+    const onChangeTenKH = event => {
+        setInputTenKH(event.target.value);
+    };
+    async function FindCustomer() {
+        await axios.get("http://127.0.0.1:8000/api/khhang/" + inputtenkh).then((response) => {
+            setCustomer(response.data.data);
+        });
+    }
+
     return (
         <div className='datatable'>
             <div className="datatableTitle">
                 Danh sách khách hàng
-                <Link to="/customer/new" className="newcustomer">Thêm Mới</Link>
             </div>
             <div className="search">
-                <input type="text" placeholder="Search ..." />
-                <button className='timKiem'>Tìm kiếm</button>
+                <input type="text" placeholder="Nhập tên khách hàng cần tìm ..." value={inputtenkh} onChange={onChangeTenKH} onKeyUp={FindCustomer} />
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaKH}
