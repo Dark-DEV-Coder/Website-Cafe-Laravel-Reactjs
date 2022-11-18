@@ -43,11 +43,12 @@ const Router = () => {
                     <Route path="products">
                         <Route index element={<Products />}></Route>
                         <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
-                        <Route path="single" element={<SingleProduct inputs={productInputs} title="Thông tin chi tiết sản phẩm" />}></Route>
+                        <Route path="single" element={<SingleProduct title="Thông tin chi tiết sản phẩm" />}></Route>
+
                     </Route>
                     <Route path="category">
                         <Route index element={<Category />}></Route>
-                        <Route path="new" element={<NewCategory  title="Thêm loại sản phẩm" />}></Route>
+                        <Route path="new" element={<NewCategory title="Thêm loại sản phẩm" />}></Route>
                         {/* <Route path="single" element={<Single />}></Route> */}
                     </Route>
                     <Route path="customer">
