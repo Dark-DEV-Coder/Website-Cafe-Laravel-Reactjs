@@ -9,13 +9,17 @@ import { productInputs } from "../admin/features/Products/components/newproduct/
 import SingleProduct from "../admin/features/Products/components/singleproduct/Single";
 import Category from "../admin/features/Category";
 import NewCategory from "../admin/features/Category/components/newcategory/Newcategory";
+import SingleCategory from "../admin/features/Category/components/singlecategory/Single";
 import Customer from "../admin/features/Customers";
 import Newcustomers from "../admin/features/Customers/components/newcustomer/Newcustomers";
 import { customerInputs } from "../admin/features/Customers/components/newcustomer/formSource";
+import SingleCustomer from "../admin/features/Customers/components/singlecustomer/Single";
 import Provider from "../admin/features/Providers";
 import Newprovider from "../admin/features/Providers/components/newprovider/Newprovider";
+import SingleProvider from "../admin/features/Providers/components/singleprovider/Single";
 import Staff from "../admin/features/Staffs";
 import NewStaff from "../admin/features/Staffs/components/newstaff/Newstaff";
+import SingleStaff from "../admin/features/Staffs/components/singlestaff/Single";
 import Bill from "../admin/features/Bills";
 import NewBill from "../admin/features/Bills/components/newbill/Newbill";
 import { billInputs } from "../admin/features/Bills/components/newbill/formSource";
@@ -49,22 +53,22 @@ const Router = () => {
                     <Route path="category">
                         <Route index element={<Category />}></Route>
                         <Route path="new" element={<NewCategory title="Thêm loại sản phẩm" />}></Route>
-                        {/* <Route path="single" element={<Single />}></Route> */}
+                        <Route path="single" element={<SingleCategory title="Thông tin chi tiết loại sản phẩm" />}></Route>
                     </Route>
                     <Route path="customer">
                         <Route index element={<Customer />}></Route>
                         <Route path="new" element={<Newcustomers inputs={customerInputs} title="Thêm khách hàng" />}></Route>
-                        {/* <Route path="single" element={<Single />}></Route> */}
+                        <Route path="single" element={<SingleCustomer title="Thông tin chi tiết khách hàng" />}></Route>
                     </Route>
                     <Route path="provider">
                         <Route index element={<Provider />}></Route>
                         <Route path="new" element={<Newprovider title="Thêm nhà cung cấp" />}></Route>
-                        {/* <Route path="single" element={<Single />}></Route> */}
+                        <Route path="single" element={<SingleProvider title="Thông tin chi tiết nhà cung cấp" />}></Route>
                     </Route>
                     <Route path="staff">
                         <Route index element={<Staff />}></Route>
                         <Route path="new" element={<NewStaff title="Thêm nhân viên" />}></Route>
-                        {/* <Route path="single" element={<Single />}></Route> */}
+                        <Route path="single" element={<SingleStaff title="Thông tin chi tiết nhân viên" />}></Route>
                     </Route>
                     <Route path="bill">
                         <Route index element={<Bill />}></Route>

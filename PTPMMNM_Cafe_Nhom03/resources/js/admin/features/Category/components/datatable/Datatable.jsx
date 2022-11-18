@@ -18,43 +18,43 @@ const Datatable = () => {
     const [categorys, setCategory] = React.useState([]);
     const [error, setError] = React.useState("");
     const [loaded, setLoaded] = React.useState(false);
-    React.useEffect(() =>  {
-        (async() => {
-            try{
+    React.useEffect(() => {
+        (async () => {
+            try {
                 await axios.get("http://127.0.0.1:8000/api/lspham").then((response) => {
                     setCategory(response.data.data);
                 });
             }
-            catch(error){
+            catch (error) {
                 setError(error.message);
             }
-            finally{
+            finally {
                 setLoaded(true);
             }
         })();
-        
+
     }, []);
 
 
-    const   [deletecate, setDeleteCategory] = React.useState(null);
-    function DeleteCategory(id){
-        if (window.confirm('Bạn có chắc muốn xóa loại sản phẩm này?')){
-            axios.delete("http://127.0.0.1:8000/api/lspham/"+ id).then((response) => {                    
+    const [deletecate, setDeleteCategory] = React.useState(null);
+    function DeleteCategory(id) {
+        if (window.confirm('Bạn có chắc muốn xóa loại sản phẩm này?')) {
+            axios.delete("http://127.0.0.1:8000/api/lspham/" + id).then((response) => {
                 setDeleteCategory(response.data);
                 alert(JSON.stringify(response.data.message));
-                window.location.reload();                        
+                window.location.reload();
             });
         }
     }
 
-    const   [inputtenlsp, setInputTenLSP] = React.useState("");
+    const [inputtenlsp, setInputTenLSP] = React.useState("");
     const onChangeTenLSP = event => {
         setInputTenLSP(event.target.value);
-     };
-    async function FindCategory(){
-        await axios.get("http://127.0.0.1:8000/api/lspham/"+ inputtenlsp).then((response) => {                    
-            setCategory(response.data.data);                     
-        });        
+    };
+    async function FindCategory() {
+        await axios.get("http://127.0.0.1:8000/api/lspham/" + inputtenlsp).then((response) => {
+            setCategory(response.data.data);
+        });
     }
 
     const actionColumn = [
@@ -62,7 +62,7 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/products/single">
+                        <Link to="/category/single">
                             <div className="viewButton">
                                 Xem chi tiết
                             </div>
@@ -83,11 +83,11 @@ const Datatable = () => {
                 <Link to="/category/new" className="newcategory">Thêm Mới</Link>
 
             </div>
-            <div className="search">                
+            <div className="search">
                 <input type="text" placeholder="Nhập tên cần tìm" value={inputtenlsp} onChange={onChangeTenLSP} onKeyUp={FindCategory} />
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
-                getRowId={(row) => row.MaLoaiSP} 
+                getRowId={(row) => row.MaLoaiSP}
                 rows={categorys}
                 columns={productColumns.concat(actionColumn)}
                 pageSize={9}

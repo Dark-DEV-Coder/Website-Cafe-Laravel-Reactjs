@@ -17,42 +17,42 @@ const Datatable = () => {
     const [staffs, setStaff] = React.useState([]);
     const [error, setError] = React.useState("");
     const [loaded, setLoaded] = React.useState(false);
-    React.useEffect(() =>  {
-        (async() => {
-            try{
+    React.useEffect(() => {
+        (async () => {
+            try {
                 await axios.get("http://127.0.0.1:8000/api/nvien").then((response) => {
                     setStaff(response.data.data);
                 });
             }
-            catch(error){
+            catch (error) {
                 setError(error.message);
             }
-            finally{
+            finally {
                 setLoaded(true);
             }
         })();
-        
+
     }, []);
 
-    const   [deletestaff, setDeleteStaff] = React.useState(null);
-    function DeleteStaff(id){
-        if (window.confirm('Bạn có chắc muốn xóa nhân viên này?')){
-            axios.delete("http://127.0.0.1:8000/api/nvien/"+ id).then((response) => {                    
+    const [deletestaff, setDeleteStaff] = React.useState(null);
+    function DeleteStaff(id) {
+        if (window.confirm('Bạn có chắc muốn xóa nhân viên này?')) {
+            axios.delete("http://127.0.0.1:8000/api/nvien/" + id).then((response) => {
                 setDeleteStaff(response.data);
                 alert(JSON.stringify(response.data.message));
-                window.location.reload();                        
+                window.location.reload();
             });
         }
     }
 
-    const   [inputtennv, setInputTenNV] = React.useState("");
+    const [inputtennv, setInputTenNV] = React.useState("");
     const onChangeTenNV = event => {
         setInputTenNV(event.target.value);
-     };
-    async function FindStaff(){
-        await axios.get("http://127.0.0.1:8000/api/nvien/"+ inputtennv).then((response) => {                    
-            setStaff(response.data.data);                     
-        });        
+    };
+    async function FindStaff() {
+        await axios.get("http://127.0.0.1:8000/api/nvien/" + inputtennv).then((response) => {
+            setStaff(response.data.data);
+        });
     }
 
     const actionColumn = [
@@ -60,7 +60,7 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 200, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/products/single">
+                        <Link to="/staff/single">
                             <div className="viewButton">
                                 Xem chi tiết
                             </div>
@@ -80,11 +80,11 @@ const Datatable = () => {
                 Danh sách nhân viên
                 <Link to="/staff/new" className="newstaff">Thêm Mới</Link>
             </div>
-            <div className="search">                
+            <div className="search">
                 <input type="text" placeholder="Nhập tên nhân viên cần tìm" value={inputtennv} onChange={onChangeTenNV} onKeyUp={FindStaff} />
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
-                getRowId={(row) => row.MaNV} 
+                getRowId={(row) => row.MaNV}
                 rows={staffs}
                 columns={productColumns.concat(actionColumn)}
                 pageSize={9}

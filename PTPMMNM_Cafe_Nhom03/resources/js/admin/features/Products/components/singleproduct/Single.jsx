@@ -63,7 +63,7 @@ const SingleProduct = ({ title }) => {
                             </div>
                             <div className='singleformInput'>
                                 <label>Mã Sản Phẩm</label>
-                                <input type={"text"} placeholder={"ABC"} disabled={input} />
+                                <input type={"text"} placeholder={"ABC"} disabled />
                             </div>
 
                             <div className='singleformInput'>

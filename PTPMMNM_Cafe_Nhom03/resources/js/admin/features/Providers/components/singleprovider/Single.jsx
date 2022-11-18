@@ -8,7 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import { listChucNang } from '../../../../../listTest';
 import { ModalFooter } from 'react-bootstrap';
-const SingleCategory = ({ title }) => {
+const SingleProvider = ({ title }) => {
     const [file, setFile] = useState("");
     const [input, setInput] = useState(true);
     const [showButtonEdit, setShowButtonEdit] = useState(false);
@@ -16,12 +16,6 @@ const SingleCategory = ({ title }) => {
         setInput(false);
         setShowButtonEdit(true);
     }
-    console.log(file);
-    const options = [
-        { value: 'ad', label: 'Admin' },
-        { value: 'nv', label: 'Nhân viên' },
-        { value: 'ql', label: 'Quản lý' }
-    ]
     return (
         <div className="single">
             <Sidebar chucNangList={listChucNang} />
@@ -31,21 +25,28 @@ const SingleCategory = ({ title }) => {
                     <h1>{title}</h1>
 
                 </div>
-                <div className="singlebottom" style={{ height: "200px" }}>
+                <div className="singlebottom" style={{ height: "280px" }}>
                     <div className="singleright">
-
                         <form>
                             <div className='singleformInput'>
-                                <label>Mã Loại Sản Phẩm</label>
-                                <input type={"text"} placeholder={"ABC"} disabled />
+                                <label>Mã Nhà Cung Cấp</label>
+                                <input type={"text"} placeholder={"NCC1"} disabled />
                             </div>
 
                             <div className='singleformInput'>
-                                <label>Tên Loại Sản Phẩm</label>
-                                <input type={"text"} placeholder={"ABC"} disabled={input} />
+                                <label>Tên Nhà Cung Cấp</label>
+                                <input type={"text"} placeholder={"Cafe Trung Nguyên"} disabled={input} />
                             </div>
 
-                            <div className='singleformInput'>
+                            <div className="singleformInput" >
+                                <label>Địa Chỉ</label>
+                                <input type={"text"} placeholder={"abc/1 ... "} disabled={input} />
+                            </div>
+                            <div className="singleformInput" >
+                                <label>Số Điện Thoại</label>
+                                <input type={"text"} placeholder={"abc/1 ... "} disabled={input} />
+                            </div>
+                            <div className="singleformInput" >
 
                             </div>
                             <div className="singleformInput"   >
@@ -64,4 +65,4 @@ const SingleCategory = ({ title }) => {
     );
 };
 
-export default SingleCategory;
+export default SingleProvider;

@@ -26,13 +26,15 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 200, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        {/* <Link to="/products/single"> */}
-                        <div className="viewButton" onClick={() => {
-                            console.log(params.row);
-                        }}>
-                            Xem chi tiết
-                        </div>
-                        {/* </Link> */}
+                        <Link to="/customer/single">
+                            <div className="viewButton"
+                            // onClick={() => {
+                            //     console.log(params.row);
+                            // }}
+                            >
+                                Xem chi tiết
+                            </div>
+                        </Link>
 
                         <div className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
                             Xóa
