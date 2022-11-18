@@ -7,7 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-const Datatable = () => {
+const DataTableStatistical = () => {
     const [search, setSearch] = React.useState('');
 
     const handleChange = (event) => {
@@ -43,35 +43,25 @@ const Datatable = () => {
     return (
         <div className='datatable'>
             <div className="datatableTitle">
-                Danh sách hóa đơn
-                <Link to="/statistical" className="thongke">Thống kê</Link>
+                Thống kê hóa đơn
+
             </div>
-            <div className="search">
-                <FormControl sx={{ m: 1, minWidth: 220 }} size="small">
-                    <InputLabel id="demo-select-small">Chọn kiểu tìm kiếm</InputLabel>
-                    <Select
-                        labelId="demo-select-small"
-                        id="demo-select-small"
-                        value={search}
-                        label="Chọn kiểu tìm kiếm"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl>
-                <input type="text" placeholder="Search ..." />
-                <button className='timKiem'>Tìm kiếm</button>
+            <div className="searchStatistical">
+                <label>Ngày lập hóa đơn từ : </label>
+                <input type="date" placeholder="Search ..." />
+                --
+                <input type="date" placeholder="Search ..." />
+                <button className='timKiem'>Thống kê</button>
             </div>
-            <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
+            <div className="searchStatistical" style={{ marginTop: "20px" }}>
+                <h5 >Tổng Doanh Thu :  {"50000000"} </h5>
+
+            </div>
+            <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "470px" }}
                 getRowId={(row) => row.MaHD}
                 rows={bills}
                 columns={productColumns.concat(actionColumn)}
-                pageSize={9}
+                pageSize={6}
                 rowsPerPageOptions={[5]}
                 checkboxSelection
             />
@@ -79,4 +69,4 @@ const Datatable = () => {
     )
 }
 
-export default Datatable
+export default DataTableStatistical
