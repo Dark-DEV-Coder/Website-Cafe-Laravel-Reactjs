@@ -45,6 +45,16 @@ const Datatable = () => {
         }
     }
 
+    const   [inputtennv, setInputTenNV] = React.useState("");
+    const onChangeTenNV = event => {
+        setInputTenNV(event.target.value);
+     };
+    async function FindStaff(){
+        await axios.get("http://127.0.0.1:8000/api/nvien/"+ inputtennv).then((response) => {                    
+            setStaff(response.data.data);                     
+        });        
+    }
+
     const actionColumn = [
         {
             field: "action", headerName: "Chức năng", width: 200, renderCell: (params) => {
@@ -71,8 +81,7 @@ const Datatable = () => {
                 <Link to="/staff/new" className="newstaff">Thêm Mới</Link>
             </div>
             <div className="search">                
-                <input type="text" placeholder="Nhập tên nhân viên cần tìm" />
-                <button className='timKiem'>Tìm kiếm</button>
+                <input type="text" placeholder="Nhập tên nhân viên cần tìm" value={inputtennv} onChange={onChangeTenNV} onKeyUp={FindStaff} />
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaNV} 

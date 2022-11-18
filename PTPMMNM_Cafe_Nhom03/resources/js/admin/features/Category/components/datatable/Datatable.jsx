@@ -47,6 +47,16 @@ const Datatable = () => {
         }
     }
 
+    const   [inputtenlsp, setInputTenLSP] = React.useState("");
+    const onChangeTenLSP = event => {
+        setInputTenLSP(event.target.value);
+     };
+    async function FindCategory(){
+        await axios.get("http://127.0.0.1:8000/api/lspham/"+ inputtenlsp).then((response) => {                    
+            setCategory(response.data.data);                     
+        });        
+    }
+
     const actionColumn = [
         {
             field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
@@ -73,10 +83,8 @@ const Datatable = () => {
                 <Link to="/category/new" className="newcategory">Thêm Mới</Link>
 
             </div>
-            <div className="search">
-                
-                <input type="text" placeholder="Nhập tên cần tìm" />
-                <button className='timKiem'>Tìm kiếm</button>
+            <div className="search">                
+                <input type="text" placeholder="Nhập tên cần tìm" value={inputtenlsp} onChange={onChangeTenLSP} onKeyUp={FindCategory} />
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaLoaiSP} 

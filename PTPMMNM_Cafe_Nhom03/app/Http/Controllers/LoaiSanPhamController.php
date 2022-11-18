@@ -78,9 +78,9 @@ class LoaiSanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) // Hàm tìm thông tin 1 loại sản phẩm
+    public function show($ten) // Hàm tìm thông tin 1 loại sản phẩm
     {        
-        $loaisanpham = LoaiSanPhamModel::where('MaLoaiSP',$id)->get();
+        $loaisanpham = LoaiSanPhamModel::where('TenLoai','like',"%$ten%")->get();
         if (is_null($loaisanpham)){
             $arr = [
                 'status' => false,
@@ -91,8 +91,8 @@ class LoaiSanPhamController extends Controller
         }
         $arr = [
             'status' => true,
-            'message' => 'Chi tiết loại sản phẩm',
-            'data' => new LoaiSanPhamResource($loaisanpham),
+            'message' => 'Các loại sản phẩm cần tìm',
+            'data' => LoaiSanPhamResource::collection($loaisanpham),
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }

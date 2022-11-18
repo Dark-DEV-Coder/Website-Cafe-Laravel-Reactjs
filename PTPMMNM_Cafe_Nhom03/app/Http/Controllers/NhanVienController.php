@@ -110,20 +110,21 @@ class NhanVienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) // Tìm thông tin 1 nhân viên
+    public function show($ten) // Tìm thông tin 1 nhân viên
     {        
-        $nhanvien = NhanVienModel::where('MaNV',$id)->get();
+        $nhanvien = NhanVienModel::where('HoNV','like',"%$ten%")->orWhere('TenNV','like',"%$ten%")->get();
         if (is_null($nhanvien)){
             $arr = [
                 'status' => false,
                 'message' => 'Không có nhân viên này',
+                'data' => [],
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
         $arr = [
             'status' => true,
-            'message' => 'Chi tiết nhân viên',
-            'data' => new NhanVienResource($nhanvien),
+            'message' => 'Các nhân viên cần tìm',
+            'data' => NhanVienResource::collection($nhanvien),
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }

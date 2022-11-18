@@ -95,20 +95,21 @@ class NhaCungCapController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) // Hàm tìm thông tin 1 nhà cung cấp
+    public function show($ten) // Hàm tìm thông tin 1 nhà cung cấp
     {        
-        $nhacungcap = NhaCungCapModel::where('MaNCC',$id)->get();
+        $nhacungcap = NhaCungCapModel::where('TenNCC','like',"%$ten%")->get();
         if (is_null($nhacungcap)){
             $arr = [
                 'status' => false,
                 'message' => 'Không có nhà cung cấp này',
+                'data' => [],
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
         }
         $arr = [
             'status' => true,
-            'message' => 'Chi tiết nhà cung cấp',
-            'data' => new NhaCungCapResource($nhacungcap),
+            'message' => 'Các nhà cung cấp cần tìm',
+            'data' => NhaCungCapResource::collection($nhacungcap),
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }

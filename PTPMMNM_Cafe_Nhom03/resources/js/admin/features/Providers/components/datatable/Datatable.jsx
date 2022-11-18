@@ -36,14 +36,24 @@ const Datatable = () => {
     }, []);
 
     const   [deleteprovider, setDeleteProvider] = React.useState(null);
-    function DeleteProvider(id){
+    async function DeleteProvider(id){
         if (window.confirm('Bạn có chắc muốn xóa nhà cung cấp này?')){
-            axios.delete("http://127.0.0.1:8000/api/nccap/"+ id).then((response) => {                    
+            await axios.delete("http://127.0.0.1:8000/api/nccap/"+ id).then((response) => {                    
                 setDeleteProvider(response.data);
                 alert(JSON.stringify(response.data.message));
                 window.location.reload();                        
             });
         }
+    }
+
+    const   [inputtenncc, setInputTenNCC] = React.useState("");
+    const onChangeTenNCC = event => {
+        setInputTenNCC(event.target.value);
+     };
+    async function FindProvider(){
+        await axios.get("http://127.0.0.1:8000/api/nccap/"+ inputtenncc).then((response) => {                    
+            setProvider(response.data.data);                     
+        });        
     }
 
     const actionColumn = [
@@ -72,8 +82,7 @@ const Datatable = () => {
                 <Link to="/provider/new" className="newprovider">Thêm Mới</Link>
             </div>
             <div className="search">                
-                <input type="text" placeholder="Nhập tên cần tìm" />
-                <button className='timKiem'>Tìm kiếm</button>
+                <input type="text" placeholder="Nhập tên cần tìm" value={inputtenncc} onChange={onChangeTenNCC} onKeyUp={FindProvider} />                
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaNCC} 
