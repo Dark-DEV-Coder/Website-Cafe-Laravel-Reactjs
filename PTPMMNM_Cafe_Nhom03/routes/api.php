@@ -38,12 +38,15 @@ Route::get('chitietsp/{id}', [SanPhamController::class, 'detail']);
 
 // API nhân viên
 Route::resource('nvien',NhanVienController::class);
+Route::get('chitietnvien/{id}', [NhanVienController::class, 'detail']);
 
 // API khách hàng
 Route::resource('khhang',KhachHangController::class);
+Route::get('chitietkhhang/{id}', [KhachHangController::class, 'detail']);
 
 // API loại sản phẩm
 Route::resource('lspham',LoaiSanPhamController::class);
+Route::get('chitietlspham/{id}', [LoaiSanPhamController::class, 'detail']);
 
 // API quyền tài khoản
 Route::resource('qtkhoan',QuyenTaiKhoanController::class);
@@ -53,6 +56,7 @@ Route::resource('pnhang',PhieuNhapHangController::class);
 
 // API nhà cung cấp
 Route::resource('nccap',NhaCungCapController::class);
+Route::get('chitietncc/{id}', [NhaCungCapController::class, 'detail']);
 
 // API hóa đơn
 Route::resource('hdon',HoaDonController::class);

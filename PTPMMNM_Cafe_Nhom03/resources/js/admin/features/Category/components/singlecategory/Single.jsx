@@ -8,6 +8,9 @@ import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import { listChucNang } from '../../../../../listTest';
 import { ModalFooter } from 'react-bootstrap';
+import React from 'react';
+import axios from 'axios';
+import { useParams } from "react-router-dom";
 const SingleCategory = ({ title }) => {
     const [file, setFile] = useState("");
     const [input, setInput] = useState(true);
@@ -16,12 +19,53 @@ const SingleCategory = ({ title }) => {
         setInput(false);
         setShowButtonEdit(true);
     }
-    console.log(file);
-    const options = [
-        { value: 'ad', label: 'Admin' },
-        { value: 'nv', label: 'Nhân viên' },
-        { value: 'ql', label: 'Quản lý' }
-    ]
+    const params = useParams();
+    const [inputmalsp, setInputMaLSP] = React.useState("");
+    const [inputtenlsp, setInputTenLSP] = React.useState("");
+
+    const onChangeMaLSP = event => {
+        setInputMaLSP(event.target.value);
+    };
+    const onChangeTenLSP = event => {
+        setInputTenLSP(event.target.value);
+    };
+    React.useEffect(() => {
+        (async () => {
+            try {
+                await axios.get("http://127.0.0.1:8000/api/chitietlspham/" + params.id).then((response) => {
+                    setInputMaLSP(response.data.data.MaLoaiSP);
+                    setInputTenLSP(response.data.data.TenLoai);
+                });
+            }
+            catch (error) {
+                setError(error.message);
+            }
+            finally {
+                setLoaded(true);
+            }
+        })();
+
+    }, []);
+
+    const [editcategory, setEditCategory] = React.useState(null);
+    async function EditCategory() {
+        const cate = {
+            malsp: inputmalsp,
+            tenlsp: inputtenlsp,
+        };
+        await axios.put("http://127.0.0.1:8000/api/lspham/"+inputmalsp, cate).then((response) => {
+            if (response.data.status == false) {
+                alert(JSON.stringify(response.data.message));
+            }
+            else {
+                setEditCategory(response.data);
+                alert(JSON.stringify(response.data.message));
+                window.location.reload();
+            }
+
+        });
+    }
+
     return (
         <div className="single">
             <Sidebar chucNangList={listChucNang} />
@@ -37,19 +81,19 @@ const SingleCategory = ({ title }) => {
                         <form>
                             <div className='singleformInput'>
                                 <label>Mã Loại Sản Phẩm</label>
-                                <input type={"text"} placeholder={"ABC"} disabled />
+                                <input type={"text"} value={inputmalsp} onChange={onChangeMaLSP} disabled />
                             </div>
 
                             <div className='singleformInput'>
                                 <label>Tên Loại Sản Phẩm</label>
-                                <input type={"text"} placeholder={"ABC"} disabled={input} />
+                                <input type={"text"} value={inputtenlsp} onChange={onChangeTenLSP} disabled={input} />
                             </div>
 
                             <div className='singleformInput'>
 
                             </div>
                             <div className="singleformInput"   >
-                                {showButtonEdit ? <button>Lưu</button> : null}
+                                {showButtonEdit ? <button type='button' onClick={EditCategory}>Lưu</button> : null}
 
                             </div>
 
