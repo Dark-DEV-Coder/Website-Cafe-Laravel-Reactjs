@@ -27,7 +27,7 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/products/single">
+                        <Link to="/admin/imports/single">
                             <div className="viewButton">
                                 Xem chi tiết
                             </div>
@@ -45,7 +45,7 @@ const Datatable = () => {
         <div className='datatable'>
             <div className="datatableTitle">
                 Danh sách phiếu nhập hàng
-                <Link to="/imports/new" className="newimport">Thêm Mới</Link>
+                <Link to="/admin/imports/new" className="newimport">Thêm Mới</Link>
             </div>
             <div className="search">
 
