@@ -1,5 +1,10 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 const LoginAdmin = () => {
+    const navigate = useNavigate()
+    const clickLogin = () => {
+        navigate("/admin/home")
+    }
     return (
         <div className="main-wrapper" >
             <div className="account-content">
@@ -26,7 +31,8 @@ const LoginAdmin = () => {
                                     <input className="form-control" type="password" />
                                 </div>
                                 <div className="form-group text-center">
-                                    <button className="btn btn-primary account-btn" type="submit" >Login</button>
+
+                                    <button className="btn btn-primary account-btn" onClick={() => clickLogin()} >Login</button>
                                 </div>
                                 <div className="account-footer">
                                     <p>Don't have an account yet? <a href="register.html">Register</a></p>

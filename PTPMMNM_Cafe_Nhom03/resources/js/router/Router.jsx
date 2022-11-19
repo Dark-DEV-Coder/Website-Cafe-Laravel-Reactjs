@@ -42,9 +42,9 @@ const Router = () => {
             <Routes>
                 <Route path="/">
                     <Route path="admin">
-                        <Route index element={<HomeAdmin />}></Route>
+                        <Route index element={<IndexLogin />}></Route>
                         <Route path="home" element={<HomeAdmin />}></Route>
-                        <Route path="login_admin" element={<IndexLogin />}></Route>
+                        {/* <Route path="login_admin" element={<IndexLogin />}></Route> */}
                         <Route path="404" element={<NotFoundPage />}></Route>
                         <Route path="products">
                             <Route index element={<Products />}></Route>
