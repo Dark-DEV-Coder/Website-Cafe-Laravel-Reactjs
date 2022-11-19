@@ -61,7 +61,7 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 200, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to={"/staff/single/"+params.row.MaNV}>
+                        <Link to={"/admin/staff/single/" + params.row.MaNV}>
                             <div className="viewButton">
                                 Xem chi tiết
                             </div>
@@ -79,7 +79,7 @@ const Datatable = () => {
         <div className='datatable'>
             <div className="datatableTitle">
                 Danh sách nhân viên
-                <Link to="/staff/new" className="newstaff">Thêm Mới</Link>
+                <Link to="/admin/staff/new" className="newstaff">Thêm Mới</Link>
             </div>
             <div className="search">
                 <input type="text" placeholder="Nhập tên nhân viên cần tìm ..." value={inputtennv} onChange={onChangeTenNV} onKeyUp={FindStaff} />

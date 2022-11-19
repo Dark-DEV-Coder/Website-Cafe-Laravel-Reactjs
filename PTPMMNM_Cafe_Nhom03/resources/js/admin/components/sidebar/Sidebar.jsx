@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 const Sidebar = ({ chucNangList }) => {
     const navigate = useNavigate()
     const click = (link) => {
-        navigate("/" + link)
+        navigate("/admin/" + link)
     }
     return (
         <div className='sidebar'>

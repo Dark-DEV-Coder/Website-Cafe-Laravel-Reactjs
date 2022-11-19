@@ -62,7 +62,7 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to={"/category/single/"+params.row.MaLoaiSP}>
+                        <Link to={"/admin/category/single/" + params.row.MaLoaiSP}>
                             <div className="viewButton">
                                 Xem chi tiết
                             </div>
@@ -80,7 +80,7 @@ const Datatable = () => {
         <div className='datatable'>
             <div className="datatableTitle">
                 Danh sách loại sản phẩm
-                <Link to="/category/new" className="newcategory">Thêm Mới</Link>
+                <Link to="/admin/category/new" className="newcategory">Thêm Mới</Link>
 
             </div>
             <div className="search">

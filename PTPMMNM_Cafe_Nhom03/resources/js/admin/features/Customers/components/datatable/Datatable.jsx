@@ -27,7 +27,7 @@ const Datatable = () => {
             field: "action", headerName: "Chức năng", width: 200, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to={"/customer/single/"+params.row.MaKH}>
+                        <Link to={"/admin/customer/single/" + params.row.MaKH}>
                             <div className="viewButton">
                                 Xem chi tiết
                             </div>

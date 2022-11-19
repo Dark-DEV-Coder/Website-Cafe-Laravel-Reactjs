@@ -131,7 +131,7 @@ const NewProduct = ({ title }) => {
                             </div>
                             <div className="formInput" key='lsp'>
                                 <label>Loại sản phẩm</label>
-                                <select value={inputlsp} onChange={onChangeLoaiSP}>
+                                <select value={inputlsp} onChange={onChangeLoaiSP} className="select-css">
                                     <option value='-1'>Chọn loại sản phẩm</option>
                                     {categorys.map((cate) => (
                                         <option key={cate.MaLoaiSP} value={cate.MaLoaiSP}>{cate.TenLoai}</option>
@@ -140,7 +140,7 @@ const NewProduct = ({ title }) => {
                             </div>
                             <div className="formInput" key='nccap'>
                                 <label>Nhà cung cấp</label>
-                                <select value={inputncccap} onChange={onChangeNCCSP}>
+                                <select value={inputncccap} onChange={onChangeNCCSP} className="select-css">
                                     <option value='-1'>Chọn nhà cung cấp</option>
                                     {providers.map((provi) => (
                                         <option key={provi.MaNCC} value={provi.MaNCC}>{provi.TenNCC}</option>

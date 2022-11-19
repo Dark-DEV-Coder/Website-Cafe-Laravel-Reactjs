@@ -66,7 +66,7 @@ const SingleProvider = ({ title }) => {
             diachincc: inputdcncc,
             sdtncc: inputsdtncc,
         };
-        await axios.put("http://127.0.0.1:8000/api/nccap/"+inputmancc, provi).then((response) => {
+        await axios.put("http://127.0.0.1:8000/api/nccap/" + inputmancc, provi).then((response) => {
             if (response.data.status == false) {
                 alert(JSON.stringify(response.data.message));
             }
@@ -88,7 +88,7 @@ const SingleProvider = ({ title }) => {
                     <h1>{title}</h1>
 
                 </div>
-                <div className="singlebottom" style={{ height: "280px" }}>
+                <div className="singlebottom" style={{ height: "320px" }}>
                     <div className="singleright">
                         <form>
                             <div className='singleformInput'>
@@ -100,15 +100,15 @@ const SingleProvider = ({ title }) => {
                                 <label>Tên Nhà Cung Cấp</label>
                                 <input type={"text"} value={inputtenncc} onChange={onChangeTenNCC} disabled={input} />
                             </div>
-
-                            <div className="singleformInput" >
-                                <label>Địa Chỉ</label>
-                                <textarea rows={"3"} cols={"50"} value={inputdcncc} onChange={onChangeDiaChiNCC} disabled={input}></textarea>
-                            </div>
                             <div className="singleformInput" >
                                 <label>Số Điện Thoại</label>
                                 <input type={"text"} value={inputsdtncc} onChange={onChangeSDTNCC} disabled={input} />
                             </div>
+                            <div className="singleformInput" >
+                                <label>Địa Chỉ</label>
+                                <textarea rows={"3"} cols={"50"} value={inputdcncc} onChange={onChangeDiaChiNCC} disabled={input}></textarea>
+                            </div>
+
                             <div className="singleformInput" >
 
                             </div>
