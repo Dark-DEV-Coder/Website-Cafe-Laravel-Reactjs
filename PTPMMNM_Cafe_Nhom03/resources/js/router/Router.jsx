@@ -35,15 +35,24 @@ import { functionInputs } from "../admin/features/Functions/components/newfuncti
 import Vote from "../admin/features/Votes";
 
 import Home from "../user/features/Home";
-const Router = () => {
-    return (
+const Router = () => {    
+    const [loggedIn, setLoggedIn] = React.useState(false); // <-- undefined
+  
+    React.useEffect(() => {
+        if (localStorage['auth_token'])
+            setLoggedIn(true);
+        else
+            setLoggedIn(false);
+    }, []);
+    return loggedIn == true
+        ? 
         <div>
             {/* Muốn html nào k thay đổi theo router thì làm ở đây */}
             <Routes>
                 <Route path="/">
                     <Route path="admin">
                         <Route index element={<IndexLogin />}></Route>
-                        <Route path="home" element={<HomeAdmin />}></Route>
+                        <Route path="home" element={<HomeAdmin />}></Route>                        
                         {/* <Route path="login_admin" element={<IndexLogin />}></Route> */}
                         <Route path="404" element={<NotFoundPage />}></Route>
                         <Route path="products">
@@ -109,6 +118,96 @@ const Router = () => {
                 </Route>
             </Routes>
         </div >
-    )
+        :        
+        <div>
+            {/* Muốn html nào k thay đổi theo router thì làm ở đây */}
+            <Routes>
+                <Route path="/">
+                    <Route path="admin">
+                        <Route index element={<IndexLogin />}></Route>
+                    </Route>
+                </Route>
+
+                <Route path="/">
+                    <Route index element={<Home />}></Route>
+                </Route>
+            </Routes>
+        </div >
+        
+    
+    // return (
+    //     <div>
+    //         {/* Muốn html nào k thay đổi theo router thì làm ở đây */}
+    //         <Routes>
+    //             <Route path="/">
+    //                 <Route path="admin">
+    //                     <Route index element={<IndexLogin />}></Route>
+    //                     <Route path="home" element={<HomeAdmin />}></Route>
+    //                     {/* <Route path="login_admin" element={<IndexLogin />}></Route> */}
+    //                     <Route path="404" element={<NotFoundPage />}></Route>
+    //                     <Route path="products">
+    //                         <Route index element={<Products />}></Route>
+    //                         <Route path="new" element={<New title="Thêm sản phẩm" />}></Route>
+    //                         <Route path="single/:id" element={<SingleProduct title="Thông tin chi tiết sản phẩm" />}></Route>
+
+    //                     </Route>
+    //                     <Route path="category">
+    //                         <Route index element={<Category />}></Route>
+    //                         <Route path="new" element={<NewCategory title="Thêm loại sản phẩm" />}></Route>
+    //                         <Route path="single/:id" element={<SingleCategory title="Thông tin chi tiết loại sản phẩm" />}></Route>
+    //                     </Route>
+    //                     <Route path="customer">
+    //                         <Route index element={<Customer />}></Route>
+    //                         <Route path="new" element={<Newcustomers inputs={customerInputs} title="Thêm khách hàng" />}></Route>
+    //                         <Route path="single/:id" element={<SingleCustomer title="Thông tin chi tiết khách hàng" />}></Route>
+    //                     </Route>
+    //                     <Route path="provider">
+    //                         <Route index element={<Provider />}></Route>
+    //                         <Route path="new" element={<Newprovider title="Thêm nhà cung cấp" />}></Route>
+    //                         <Route path="single/:id" element={<SingleProvider title="Thông tin chi tiết nhà cung cấp" />}></Route>
+    //                     </Route>
+    //                     <Route path="staff">
+    //                         <Route index element={<Staff />}></Route>
+    //                         <Route path="new" element={<NewStaff title="Thêm nhân viên" />}></Route>
+    //                         <Route path="single/:id" element={<SingleStaff title="Thông tin chi tiết nhân viên" />}></Route>
+    //                     </Route>
+    //                     <Route path="bill">
+    //                         <Route index element={<Bill />}></Route>
+    //                         <Route path="new" element={<NewBill inputs={billInputs} title="Thêm hóa đơn" />}></Route>
+    //                         {/* <Route path="single" element={<Single />}></Route> */}
+    //                     </Route>
+    //                     <Route path="statistical">
+    //                         <Route index element={<Statistical />}></Route>
+
+    //                     </Route>
+    //                     <Route path="imports">
+    //                         <Route index element={<Import />}></Route>
+    //                         <Route path="new" element={<NewImport inputs={importInputs} title="Thêm phiếu nhập hàng" />}></Route>
+    //                         {/* <Route path="single" element={<Single />}></Route> */}
+    //                     </Route>
+    //                     <Route path="accounts">
+    //                         <Route index element={<Account />}></Route>
+    //                         <Route path="new" element={<NewAccount inputs={accountInputs} title="Thêm tài khỏan" />}></Route>
+    //                         {/* <Route path="single" element={<Single />}></Route> */}
+    //                     </Route>
+    //                     <Route path="functions">
+    //                         <Route index element={<Function />}></Route>
+    //                         <Route path="new" element={<NewFunction inputs={functionInputs} title="Thêm quyền tài khoản" />}></Route>
+    //                         {/* <Route path="single" element={<Single />}></Route> */}
+    //                     </Route>
+    //                     <Route path="votes">
+    //                         <Route index element={<Vote />}></Route>
+    //                         {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
+    //                     <Route path="single" element={<Single />}></Route> */}
+    //                     </Route>
+    //                 </Route>
+    //             </Route>
+
+    //             <Route path="/">
+    //                 <Route index element={<Home />}></Route>
+    //             </Route>
+    //         </Routes>
+    //     </div >
+    // )
 }
 export default Router
