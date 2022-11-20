@@ -1517,37 +1517,7 @@ table.dataTable thead>tr>td.sorting {
 	8. Header
 -----------------------*/
 
-.header {
-	background: #f43b48;
-	background: -moz-linear-gradient(left, #82ae46 0%, #03ae7d 100%);
-	background: -webkit-linear-gradient(left, #82ae46 0%, #03ae7d 100%);
-	background: -ms-linear-gradient(left, #82ae46 0%, #03ae7d 100%);
-	background: linear-gradient(to right, #82ae46 0%, #03ae7d 100%);
-	border-bottom: 1px solid transparent;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-	height: 60px;
-	left: 0;
-	position: fixed;
-	right: 0;
-	top: 0;
-	z-index: 1002;
-}
 
-.header .header-left {
-	float: left;
-	height: 60px;
-	padding: 0 20px;
-	position: relative;
-	text-align: center;
-	width: 230px;
-	z-index: 1;
-	transition: all 0.2s ease-in-out;
-}
-
-.header .header-left .logo {
-	display: inline-block;
-	line-height: 60px;
-}
 
 .bar-icon {
 	display: inline-block;

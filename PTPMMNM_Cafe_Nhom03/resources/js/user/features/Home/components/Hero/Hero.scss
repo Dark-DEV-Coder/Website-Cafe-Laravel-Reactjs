@@ -1,0 +1,207 @@
+.hero {
+    padding-bottom: 50px;
+
+    .container {
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+
+            .col-lg-3 {
+                .hero__categories {
+
+                    ul {
+                        border: 1px solid #ebebeb;
+                        padding-left: 40px;
+                        padding-top: 10px;
+                        padding-bottom: 12px;
+
+                        li {
+                            list-style: none;
+
+                            a {
+
+                                font-size: 16px;
+                                color: #1c1c1c;
+                                line-height: 39px;
+                                display: block;
+                            }
+                        }
+                    }
+
+                    .hero__categories__all {
+                        .spas {
+                            margin-left: 8px;
+                            font-size: 18px;
+                            font-weight: 700;
+                            color: #fff;
+                        }
+
+                        background: #7fad39;
+                        position: relative;
+                        padding: 10px 25px 10px 40px;
+                        cursor: pointer;
+
+                        i {
+                            font-size: 16px;
+                            color: #fff;
+                            margin-right: 10px;
+                        }
+
+                        // &:after {
+                        //     position: absolute;
+                        //     right: 18px;
+                        //     top: 9px;
+                        //     content: '\33';
+                        //     font-family: 'ElegantIcons';
+                        //     font-size: 18px;
+                        //     color: #fff;
+                        // }
+                    }
+                }
+
+            }
+
+            .col-lg-9 {
+                .hero__search {
+                    overflow: hidden;
+                    margin-bottom: 30px;
+                }
+
+                .hero__item {
+                    height: 431px;
+                    display: flex;
+                    align-items: center;
+
+                    .hero__text {
+                        .primary-btn {
+                            display: inline-block;
+                            font-size: 14px;
+                            padding: 10px 28px 10px;
+                            color: #ffffff;
+                            text-transform: uppercase;
+                            font-weight: 700;
+                            background: #7fad39;
+                            letter-spacing: 2px;
+                        }
+                    }
+                }
+
+                .set-bg {
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: top center;
+                }
+
+                .hero__search__form {
+                    width: 610px;
+                    height: 50px;
+                    border: 1px solid #ebebeb;
+                    position: relative;
+                    float: left;
+
+                    form {
+
+                        .site-btn {
+                            font-size: 14px;
+                            color: #ffffff;
+                            font-weight: 800;
+                            text-transform: uppercase;
+                            display: inline-block;
+                            padding: 13px 30px 12px;
+                            background: #7fad39;
+                            border: none;
+                        }
+
+                        .hero__search__categories {
+                            width: 30%;
+                            float: left;
+                            font-size: 16px;
+                            color: #1c1c1c;
+                            font-weight: 700;
+                            padding-left: 18px;
+                            padding-top: 11px;
+                            position: relative;
+
+                            &:after {
+                                position: absolute;
+                                right: 0;
+                                top: 14px;
+                                height: 20px;
+                                width: 1px;
+                                background: #000000;
+                                opacity: .1;
+                                content: "";
+                            }
+
+                            span {
+                                position: absolute;
+                                right: 14px;
+                                top: 14px;
+                            }
+                        }
+
+                        input {
+                            width: 70%;
+                            border: none;
+                            height: 48px;
+                            font-size: 16px;
+                            color: #b2b2b2;
+                            padding-left: 20px;
+
+                            &::placeholder {
+                                color: #b2b2b2;
+                            }
+                        }
+
+                        button {
+                            position: absolute;
+                            right: 0;
+                            top: -1px;
+                            height: 50px;
+                        }
+                    }
+                }
+
+                .hero__search__phone {
+                    float: right;
+
+                    .hero__search__phone__icon {
+                        font-size: 18px;
+                        color: #7fad39;
+                        height: 45px;
+                        width: 45px;
+                        background: #f5f5f5;
+                        line-height: 50px;
+                        text-align: center;
+                        border-radius: 50%;
+                        float: left;
+                        margin-top: 5px;
+                        margin-right: 10px;
+                    }
+
+                    .hero__search__phone__text {
+                        overflow: hidden;
+
+                        h5 {
+                            color: #1c1c1c;
+                            font-weight: 700;
+                            margin-bottom: 5px;
+                        }
+
+                        span {
+                            font-size: 14px;
+                            color: #6f6f6f;
+                        }
+                    }
+                }
+
+
+
+            }
+        }
+    }
+}

@@ -1,51 +1,38 @@
 import React from "react";
 import "./Header.scss";
-// import "./_header.scss";
-// import "./_responsive.scss";
-// import "./style.scss";
+import "../../../../css/bootstrap.min.css";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 const Header = () => {
     return (
-        <header className="header">
+        <nav className="navbar navbar-expand-lg ftco-navbar-light" id="ftco-navbar">
             <div className="container">
-                <div className="row">
-                    <div className="col-lg-3">
-                        <div className="header__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt="" /></a>
-                        </div>
-                    </div>
-                    <div className="col-lg-6">
-                        <nav className="header__menu">
-                            <ul>
-                                <li className="active"><a href="./index.html">Home</a></li>
-                                <li><a href="./shop-grid.html">Shop</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul className="header__menu__dropdown">
-                                        <li><a href="./shop-details.html">Shop Details</a></li>
-                                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                        <li><a href="./checkout.html">Check Out</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="./blog.html">Blog</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div className="col-lg-3">
-                        <div className="header__cart">
-                            <ul>
-                                <li><a href="#"><i className="fa fa-heart"></i> <span>1</span></a></li>
-                                <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                            </ul>
-                            <div className="header__cart__price">item: <span>$150.00</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div className="humberger__open">
-                    <i className="fa fa-bars"></i>
+                <a className="navbar-brand" href="index.html">Mizuuu</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="oi oi-menu"></span> Menu
+                </button>
+
+                <div className="collapse navbar-collapse" id="ftco-nav">
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item active"><a href="index.html" className="nav-link">Home</a></li>
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+                            <div className="dropdown-menu" aria-labelledby="dropdown04">
+                                <a className="dropdown-item" href="shop.html">Shop</a>
+                                <a className="dropdown-item" href="wishlist.html">Wishlist</a>
+                                <a className="dropdown-item" href="product-single.html">Single Product</a>
+                                <a className="dropdown-item" href="cart.html">Cart</a>
+                                <a className="dropdown-item" href="checkout.html">Checkout</a>
+                            </div>
+                        </li>
+                        <li className="nav-item"><a href="about.html" className="nav-link">About</a></li>
+                        <li className="nav-item"><a href="blog.html" className="nav-link">Blog</a></li>
+                        <li className="nav-item"><a href="contact.html" className="nav-link">Contact</a></li>
+                        <li className="nav-item cta cta-colored"><a href="cart.html" className="nav-link"><ShoppingCartOutlinedIcon style={{ fontSize: "18px" }} />[0]</a></li>
+
+                    </ul>
                 </div>
             </div>
-        </header>
+        </nav >
     )
 }
 
