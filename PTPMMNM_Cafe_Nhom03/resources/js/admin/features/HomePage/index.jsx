@@ -8,7 +8,7 @@ import "./homepage.scss"
 import Table from "./components/table/Table";
 import { listChucNang } from "../../../listTest";
 const HomeAdmin = () => {
-
+    
     return (
         <div className="home">
             <Sidebar chucNangList={listChucNang} />

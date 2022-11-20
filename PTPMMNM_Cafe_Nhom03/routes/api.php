@@ -12,6 +12,7 @@ use App\Http\Controllers\SanPhamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaiKhoanController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,11 @@ Route::get('chitietlspham/{id}', [LoaiSanPhamController::class, 'detail']);
 
 // API quyền tài khoản
 Route::resource('qtkhoan',QuyenTaiKhoanController::class);
+Route::post('user/login', [UserController::class, 'login']);
+Route::post('user/register', [UserController::class, 'register']);
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 // API phiếu nhập hàng
 Route::resource('pnhang',PhieuNhapHangController::class);

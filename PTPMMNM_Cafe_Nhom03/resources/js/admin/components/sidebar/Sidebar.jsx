@@ -19,6 +19,9 @@ const Sidebar = ({ chucNangList }) => {
     const click = (link) => {
         navigate("/admin/" + link)
     }
+    function Logout(){
+        window.location.assign("http://127.0.0.1:8000/admin");
+    }
     return (
         <div className='sidebar'>
             <div className="top">
@@ -36,7 +39,7 @@ const Sidebar = ({ chucNangList }) => {
                         ))}
 
                     <p className="title">LOG OUT</p>
-                    <li>
+                    <li onClick={Logout}>
                         <LogoutIcon className='icon' />
                         <span>Logout</span>
                     </li>
