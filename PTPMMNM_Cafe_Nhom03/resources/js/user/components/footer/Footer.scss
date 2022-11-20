@@ -1,0 +1,44 @@
+.ftco-footer {
+    font-size: 14px;
+    padding: 3em 0;
+    color: #000000;
+
+    .ftco-footer-logo {
+        text-transform: uppercase;
+        letter-spacing: .1em;
+    }
+
+    .ftco-footer-widget {
+        h2 {
+            font-weight: normal;
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        ul {
+            li {
+                font-size: 14px;
+                margin-bottom: 0px;
+
+                a {
+                    color: #000000;
+                }
+            }
+        }
+
+        .btn-primary {
+            // background: $white !important;
+            border: 2px solid #fff !important;
+
+            &:hover {
+                // background: $white;
+                border: 2px solid #fff !important;
+            }
+        }
+    }
+}
+
+.ftco-section {
+    position: relative;
+}

@@ -35,9 +35,9 @@ import { functionInputs } from "../admin/features/Functions/components/newfuncti
 import Vote from "../admin/features/Votes";
 
 import Home from "../user/features/Home";
-const Router = () => {    
+const Router = () => {
     const [loggedIn, setLoggedIn] = React.useState(false); // <-- undefined
-  
+
     React.useEffect(() => {
         if (localStorage['auth_token'])
             setLoggedIn(true);
@@ -45,14 +45,14 @@ const Router = () => {
             setLoggedIn(false);
     }, []);
     return loggedIn == true
-        ? 
+        ?
         <div>
             {/* Muốn html nào k thay đổi theo router thì làm ở đây */}
             <Routes>
                 <Route path="/">
                     <Route path="admin">
                         <Route index element={<IndexLogin />}></Route>
-                        <Route path="home" element={<HomeAdmin />}></Route>                        
+                        <Route path="home" element={<HomeAdmin />}></Route>
                         {/* <Route path="login_admin" element={<IndexLogin />}></Route> */}
                         <Route path="404" element={<NotFoundPage />}></Route>
                         <Route path="products">
@@ -118,7 +118,7 @@ const Router = () => {
                 </Route>
             </Routes>
         </div >
-        :        
+        :
         <div>
             {/* Muốn html nào k thay đổi theo router thì làm ở đây */}
             <Routes>
@@ -133,8 +133,8 @@ const Router = () => {
                 </Route>
             </Routes>
         </div >
-        
-    
+
+
     // return (
     //     <div>
     //         {/* Muốn html nào k thay đổi theo router thì làm ở đây */}
