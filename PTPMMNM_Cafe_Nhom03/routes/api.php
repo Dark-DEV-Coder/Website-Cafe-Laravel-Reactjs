@@ -8,6 +8,7 @@ use App\Http\Controllers\NhaCungCapController;
 use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\PhieuNhapHangController;
 use App\Http\Controllers\QuyenTaiKhoanController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SanPhamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // API tài khoản
 Route::resource('tk',TaiKhoanController::class);
+Route::post('user/login', [UserController::class, 'login']);
+Route::post('user/register', [UserController::class, 'register']);
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+// API reset, forgot password
+Route::post('reset-password', [ResetPasswordController::class, 'sendMail']);
+Route::put('reset-password/{token}', [ResetPasswordController::class, 'reset']);
 
 // API sản phẩm
 Route::resource('sp',SanPhamController::class);
@@ -51,11 +61,6 @@ Route::get('chitietlspham/{id}', [LoaiSanPhamController::class, 'detail']);
 
 // API quyền tài khoản
 Route::resource('qtkhoan',QuyenTaiKhoanController::class);
-Route::post('user/login', [UserController::class, 'login']);
-Route::post('user/register', [UserController::class, 'register']);
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 // API phiếu nhập hàng
 Route::resource('pnhang',PhieuNhapHangController::class);
@@ -69,3 +74,4 @@ Route::resource('hdon',HoaDonController::class);
 
 // API đánh giá sản phẩm
 Route::resource('dgspham',DanhGiaSanPhamController::class);
+
