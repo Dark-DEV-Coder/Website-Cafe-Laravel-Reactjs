@@ -4,6 +4,7 @@ import Header from '../../components/header/Header';
 import Hero from './components/Hero/Hero';
 import ProductHome from './components/ProductsHome/ProductHome';
 // import CategoriesSection from './components/CategoriesSection/CategoriesSection';
+import Blog from './components/Blog/Blog';
 import Footer from '../../components/footer/Footer';
 
 const Home = () => {
@@ -12,9 +13,10 @@ const Home = () => {
             <Header />
             <Hero />
             <ProductHome />
+            <Blog />
             {/* <CategoriesSection /> */}
             <Footer />
-        </div>
+        </div >
     )
 }
 
