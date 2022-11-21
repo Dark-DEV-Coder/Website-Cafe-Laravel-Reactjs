@@ -4,7 +4,7 @@ import "../../../../css/bootstrap.min.css";
 import { useState } from 'react';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 const Header = () => {
-    const [show, setShow] = useState(false);
+    const [showShop, setShowShop] = useState(false);
 
     return (
         <nav className="navbar navbar-expand-lg ftco-navbar-light" id="ftco-navbar">
@@ -18,18 +18,31 @@ const Header = () => {
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item active"><a href="index.html" className="nav-link">Home</a></li>
                         <li className="nav-item dropdown">
-                            <a onClick={() => setShow(!show)} className="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown-menu" aria-haspopup="true" aria-expanded="false">Shop {console.log(show)}</a>
-                            <div className="dropdown-menu" aria-labelledby="dropdown04">
-                                {show ?
+                            <div onClick={() => setShowShop(!showShop)} className="nav-link dropdown-toggle" style={{ cursor: "pointer" }} >Shop</div>
+                            {showShop ?
+                                <div className="showShopMenu" style={{ position: "absolute" }} >
+                                    <a className="dropdown-item" href="/shop">Shop</a>
+                                    <a className="dropdown-item" href="wishlist.html">Wishlist</a>
+                                    <a className="dropdown-item" href="cart.html">Cart</a>
+                                    <a className="dropdown-item" href="checkout.html">Checkout</a>
+                                </div>
+                                : null}
+                            {/* <div className="dropdown-menu" >
+                                <a className="dropdown-item" href="shop.html">Shop</a>
+                                <a className="dropdown-item" href="wishlist.html">Wishlist</a>
+                                <a className="dropdown-item" href="cart.html">Cart</a>
+                                <a className="dropdown-item" href="checkout.html">Checkout</a> */}
+                            {/* {show ?
                                     <>
+
                                         <a className="dropdown-item" href="shop.html">Shop</a>
                                         <a className="dropdown-item" href="wishlist.html">Wishlist</a>
                                         <a className="dropdown-item" href="cart.html">Cart</a>
                                         <a className="dropdown-item" href="checkout.html">Checkout</a>
                                     </>
-                                    : null}
+                                    : null} */}
 
-                            </div>
+                            {/* </div> */}
 
                         </li>
                         <li className="nav-item"><a href="about.html" className="nav-link">About</a></li>

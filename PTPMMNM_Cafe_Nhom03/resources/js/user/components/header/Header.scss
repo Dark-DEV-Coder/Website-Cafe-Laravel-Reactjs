@@ -53,3 +53,14 @@
         border: 0; // For `<button>`s
     }
 }
+
+.showShopMenu {
+    margin-left: -10px;
+    background-color: #222222   ;
+    margin-top: 0px;
+    z-index: 1000;
+
+    a {
+        color: aliceblue;
+    }
+}

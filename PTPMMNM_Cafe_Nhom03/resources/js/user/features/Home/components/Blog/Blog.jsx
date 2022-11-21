@@ -24,8 +24,8 @@ const Blog = () => {
                             </div>
                             <div className="blog__item__text">
                                 <ul>
-                                    <li><i className="fa fa-calendar-o"></i> May 4,2019</li>
-                                    <li><i className="fa fa-comment-o"></i> 5</li>
+                                    <li><i className="fa fa-calendar-o"></i>7:00 23/11/2022</li>
+                                    <li><i className="fa fa-comment-o"></i></li>
                                 </ul>
                                 <h5><a href="#">Uống cà phê sạch để khỏe mạnh</a></h5>
                                 <p>Về tác dụng của cà phê, thế giới đã khẳng định từ rất lâu. Cà phê tốt cho tim mạch do giàu chất chống oxy hóa (làm sạch máu, phòng cao huyết áp). Hoạt chất phenol trong cà phê ngăn ngừa xơ vữa động mạch, phòng bệnh tai biến mạch máu não. </p>
@@ -39,8 +39,8 @@ const Blog = () => {
                             </div>
                             <div className="blog__item__text">
                                 <ul>
-                                    <li><i className="fa fa-calendar-o"></i> May 4,2019</li>
-                                    <li><i className="fa fa-comment-o"></i> 5</li>
+                                    <li><i className="fa fa-calendar-o"></i> 16:00 21/11/2022</li>
+                                    <li><i className="fa fa-comment-o"></i></li>
                                 </ul>
                                 <h5><a href="#">Văn hóa thưởng thức cà phê sạch</a></h5>
                                 <p>Theo các nhà khoa học, mỗi người khỏe mạnh, trung bình uống 1 – 3 ly cafe/ ngày vào buổi sáng, phòng trường hợp bị mất ngủ. Tùy vào thể trạng của mình, bạn sẽ điều chỉnh liều lượng cho phù hợp. </p>
@@ -54,8 +54,8 @@ const Blog = () => {
                             </div>
                             <div className="blog__item__text">
                                 <ul>
-                                    <li><i className="fa fa-calendar-o"></i> May 4,2019</li>
-                                    <li><i className="fa fa-comment-o"></i> 5</li>
+                                    <li><i className="fa fa-calendar-o"></i> 9:00 17/11/2022</li>
+                                    <li><i className="fa fa-comment-o"></i> </li>
                                 </ul>
                                 <h5><a href="#">7 lý do nên uống cà phê nguyên chất</a></h5>
                                 <p>Có rất nhiều lý do nên uống cà phê mỗi ngày. Cà phê tăng cường hoạt động não bộ, tăng cường trí nhớ, giúp bạn giảm cân và còn nhiều lợi ích khác nữa mà bạn chưa biết.    </p>

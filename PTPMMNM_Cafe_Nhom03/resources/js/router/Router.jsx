@@ -35,6 +35,8 @@ import { functionInputs } from "../admin/features/Functions/components/newfuncti
 import Vote from "../admin/features/Votes";
 
 import Home from "../user/features/Home";
+import Shop from "../user/features/Shop";
+
 const Router = () => {
     const [loggedIn, setLoggedIn] = React.useState(false); // <-- undefined
 
@@ -115,6 +117,7 @@ const Router = () => {
 
                 <Route path="/">
                     <Route index element={<Home />}></Route>
+                    <Route path="shop" element={<Shop />}></Route>
                 </Route>
             </Routes>
         </div >
@@ -130,6 +133,7 @@ const Router = () => {
 
                 <Route path="/">
                     <Route index element={<Home />}></Route>
+                    <Route path="shop" element={<Shop />}></Route>
                 </Route>
             </Routes>
         </div >
