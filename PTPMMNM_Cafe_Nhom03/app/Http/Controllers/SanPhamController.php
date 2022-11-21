@@ -27,6 +27,19 @@ class SanPhamController extends Controller
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
+    public function Page($page) // Hàm lấy danh sách sản phẩm
+    {
+        $tu = ($page-1)*8;
+        $sanphams = SanPhamModel::where('TrangThai','!=',0)->offset($tu)->limit(8)->get();
+        $arr=[
+            'status' => true,
+            'message' => 'Danh sách sản phẩm',
+            'data' => SanPhamResource::collection($sanphams),
+        ];
+        // Trả về dữ liệu dạng json
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
