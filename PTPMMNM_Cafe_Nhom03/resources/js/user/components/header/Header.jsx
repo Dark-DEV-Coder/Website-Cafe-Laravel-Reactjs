@@ -22,7 +22,6 @@ const Header = () => {
                             {showShop ?
                                 <div className="showShopMenu" style={{ position: "absolute" }} >
                                     <a className="dropdown-item" href="/shop">Shop</a>
-                                    <a className="dropdown-item" href="wishlist.html">Wishlist</a>
                                     <a className="dropdown-item" href="cart.html">Cart</a>
                                     <a className="dropdown-item" href="checkout.html">Checkout</a>
                                 </div>
