@@ -10,11 +10,5 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    // css: {
-    //     preprocessorOptions: {
-    //         scss: {
-    //             additionalData: '@import "./resources/js/user/components/header/responsive.scss";',
-    //         },
-    //     },
-    // },
+
 });
