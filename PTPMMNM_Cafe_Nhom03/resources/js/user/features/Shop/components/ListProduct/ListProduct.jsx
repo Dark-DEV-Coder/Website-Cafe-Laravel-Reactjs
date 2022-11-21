@@ -17,14 +17,26 @@ import Stack from '@mui/material/Stack';
 import axios from 'axios';
 const ListProduct = () => {
     const [products, setProduct] = React.useState([]);
+    const [page,SetPage] = React.useState([]);
+    const [currentpage,SetCurrentPage] = React.useState('1');
     const [error, setError] = React.useState("");
     const [loaded, setLoaded] = React.useState(false);
     React.useEffect(() => {
         (async () => {
             try {
-                await axios.get("http://127.0.0.1:8000/api/sp").then((response) => {
+                await axios.get("http://127.0.0.1:8000/api/sp/page/1").then((response) => {
                     setProduct(response.data.data);
-                });
+                }); 
+                await axios.get("http://127.0.0.1:8000/api/sp").then((response) => {
+                    const pro = response.data.data;
+                    const m = (pro.length)/8;
+                    const totalpage = Math.ceil(m);
+                    const arr = [];
+                    for (let i=1;i<=totalpage;i++){
+                        arr.push(i);
+                    }
+                    SetPage(arr);
+                });                                              
             }
             catch (error) {
                 setError(error.message);
@@ -36,6 +48,13 @@ const ListProduct = () => {
 
     }, []);
 
+    function PageProduct(p){
+        axios.get("http://127.0.0.1:8000/api/sp/page/" + p).then((response) => {
+            setProduct(response.data.data);       
+            SetCurrentPage(p);     
+        });  
+    }    
+
     return (
         <section className="ftco-section" >
             <div className="container">
@@ -46,7 +65,7 @@ const ListProduct = () => {
                 </div>
                 {/* List product */}
                 <div className="row featured__filter">
-                {products.map((item) => (      
+                    {products.map((item) => (      
                         <div key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                             <div className="featured__item">
                                 <div className="featured__item__pic set-bg" style={{
@@ -62,18 +81,17 @@ const ListProduct = () => {
                                 </div>
                             </div>
                         </div>                             
-                    ))}    
+                    ))}  
+                    <div className="row mt-5">
+                        Trang {currentpage}
+                    </div>  
                     <div className="row mt-5">
                         <div className="col text-center">
                             <div className="block-27">
                                 <ul>
-                                    <li><a href="#">&lt;</a></li>
-                                    <li className="active"><span>1</span></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">&gt;</a></li>
+                                {page.map((p) => (      
+                                    <li key={p} onClick={() => PageProduct(p)}><a href="#">{p}</a></li>                          
+                                ))}
                                 </ul>
                             </div>
                         </div>

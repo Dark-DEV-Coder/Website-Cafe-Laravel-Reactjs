@@ -45,6 +45,7 @@ Route::put('reset-password/{token}', [ResetPasswordController::class, 'reset']);
 // API sản phẩm
 Route::resource('sp',SanPhamController::class);
 Route::get('chitietsp/{id}', [SanPhamController::class, 'detail']);
+Route::get('/sp/page/{id}', [SanPhamController::class, 'Page']);
 
 
 // API nhân viên
