@@ -50,7 +50,7 @@ class KhachHangController extends Controller
         }
         
         $count = KhachHangModel::select('MaKH')->count();
-        $makh = 'KH'+($count+1);
+        $makh = 'KH'+($count);
         $matk = $input['MaTK'];
         $ho = $input['HoKH'];
         $ten = $input['TenKH'];

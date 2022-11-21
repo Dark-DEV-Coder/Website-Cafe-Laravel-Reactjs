@@ -12,7 +12,6 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SanPhamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TaiKhoanController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -31,7 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // API tài khoản
-Route::resource('tk',TaiKhoanController::class);
+Route::resource('tk',UserController::class);
 Route::post('user/login', [UserController::class, 'login']);
 Route::post('user/register', [UserController::class, 'register']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {

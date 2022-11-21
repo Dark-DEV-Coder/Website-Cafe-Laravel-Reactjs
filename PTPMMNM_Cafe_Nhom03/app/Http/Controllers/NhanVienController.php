@@ -68,13 +68,13 @@ class NhanVienController extends Controller
             $arr = [
                 'status' => false,
                 'message' => 'Email không đúng định dạng',
-                'data' => $checkphone->errors()
+                'data' => $checkmail->errors()
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
         $count = NhanVienModel::select('MaNV')->count();
-        $manv = 'NV'.strval($count+1);
+        $manv = 'NV'.strval($count);
         $ho = $input['honv'];
         $ten = $input['tennv'];
         $ngay = $input['ngaysinhnv'];    
