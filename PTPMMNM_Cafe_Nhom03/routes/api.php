@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChiTietQuyenController;
 use App\Http\Controllers\DanhGiaSanPhamController;
 use App\Http\Controllers\HoaDonController;
 use App\Http\Controllers\KhachHangController;
@@ -60,6 +61,7 @@ Route::get('chitietlspham/{id}', [LoaiSanPhamController::class, 'detail']);
 
 // API quyền tài khoản
 Route::resource('qtkhoan',QuyenTaiKhoanController::class);
+Route::get('chitietquyen/{id}', [ChiTietQuyenController::class, 'detailfunction']);
 
 // API phiếu nhập hàng
 Route::resource('pnhang',PhieuNhapHangController::class);

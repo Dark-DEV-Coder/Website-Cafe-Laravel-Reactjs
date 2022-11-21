@@ -272,20 +272,24 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $user = User::where('email', $request->email)->get()->first();
-        if ($user && Hash::check($request->password, $user->password))
-        {
-            $token = self::getToken($request->email, $request->password);
-            $user->auth_token = $token;
-            $user->save();
-            $response=[
-                'status' => true,
-                'message' => 'Đăng nhập thành công',
-                'data' => ['auth_token' => $user->auth_token,'MaQuyen' => $user->MaQuyen],
-            ];                     
+        if ($user->TrangThai == 0){
+            $response = ['status' => false,'message' => 'Tài khoản không tồn tại'];
         }
-        else 
-          $response = ['status' => false,'message' => 'Tài khoản hoặc mật khẩu không hợp lệ'];
-
+        else{
+            if ($user && Hash::check($request->password, $user->password))
+            {
+                $token = self::getToken($request->email, $request->password);
+                $user->auth_token = $token;
+                $user->save();
+                $response=[
+                    'status' => true,
+                    'message' => 'Đăng nhập thành công',
+                    'data' => ['auth_token' => $user->auth_token,'MaQuyen' => $user->MaQuyen],
+                ];                     
+            }
+            else 
+                $response = ['status' => false,'message' => 'Tài khoản hoặc mật khẩu không hợp lệ'];
+        }
         return response()->json($response, 201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 }

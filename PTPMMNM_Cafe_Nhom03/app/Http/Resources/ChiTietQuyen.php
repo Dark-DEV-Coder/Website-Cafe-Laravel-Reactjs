@@ -17,9 +17,6 @@ class ChiTietQuyen extends JsonResource
         return [
             'MaQuyen' => $this->MaQuyen,
             'MaChucNang' => $this->MaChucNang,
-            'TenChucNang' => $this->TenChucNang,
-            'Icon' => $this->Icon,
-            'Link' => $this->Link,
         ];
     }
 }

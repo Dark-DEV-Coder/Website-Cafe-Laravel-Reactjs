@@ -55,6 +55,29 @@ class ChiTietQuyenController extends Controller
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
+    public function detailfunction($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $chitiet = ChiTietQuyenModel::join('chuc_nang','chuc_nang.MaChucNang','=','chi_tiet_quyen.MaChucNang')
+                                ->where('chi_tiet_quyen.MaQuyen',$id)
+                                ->select('chi_tiet_quyen.MaChucNang','chuc_nang.TenChucNang','chuc_nang.Icon','chuc_nang.Link')
+                                ->get();
+        if (is_null($chitiet)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có chi tiết quyền này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Danh sách chi tiết quyền',
+            'data' => $chitiet,
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+
 
     /**
      * Update the specified resource in storage.
