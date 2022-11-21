@@ -1,0 +1,62 @@
+.hero-wrap {
+    width: 100%;
+    position: relative;
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: '';
+        opacity: .6;
+        width: 50%;
+        background: #7fad39;
+    }
+
+    .slider-text {
+        color: #ffffff;
+        position: relative;
+
+        .breadcrumbs {
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 3px;
+            margin-bottom: 0;
+            z-index: 99;
+            font-weight: 300;
+
+            span {
+                color: rgba(255, 255, 255, 1);
+
+                a {
+                    color: #ffffff;
+                }
+            }
+        }
+
+        .bread {
+            font-weight: 800;
+            color: #ffffff;
+            font-size: 30px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            border: 1px solid rgba(255, 255, 255, .4);
+            border-radius: 30px;
+
+            &:hover,
+            &:focus {
+                background: #ffffff !important;
+                color: #000000;
+            }
+        }
+    }
+
+    &.hero-bread {
+        padding: 10em 0;
+    }
+
+}

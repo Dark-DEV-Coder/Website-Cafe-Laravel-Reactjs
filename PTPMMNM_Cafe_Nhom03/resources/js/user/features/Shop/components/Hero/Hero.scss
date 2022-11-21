@@ -1,6 +1,4 @@
-.hero {
-    padding-bottom: 50px;
-
+.heroShop {
     .container {
         .row {
             display: -ms-flexbox;
@@ -12,7 +10,9 @@
 
             .col-lg-3 {
                 .hero__categories {
+                    background-color: #ffffff;
                     position: absolute;
+                    z-index: 1001;
 
                     ul {
                         border: 1px solid #ebebeb;

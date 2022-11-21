@@ -117,6 +117,7 @@ const Router = () => {
 
                 <Route path="/">
                     <Route index element={<Home />}></Route>
+                    <Route path="home" element={<Home />}></Route>
                     <Route path="shop" element={<Shop />}></Route>
                 </Route>
             </Routes>
@@ -133,6 +134,7 @@ const Router = () => {
 
                 <Route path="/">
                     <Route index element={<Home />}></Route>
+                    <Route path="home" element={<Home />}></Route>
                     <Route path="shop" element={<Shop />}></Route>
                 </Route>
             </Routes>

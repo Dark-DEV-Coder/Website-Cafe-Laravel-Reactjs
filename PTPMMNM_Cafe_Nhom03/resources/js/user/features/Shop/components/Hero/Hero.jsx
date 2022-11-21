@@ -3,15 +3,12 @@ import "./Hero.scss";
 import "../../../../../../css/bootstrap2.min.css";
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
-import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
-import slide3 from "../img/BannerWeb2.jpg";
-const Hero = () => {
-    const [showCate, SetShowCate] = useState(true);
+const HeroListProduct = () => {
+    const [showCate, SetShowCate] = useState(false);
 
     return (
-        <section className="hero">
+        <section className="heroShop">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3">
@@ -62,15 +59,6 @@ const Hero = () => {
                                 </form>
                             </div>
                         </div>
-                        <div className="hero__item set-bg" style={{
-                            backgroundImage: `url(${slide3})`, backgroundRepeat: 'no-repeat'
-                        }}>
-                            <div className="hero__text" style={{ marginLeft: "420px", marginTop: "100px" }}>
-                                <span>Coffee Fresh</span>
-                                <h4>100% NGUYÊN CHẤT </h4>
-                                <a href="#" className="primary-btn">MUA NGAY</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div >
@@ -78,4 +66,4 @@ const Hero = () => {
     )
 }
 
-export default Hero
+export default HeroListProduct
