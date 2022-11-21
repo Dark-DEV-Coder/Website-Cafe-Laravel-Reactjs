@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./Hero.scss";
 import "../../../../../../css/bootstrap2.min.css";
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
@@ -8,38 +8,42 @@ import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 import slide3 from "../img/BannerWeb2.jpg";
 const Hero = () => {
+    const [showCate, SetShowCate] = useState(true);
+
     return (
         <section className="hero">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3">
-                        <div className="hero__categories">
-                            <div className="hero__categories__all">
+                        <div className="hero__categories" >
+                            <div className="hero__categories__all" onClick={() => SetShowCate(!showCate)}>
                                 <div className='iconmenu'>
                                     <MenuOutlinedIcon style={{
                                         fontSize: "25px",
                                         color: "#ffffff",
                                         marginBottom: "3px",
                                     }} />
-                                    <span className='spas'>All departments</span>
+                                    <span className='spas'>All departments {console.log(showCate)}</span>
                                 </div>
-
-
-
                             </div>
-                            <ul>
-                                <li><a href="#">Fresh Meat</a></li>
-                                <li><a href="#">Vegetables</a></li>
-                                <li><a href="#">Fruit & Nut Gifts</a></li>
-                                <li><a href="#">Fresh Berries</a></li>
-                                <li><a href="#">Ocean Foods</a></li>
-                                <li><a href="#">Butter & Eggs</a></li>
-                                <li><a href="#">Fastfood</a></li>
-                                <li><a href="#">Fresh Onion</a></li>
-                                <li><a href="#">Papayaya & Crisps</a></li>
-                                <li><a href="#">Oatmeal</a></li>
-                                <li><a href="#">Fresh Bananas</a></li>
-                            </ul>
+                            {showCate ?
+                                <ul>
+
+                                    <li><a href="#">Fresh Meat</a></li>
+                                    <li><a href="#">Vegetables</a></li>
+                                    <li><a href="#">Fruit & Nut Gifts</a></li>
+                                    <li><a href="#">Fresh Berries</a></li>
+                                    <li><a href="#">Ocean Foods</a></li>
+                                    <li><a href="#">Butter & Eggs</a></li>
+                                    <li><a href="#">Fastfood</a></li>
+                                    <li><a href="#">Fresh Onion</a></li>
+                                    <li><a href="#">Papayaya & Crisps</a></li>
+                                    <li><a href="#">Oatmeal</a></li>
+                                    <li><a href="#">Fresh Bananas</a></li>
+                                </ul>
+                                : null
+                            }
+
                         </div>
                     </div>
                     <div className="col-lg-9">
