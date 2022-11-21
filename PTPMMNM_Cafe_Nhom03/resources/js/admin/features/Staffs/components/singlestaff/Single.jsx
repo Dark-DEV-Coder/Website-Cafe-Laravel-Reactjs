@@ -13,10 +13,16 @@ import axios from 'axios';
 import { useParams } from "react-router-dom";
 const SingleStaff = ({ title }) => {
     const [input, setInput] = useState(true);
+    const [selectMaTK, setSelectMaTK] = useState(false);
+    const [buttonOK, setButtonOK] = useState(false);
     const [showButtonEdit, setShowButtonEdit] = useState(false);
     const handleEditClick = () => {
         setInput(false);
         setShowButtonEdit(true);
+    }
+    const handleCapMaTK = () => {
+        setSelectMaTK(true);
+        setButtonOK(true);
     }
     const params = useParams();
     const [inputmanv, setInputMaNV] = React.useState("");
@@ -88,7 +94,7 @@ const SingleStaff = ({ title }) => {
 
     const [editstaff, setEditStaff] = React.useState(null);
     async function EditStaff() {
-        if (inputgioitinhnv == -1){
+        if (inputgioitinhnv == -1) {
             alert('Chưa chọn giới tính');
             return false;
         }
@@ -103,7 +109,7 @@ const SingleStaff = ({ title }) => {
             luong: inputluong,
             diachinv: inputdiachinv,
         };
-        await axios.put("http://127.0.0.1:8000/api/nvien/"+inputmanv, staff).then((response) => {
+        await axios.put("http://127.0.0.1:8000/api/nvien/" + inputmanv, staff).then((response) => {
             if (response.data.status == false) {
                 alert(JSON.stringify(response.data.message));
             }
@@ -125,7 +131,7 @@ const SingleStaff = ({ title }) => {
                     <h1>{title}</h1>
 
                 </div>
-                <div className="singlebottom" style={{ height: "560px" }}>
+                <div className="singlebottom" style={{ height: "700px" }}>
                     <div className="singleright">
                         <form>
                             <div className='singleformInput'>
@@ -175,13 +181,27 @@ const SingleStaff = ({ title }) => {
                                 <input type={"number"} value={inputluong} onChange={onChangeLuong} disabled={input} />
                             </div>
                             <div className='singleformInput'>
+                                {selectMaTK ?
+                                    <><label>Mã tài khoản </label>
+                                        <select value={inputgioitinhnv} onChange={onChangeGioiTinhNV} className="select-css" disabled={input}>
+                                            <option value='-1'>Chọn Mã Tài Khoản</option>
+                                        </select>
+                                    </> : null
+                                }
 
                             </div>
                             <div className="singleformInput"   >
                                 {showButtonEdit ? <button type='button' onClick={EditStaff}>Lưu</button> : null}
+                                {showButtonEdit ? <button type='button' style={{ marginLeft: "20px" }} onClick={() => handleCapMaTK()}>Cấp Tài Khoản</button> : null}
 
                             </div>
+                            <div className="singleformInput"   >
+                                {buttonOK ? <button type='button' className='buttonOK'>OK</button> : null}
 
+                            </div>
+                            <div className="singleformInput"   >
+
+                            </div>
 
 
                         </form>

@@ -6,14 +6,14 @@ const LoginAdmin = () => {
     const clickLogin = () => {
         navigate("/admin/home")
     }
-    
+
     const [auth_token, setItems] = React.useState("");
 
     React.useEffect(() => {
         if (localStorage['auth_token'])
             localStorage.removeItem('auth_token');
     }, [auth_token]);
-    
+
     const [loginuser, setLoginUser] = React.useState(null);
     const [inputemail, setInputEmail] = React.useState("");
     const [inputpass, setInputPass] = React.useState("");
@@ -33,17 +33,17 @@ const LoginAdmin = () => {
                 alert(JSON.stringify(response.data.message));
             }
             else {
-                if (response.data.data.MaQuyen == 'KH'){
+                if (response.data.data.MaQuyen == 'KH') {
                     alert("Tài khoản này không có quyền truy cập");
                 }
-                else{
+                else {
                     setLoginUser(response.data);
-                    localStorage.setItem('auth_token',JSON.stringify(response.data.data.auth_token));
-                    localStorage.setItem('quyentk',JSON.stringify(response.data.data.MaQuyen));
+                    localStorage.setItem('auth_token', JSON.stringify(response.data.data.auth_token));
+                    localStorage.setItem('quyentk', JSON.stringify(response.data.data.MaQuyen));
                     alert(JSON.stringify(response.data.message));
                     window.location.assign("http://127.0.0.1:8000/admin/home");
                     //headers: { 'Authorization': 'Bearer ' + token }           
-                }          
+                }
             }
 
         });
@@ -52,7 +52,7 @@ const LoginAdmin = () => {
         const user = {
             email: inputemail,
         };
-        await axios.post("http://127.0.0.1:8000/api/reset-password", user).then((response) => {            
+        await axios.post("http://127.0.0.1:8000/api/reset-password", user).then((response) => {
             alert(response.data.message);
         });
     }
@@ -74,7 +74,7 @@ const LoginAdmin = () => {
                                             <label>Password</label>
                                         </div>
                                         <div className="col-auto">
-                                            <a className="text-muted" href="#" onClick={ForgotPassword}>
+                                            <a className="text-muted" href="/admin/forgot" onClick={ForgotPassword}>
                                                 Forgot password?
                                             </a>
                                         </div>

@@ -36,7 +36,8 @@ import Vote from "../admin/features/Votes";
 
 import Home from "../user/features/Home";
 import Shop from "../user/features/Shop";
-
+import ForgotPassword from "../admin/features/ForgotPassword";
+import SuccessReset from "../admin/features/SuccessReset";
 const Router = () => {
     const [loggedIn, setLoggedIn] = React.useState(false); // <-- undefined
 
@@ -54,6 +55,9 @@ const Router = () => {
                 <Route path="/">
                     <Route path="admin">
                         <Route index element={<IndexLogin />}></Route>
+                        <Route path="forgot" element={<ForgotPassword />}></Route>
+                        <Route path="reset-susscess" element={<SuccessReset />}></Route>
+                        <Route path='api/reset-password' element={<Navigate to="/reset-password" />} />
                         <Route path="home" element={<HomeAdmin />}></Route>
                         {/* <Route path="login_admin" element={<IndexLogin />}></Route> */}
                         <Route path="404" element={<NotFoundPage />}></Route>
@@ -129,6 +133,10 @@ const Router = () => {
                 <Route path="/">
                     <Route path="admin">
                         <Route index element={<IndexLogin />}></Route>
+                        {/* <Route path='api/reset-password' element={<Navigate to="/reset-password" />} /> */}
+                        {/* <Redirect from="forgot" to="/"></Redirect> */}
+                        <Route path="forgot" element={<ForgotPassword />}></Route>
+                        {/* <Redirect from="api/reset-password" to="reset-password"></Redirect> */}
                     </Route>
                 </Route>
 

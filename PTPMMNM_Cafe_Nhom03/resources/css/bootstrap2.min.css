@@ -7511,7 +7511,7 @@ button.bg-dark:hover {
 }
 
 .rounded-pill {
-    border-radius: 50rem !important
+    border-radius: 4px !important
 }
 
 .rounded-0 {

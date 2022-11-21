@@ -136,7 +136,6 @@ const SingleCustomer = ({ title }) => {
                                 <input type={"email"} value={inputemailkh} onChange={onChangeEmailKH} disabled={input} />
                             </div>
                             <div className='singleformInput'>
-                                
                             </div>
                             {/* <div className="singleformInput"   >
                                 {showButtonEdit ? <button className='singleformInputCus'>Lưu</button> : null}
