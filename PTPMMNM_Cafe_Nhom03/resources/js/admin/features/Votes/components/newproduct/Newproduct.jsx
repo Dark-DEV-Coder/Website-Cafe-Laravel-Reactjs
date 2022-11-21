@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { listChucNang } from '../../../../../listTest';
 const New = ({ inputs, title }) => {
     const [file, setFile] = useState("");
-    console.log(file);
     return (
         <div className="new">
             <Sidebar chucNangList={listChucNang} />

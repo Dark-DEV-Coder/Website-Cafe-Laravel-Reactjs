@@ -1,16 +1,20 @@
 import React from 'react'
 import "./Shop.scss";
 import Header from '../../components/header/Header';
-import Hero from '../Home/components/Hero/Hero';
-import ProductHome from '../Home/components/ProductsHome/ProductHome';
-import Blog from '../Home/components/Blog/Blog';
+import HeroListProduct from './components/Hero/Hero';
 import Footer from '../../components/footer/Footer';
+import Herowrap from './components/Herowrap/Herowrap';
+import ProductHome from '../Home/components/ProductsHome/ProductHome';
+import ListProduct from './components/ListProduct/ListProduct';
 const Shop = () => {
     return (
         <div>
 
             <Header />
-            <Hero />
+            <HeroListProduct />
+            <Herowrap />
+            <ListProduct />
+            {/* <ListProduct /> */}
             <Footer />
         </div>
     )

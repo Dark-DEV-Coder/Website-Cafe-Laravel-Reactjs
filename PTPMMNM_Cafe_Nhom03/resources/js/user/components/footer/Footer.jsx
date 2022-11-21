@@ -1,5 +1,14 @@
 import React from 'react'
 import "./Footer.scss";
+import MenuOpenOutlinedIcon from '@mui/icons-material/MenuOpenOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
+import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
+import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
+import WhereToVoteOutlinedIcon from '@mui/icons-material/WhereToVoteOutlined';
+import PhoneMissedOutlinedIcon from '@mui/icons-material/PhoneMissedOutlined';
+import AttachEmailOutlinedIcon from '@mui/icons-material/AttachEmailOutlined';
 const Footer = () => {
     return (
         <footer className="ftco-footer ftco-section">
@@ -25,18 +34,18 @@ const Footer = () => {
                     </div>
                     <div className="col-md">
                         <div className="ftco-footer-widget mb-4 ml-md-5">
-                            <h2 className="ftco-heading-2">Menu</h2>
+
+                            <h2 className="ftco-heading-2"><MenuOpenOutlinedIcon style={{ marginRight: "5px", marginBottom: "2px" }} />Menu</h2>
                             <ul className="list-unstyled">
-                                <li><a href="#" className="py-2 d-block">Shop</a></li>
-                                <li><a href="#" className="py-2 d-block">About</a></li>
-                                <li><a href="#" className="py-2 d-block">Journal</a></li>
-                                <li><a href="#" className="py-2 d-block">Contact Us</a></li>
+                                <li><a href="#" className="py-2 d-block"><ShoppingCartOutlinedIcon style={{ marginRight: "5px", marginBottom: "2px" }} />Shop</a></li>
+                                <li><a href="#" className="py-2 d-block"><InfoOutlinedIcon style={{ marginRight: "5px", marginBottom: "2px" }} />About</a></li>
+                                <li><a href="#" className="py-2 d-block"><ContactsOutlinedIcon style={{ marginRight: "5px", marginBottom: "2px" }} />Contact Us</a></li>
                             </ul>
                         </div>
                     </div>
                     <div className="col-md-4">
                         <div className="ftco-footer-widget mb-4">
-                            <h2 className="ftco-heading-2">Help</h2>
+                            <h2 className="ftco-heading-2"><QuizOutlinedIcon style={{ marginRight: "5px", marginBottom: "2px" }} />Help</h2>
                             <div className="d-flex">
                                 <ul className="list-unstyled mr-l-5 pr-l-3 mr-4">
                                     <li><a href="#" className="py-2 d-block">Shipping Information</a></li>
@@ -53,12 +62,12 @@ const Footer = () => {
                     </div>
                     <div className="col-md">
                         <div className="ftco-footer-widget mb-4">
-                            <h2 className="ftco-heading-2">Have a Questions?</h2>
+                            <h2 className="ftco-heading-2"><QuestionAnswerOutlinedIcon style={{ marginRight: "5px", marginBottom: "2px" }} />Have a Questions?</h2>
                             <div className="block-23 mb-3">
                                 <ul>
-                                    <li><span className="icon icon-map-marker"></span><span className="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                                    <li><a href="#"><span className="icon icon-phone"></span><span className="text">+2 392 3929 210</span></a></li>
-                                    <li><a href="#"><span className="icon icon-envelope"></span><span className="text">info@yourdomain.com</span></a></li>
+                                    <li><WhereToVoteOutlinedIcon style={{ marginRight: "5px", marginBottom: "2px" }} />203 Fake St. Mountain View, San Francisco, California, USA</li>
+                                    <li><PhoneMissedOutlinedIcon style={{ marginRight: "5px", marginBottom: "2px" }} />+83 392 3929 2</li>
+                                    <li><AttachEmailOutlinedIcon style={{ marginRight: "5px", marginBottom: "2px" }} />info@yourdomain.com</li>
                                 </ul>
                             </div>
                         </div>

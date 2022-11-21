@@ -9,14 +9,14 @@ const Header = () => {
     return (
         <nav className="navbar navbar-expand-lg ftco-navbar-light" id="ftco-navbar">
             <div className="container">
-                <a className="navbar-brand" href="index.html">Mizuuu</a>
+                <a className="navbar-brand" href="/home">Mizuuu</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="oi oi-menu"></span> Menu
                 </button>
 
                 <div className="collapse navbar-collapse" id="ftco-nav">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item active"><a href="index.html" className="nav-link">Home</a></li>
+                        <li className="nav-item active"><a href="/home" className="nav-link">Home</a></li>
                         <li className="nav-item dropdown">
                             <div onClick={() => setShowShop(!showShop)} className="nav-link dropdown-toggle" style={{ cursor: "pointer" }} >Shop</div>
                             {showShop ?
