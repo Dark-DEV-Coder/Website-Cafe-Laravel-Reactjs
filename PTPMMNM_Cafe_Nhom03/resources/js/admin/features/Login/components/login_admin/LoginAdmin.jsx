@@ -39,6 +39,7 @@ const LoginAdmin = () => {
                 else{
                     setLoginUser(response.data);
                     localStorage.setItem('auth_token',JSON.stringify(response.data.data.auth_token));
+                    localStorage.setItem('quyentk',JSON.stringify(response.data.data.MaQuyen));
                     alert(JSON.stringify(response.data.message));
                     window.location.assign("http://127.0.0.1:8000/admin/home");
                     //headers: { 'Authorization': 'Bearer ' + token }           

@@ -4,7 +4,9 @@ import Navbar from '../../components/navbar/Navbar';
 import Datatable from './components/datatable/Datatable';
 import "./accounts.scss";
 import { listChucNang } from '../../../listTest';
+import axios from 'axios';
 const Account = () => {
+    
     return (
         <div className="list">
             <Sidebar chucNangList={listChucNang} />

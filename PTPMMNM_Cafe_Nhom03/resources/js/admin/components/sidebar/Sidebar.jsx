@@ -14,7 +14,20 @@ import { useNavigate } from 'react-router-dom';
 // import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
-const Sidebar = ({ chucNangList }) => {
+const Sidebar = ({chucNangList}) => {
+    // const iconchucnang = [
+    //     {icon: <DashboardIcon className='icon' />,},
+    //     {icon: <LocalCafeIcon className='icon' />,},
+    //     {icon: <CategoryIcon className='icon' />,},
+    //     {icon: <GroupsIcon className='icon' />,},
+    //     {icon: <LocalShippingIcon className='icon' />,},
+    //     {icon: <ContactEmergencyIcon className='icon' />,},
+    //     {icon: <ReceiptLongIcon className='icon' />,},
+    //     {icon: <FactCheckIcon className='icon' />,},
+    //     {icon: <RecordVoiceOverIcon className='icon' />,},
+    //     {icon: <PsychologyIcon className='icon' />,},
+    //     {icon: <ThumbsUpDownIcon className='icon' />,},
+    // ];
     const navigate = useNavigate()
     const click = (link) => {
         navigate("/admin/" + link)
@@ -22,6 +35,26 @@ const Sidebar = ({ chucNangList }) => {
     function Logout(){
         window.location.assign("http://127.0.0.1:8000/admin");
     }
+    // const [listChucNang, setChucNang] = React.useState([]);
+    // const [error, setError] = React.useState("");
+    // const [loaded, setLoaded] = React.useState(false);
+    // React.useEffect(() => {
+    //     (async () => {
+    //         try {
+    //             const maquyen = JSON.parse(localStorage.getItem('quyentk'));
+    //             await axios.get("http://127.0.0.1:8000/api/chitietquyen/"+maquyen).then((response) => {
+    //                 setChucNang(response.data.data);
+    //             });
+    //         }
+    //         catch (error) {
+    //             setError(error.message);
+    //         }
+    //         finally {
+    //             setLoaded(true);
+    //         }
+    //     })();
+
+    // }, []);
     return (
         <div className='sidebar'>
             <div className="top">
@@ -31,7 +64,13 @@ const Sidebar = ({ chucNangList }) => {
             <div className="center">
                 <ul>
                     {
-                        chucNangList.map((chucnang, index) => (
+                        // listChucNang.map((chucnang) => (
+                        //     <li key={chucnang.MaChucNang} onClick={() => click(chucnang.Link)} >
+                        //         {chucnang.Icon}
+                        //         <span>{chucnang.TenChucNang}</span>
+                        //     </li>
+                        // ))}
+                        chucNangList.map((chucnang) => (
                             <li key={chucnang.id} onClick={() => click(chucnang.link)} >
                                 {chucnang.icon}
                                 <span>{chucnang.name}</span>
