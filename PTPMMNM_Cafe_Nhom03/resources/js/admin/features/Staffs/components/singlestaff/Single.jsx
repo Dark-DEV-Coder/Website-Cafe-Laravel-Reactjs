@@ -20,13 +20,17 @@ const SingleStaff = ({ title }) => {
         setInput(false);
         setShowButtonEdit(true);
     }
+    const [quyentk, setQuyenTK] = React.useState([]);
     const handleCapMaTK = () => {
         setSelectMaTK(true);
         setButtonOK(true);
+        axios.get("http://127.0.0.1:8000/api/qtkhoan").then((response) => {
+            setQuyenTK(response.data.data);
+        });
     }
     const params = useParams();
     const [inputmanv, setInputMaNV] = React.useState("");
-    const [inputmatk, setInputMaTK] = React.useState("");
+    const [inputmaqtk, setInputMaQTK] = React.useState("");
     const [inputhonv, setInputHoNV] = React.useState("");
     const [inputtennv, setInputTenNV] = React.useState("");
     const [inputngaysinhnv, setInputNgaySinhNV] = React.useState("");
@@ -39,8 +43,8 @@ const SingleStaff = ({ title }) => {
     const onChangeMaNV = event => {
         setInputMaNV(event.target.value);
     };
-    const onChangeMaTK = event => {
-        setInputMaTK(event.target.value);
+    const onChangeMaQTK = event => {
+        setInputMaQTK(event.target.value);
     };
     const onChangeHoNV = event => {
         setInputHoNV(event.target.value);
@@ -66,12 +70,14 @@ const SingleStaff = ({ title }) => {
     const onChangeDiaChiNV = event => {
         setInputDiaChiNV(event.target.value);
     };
+    
+    const [error, setError] = React.useState("");
+    const [loaded, setLoaded] = React.useState(false);
     React.useEffect(() => {
         (async () => {
             try {
                 await axios.get("http://127.0.0.1:8000/api/chitietnvien/" + params.id).then((response) => {
                     setInputMaNV(response.data.data.MaNV);
-                    setInputMaTK(response.data.data.MaTK);
                     setInputHoNV(response.data.data.HoNV);
                     setInputTenNV(response.data.data.TenNV);
                     setInputNgaySinhNV(response.data.data.NgaySinh);
@@ -99,7 +105,6 @@ const SingleStaff = ({ title }) => {
             return false;
         }
         const staff = {
-            matk: inputmatk,
             honv: inputhonv,
             tennv: inputtennv,
             ngaysinhnv: inputngaysinhnv,
@@ -122,6 +127,29 @@ const SingleStaff = ({ title }) => {
         });
     }
 
+    const [accountstaff, setAccountStaff] = React.useState(null);
+    async function AccountStaff() {
+        if (inputmaqtk == -1) {
+            alert('Chưa chọn quyền tài khoản');
+            return false;
+        }
+        const staff = {
+            maqtk: inputmaqtk,
+            emailnv: inputemailnv,
+        };
+        await axios.post("http://127.0.0.1:8000/api/tk", staff).then((response) => {
+            if (response.data.status == false) {
+                alert(JSON.stringify(response.data.message));
+            }
+            else {
+                setAccountStaff(response.data);
+                alert(JSON.stringify(response.data.message));
+                window.location.reload();
+            }
+
+        });
+    }
+
     return (
         <div className="single">
             <Sidebar chucNangList={listChucNang} />
@@ -137,10 +165,6 @@ const SingleStaff = ({ title }) => {
                             <div className='singleformInput'>
                                 <label>Mã nhân viên</label>
                                 <input type={"text"} value={inputmanv} onChange={onChangeMaNV} disabled />
-                            </div>
-                            <div className='singleformInput'>
-                                <label>Mã tài khoản</label>
-                                <input type={"text"} value={inputmatk} onChange={onChangeMaTK} disabled />
                             </div>
 
                             <div className='singleformInput'>
@@ -183,8 +207,11 @@ const SingleStaff = ({ title }) => {
                             <div className='singleformInput'>
                                 {selectMaTK ?
                                     <><label>Mã tài khoản </label>
-                                        <select value={inputgioitinhnv} onChange={onChangeGioiTinhNV} className="select-css" disabled={input}>
+                                        <select value={inputmaqtk} onChange={onChangeMaQTK} className="select-css" disabled={input}>
                                             <option value='-1'>Chọn Mã Tài Khoản</option>
+                                            {quyentk.map((q) => (
+                                                <option key={q.MaQuyen} value={q.MaQuyen}>{q.TenQuyen}</option>
+                                            ))}
                                         </select>
                                     </> : null
                                 }
@@ -196,7 +223,7 @@ const SingleStaff = ({ title }) => {
 
                             </div>
                             <div className="singleformInput"   >
-                                {buttonOK ? <button type='button' className='buttonOK'>OK</button> : null}
+                                {buttonOK ? <button onClick={AccountStaff} type='button' className='buttonOK'>Xác nhận</button> : null}
 
                             </div>
                             <div className="singleformInput"   >

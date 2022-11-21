@@ -3,7 +3,21 @@ import "./ForgotPassword.scss";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "../../../../css/bootstrap2.min.css"
+import axios from 'axios';
 const ForgotPassword = () => {
+
+    const [inputemail, setInputEmail] = React.useState("");
+    const onChangeEmail = event => {
+        setInputEmail(event.target.value);
+    };
+    async function ForgotPassword() {
+        const user = {
+            email: inputemail,
+        };
+        await axios.post("http://127.0.0.1:8000/api/reset-password", user).then((response) => {
+            alert(response.data.message);
+        });
+    }
     return (
         <div className="maincontainer">
             <div class="container py-5">
@@ -19,9 +33,9 @@ const ForgotPassword = () => {
                                     <form role="form">
                                         <div class="form-group">
                                             <label for="username">Email</label>
-                                            <input type="text" name="username" placeholder="Vui lòng nhập email ..." required class="form-control" />
+                                            <input type="text" value={inputemail} onChange={onChangeEmail} placeholder="Vui lòng nhập email ..." required class="form-control" />
                                         </div>
-                                        <button type="button" class="btxacnhan subscribe btn btn-primary btn-block rounded-pill shadow-sm" style={{
+                                        <button onClick={ForgotPassword} type="button" class="btxacnhan subscribe btn btn-primary btn-block rounded-pill shadow-sm" style={{
                                             background: ""
                                         }}> Xác nhận  </button>
                                     </form>

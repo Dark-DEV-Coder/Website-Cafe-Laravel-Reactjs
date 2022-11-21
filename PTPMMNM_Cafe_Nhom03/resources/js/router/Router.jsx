@@ -57,7 +57,7 @@ const Router = () => {
                         <Route index element={<IndexLogin />}></Route>
                         <Route path="forgot" element={<ForgotPassword />}></Route>
                         <Route path="reset-susscess" element={<SuccessReset />}></Route>
-                        <Route path='api/reset-password' element={<Navigate to="/reset-password" />} />
+                        {/* <Route path='api/reset-password' element={<Navigate to="/reset-password" />} /> */}
                         <Route path="home" element={<HomeAdmin />}></Route>
                         {/* <Route path="login_admin" element={<IndexLogin />}></Route> */}
                         <Route path="404" element={<NotFoundPage />}></Route>

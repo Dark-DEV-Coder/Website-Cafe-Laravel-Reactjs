@@ -48,14 +48,6 @@ const LoginAdmin = () => {
 
         });
     }
-    async function ForgotPassword() {
-        const user = {
-            email: inputemail,
-        };
-        await axios.post("http://127.0.0.1:8000/api/reset-password", user).then((response) => {
-            alert(response.data.message);
-        });
-    }
     return (
         <div className="main-wrapper" >
             <div className="account-content">
@@ -74,7 +66,7 @@ const LoginAdmin = () => {
                                             <label>Password</label>
                                         </div>
                                         <div className="col-auto">
-                                            <a className="text-muted" href="/admin/forgot" onClick={ForgotPassword}>
+                                            <a className="text-muted" href="/admin/forgot">
                                                 Forgot password?
                                             </a>
                                         </div>

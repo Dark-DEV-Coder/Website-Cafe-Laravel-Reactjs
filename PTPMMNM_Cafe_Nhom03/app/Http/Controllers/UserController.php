@@ -46,7 +46,7 @@ class UserController extends Controller
         //
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaQuyen' => 'required', 'email' => 'required'
+            'maqtk' => 'required', 'emailnv' => 'required'
         ]);
         if ($validator->fails()){
             $arr = [
@@ -57,7 +57,7 @@ class UserController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
         $checkmail = Validator::make($input,[
-            'email' => 'email',
+            'emailnv' => 'email',
         ]);
         if ($checkmail->fails()){
             $arr = [
@@ -69,7 +69,7 @@ class UserController extends Controller
         }
         
 
-        $email = $input['email'];
+        $email = $input['emailnv'];
         $check = User::where('email',$email)->count();
         if ($check !=0){
             $arr = [
@@ -80,20 +80,20 @@ class UserController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
 
-        $qtk = $input['MaQuyen'];
-        $taikhoan = User::insert([
+        $qtk = $input['maqtk'];
+        User::insertGetId([
             'MaQuyen' => $qtk,            
             'email' => $email,    
             'password' => Hash::make('Cafenguyenchat@12345'), 
             'remember_token' => Str::random(10),         
             'updated_at' => date('Y-m-d h-i-s'),
-            'created' => date('Y-m-d h-i-s'),
+            'created_at' => date('Y-m-d h-i-s'),
             'TrangThai' => 1,
         ]);
         $arr = [
             'status' => true,
             'message' => 'Tài khoản đã tạo thành công',
-            'data' => new UserResource($taikhoan),
+            'data' => [],
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
