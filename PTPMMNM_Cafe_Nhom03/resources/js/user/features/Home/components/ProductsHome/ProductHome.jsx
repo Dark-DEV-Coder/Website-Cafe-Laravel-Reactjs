@@ -48,7 +48,7 @@ const ProductHome = () => {
                         <div key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                             <div className="featured__item">
                                 <div className="featured__item__pic set-bg" style={{
-                                    backgroundImage: `url(${'http://127.0.0.1:8000/'+item.Hinh})`, backgroundRepeat: 'no-repeat'
+                                    backgroundImage: `url(${'http://127.0.0.1:8000/'+item.Hinh})`, backgroundRepeat: 'no-repeat', backgroundSize:'contain',
                                 }}>
                                     <ul className="featured__item__pic__hover">                                        
                                         <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
@@ -56,7 +56,7 @@ const ProductHome = () => {
                                 </div>
                                 <div className="featured__item__text">
                                     <h6><a href="#">{item.TenSP}</a></h6>
-                                    <h5>{item.GiaBan}</h5>
+                                    <h5>{item.GiaBan.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</h5>
                                 </div>
                             </div>
                         </div>                             
