@@ -11,8 +11,28 @@ import anh7 from "../img/features/feature-7.jpg";
 import anh8 from "../img/features/feature-8.jpg";
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import axios from 'axios';
 const ProductHome = () => {
 
+    const [products, setProduct] = React.useState([]);
+    const [error, setError] = React.useState("");
+    const [loaded, setLoaded] = React.useState(false);
+    React.useEffect(() => {
+        (async () => {
+            try {
+                await axios.get("http://127.0.0.1:8000/api/sp").then((response) => {
+                    setProduct(response.data.data);
+                });
+            }
+            catch (error) {
+                setError(error.message);
+            }
+            finally {
+                setLoaded(true);
+            }
+        })();
+
+    }, []);
     return (
         <section className="featured spad">
             <div className="container">
@@ -24,134 +44,23 @@ const ProductHome = () => {
                     </div>
                 </div>
                 <div className="row featured__filter">
-                    <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                        <div className="featured__item">
-                            <div className="featured__item__pic set-bg" style={{
-                                backgroundImage: `url(${anh1})`, backgroundRepeat: 'no-repeat'
-                            }}>
-                                <ul className="featured__item__pic__hover">
-                                    <li><a href="#"><FavoriteRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                    <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                </ul>
+                    {products.map((item) => (      
+                        <div key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                            <div className="featured__item">
+                                <div className="featured__item__pic set-bg" style={{
+                                    backgroundImage: `url(${'http://127.0.0.1:8000/'+item.Hinh})`, backgroundRepeat: 'no-repeat'
+                                }}>
+                                    <ul className="featured__item__pic__hover">                                        
+                                        <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
+                                    </ul>
+                                </div>
+                                <div className="featured__item__text">
+                                    <h6><a href="#">{item.TenSP}</a></h6>
+                                    <h5>{item.GiaBan}</h5>
+                                </div>
                             </div>
-                            <div className="featured__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-                        <div className="featured__item">
-                            <div className="featured__item__pic set-bg" style={{
-                                backgroundImage: `url(${anh2})`, backgroundRepeat: 'no-repeat'
-                            }}>
-                                <ul className="featured__item__pic__hover">
-                                    <li><a href="#"><FavoriteRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                    <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                </ul>
-                            </div>
-                            <div className="featured__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-                        <div className="featured__item">
-                            <div className="featured__item__pic set-bg" style={{
-                                backgroundImage: `url(${anh3})`, backgroundRepeat: 'no-repeat'
-                            }}>
-                                <ul className="featured__item__pic__hover">
-                                    <li><a href="#"><FavoriteRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                    <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                </ul>
-                            </div>
-                            <div className="featured__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-                        <div className="featured__item">
-                            <div className="featured__item__pic set-bg" style={{
-                                backgroundImage: `url(${anh4})`, backgroundRepeat: 'no-repeat'
-                            }}>
-                                <ul className="featured__item__pic__hover">
-                                    <li><a href="#"><FavoriteRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                    <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                </ul>
-                            </div>
-                            <div className="featured__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                        <div className="featured__item">
-                            <div className="featured__item__pic set-bg" style={{
-                                backgroundImage: `url(${anh5})`, backgroundRepeat: 'no-repeat'
-                            }}>
-                                <ul className="featured__item__pic__hover">
-                                    <li><a href="#"><FavoriteRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                    <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                </ul>
-                            </div>
-                            <div className="featured__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-                        <div className="featured__item">
-                            <div className="featured__item__pic set-bg" style={{
-                                backgroundImage: `url(${anh6})`, backgroundRepeat: 'no-repeat'
-                            }}>
-                                <ul className="featured__item__pic__hover">
-                                    <li><a href="#"><FavoriteRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                    <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                </ul>
-                            </div>
-                            <div className="featured__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                        <div className="featured__item">
-                            <div className="featured__item__pic set-bg" style={{
-                                backgroundImage: `url(${anh7})`, backgroundRepeat: 'no-repeat'
-                            }}>
-                                <ul className="featured__item__pic__hover">
-                                    <li><a href="#"><FavoriteRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                    <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                </ul>
-                            </div>
-                            <div className="featured__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                        <div className="featured__item">
-                            <div className="featured__item__pic set-bg" style={{
-                                backgroundImage: `url(${anh8})`, backgroundRepeat: 'no-repeat'
-                            }}>
-                                <ul className="featured__item__pic__hover">
-                                    <li><a href="#"><FavoriteRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                    <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
-                                </ul>
-                            </div>
-                            <div className="featured__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
+                        </div>                             
+                    ))}                     
                 </div>
             </div>
         </section >

@@ -3,9 +3,30 @@ import "./Hero.scss";
 import "../../../../../../css/bootstrap2.min.css";
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import 'react-slideshow-image/dist/styles.css'
+import 'react-slideshow-image/dist/styles.css';
+import axios from 'axios';
 const HeroListProduct = () => {
     const [showCate, SetShowCate] = useState(false);
+
+    const [categorys, setCategory] = React.useState([]);
+    const [error, setError] = React.useState("");
+    const [loaded, setLoaded] = React.useState(false);
+    React.useEffect(() => {
+        (async () => {
+            try {
+                await axios.get("http://127.0.0.1:8000/api/lspham").then((response) => {
+                    setCategory(response.data.data);
+                });
+            }
+            catch (error) {
+                setError(error.message);
+            }
+            finally {
+                setLoaded(true);
+            }
+        })();
+
+    }, []);
 
     return (
         <section className="heroShop">
@@ -20,24 +41,15 @@ const HeroListProduct = () => {
                                         color: "#ffffff",
                                         marginBottom: "3px",
                                     }} />
-                                    <span className='spas'>All departments</span>
+                                    <span className='spas'>Các loại sản phẩm</span>
                                 </div>
                             </div>
                             {showCate ?
-                                <ul>
-
-                                    <li><a href="#">Fresh Meat</a></li>
-                                    <li><a href="#">Vegetables</a></li>
-                                    <li><a href="#">Fruit & Nut Gifts</a></li>
-                                    <li><a href="#">Fresh Berries</a></li>
-                                    <li><a href="#">Ocean Foods</a></li>
-                                    <li><a href="#">Butter & Eggs</a></li>
-                                    <li><a href="#">Fastfood</a></li>
-                                    <li><a href="#">Fresh Onion</a></li>
-                                    <li><a href="#">Papayaya & Crisps</a></li>
-                                    <li><a href="#">Oatmeal</a></li>
-                                    <li><a href="#">Fresh Bananas</a></li>
-                                </ul>
+                                 <ul>
+                                 {categorys.map((cate) => (      
+                                     <li key={cate.MaLoaiSP}><a href="#">{cate.TenLoai}</a></li>                              
+                                 ))}                                                                                                        
+                                 </ul>
                                 : null
                             }
 
