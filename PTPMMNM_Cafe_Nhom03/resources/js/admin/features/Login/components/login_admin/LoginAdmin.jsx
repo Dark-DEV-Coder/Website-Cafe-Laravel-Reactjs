@@ -66,7 +66,7 @@ const LoginAdmin = () => {
                                             <label>Password</label>
                                         </div>
                                         <div className="col-auto">
-                                            <a className="text-muted" href="/admin/forgot">
+                                            <a className="text-muted" href="/forgot">
                                                 Forgot password?
                                             </a>
                                         </div>
@@ -78,7 +78,7 @@ const LoginAdmin = () => {
                                     <button type="button" className="btn btn-primary account-btn" onClick={Login} >Login</button>
                                 </div>
                                 <div className="account-footer">
-                                    <p>Don't have an account yet? <a href="register.html">Register</a></p>
+                                    <p>Don't have an account yet? <a href="/register">Register</a></p>
                                 </div>
                             </form>
 

@@ -1,0 +1,50 @@
+body {
+    background-color: #f6f9fb !important;
+}
+
+.text-small {
+    font-size: 0.9rem;
+}
+
+.rounded {
+    border-radius: 1rem;
+}
+
+.select-css {
+    width: 100%;
+    padding: 8px;
+
+    border-radius: 5px;
+    border-bottom: 1px solid gray;
+}
+
+.select-css::-ms-expand {
+    display: none;
+}
+
+.select-css:hover {
+    border-color: #888;
+}
+
+.select-css:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+    box-shadow: 0 0 0 3px -moz-mac-focusring;
+    color: #222;
+    outline: none;
+}
+
+.select-css option {
+    font-weight: normal;
+}
+
+.buttonRis {
+    margin-top: 30px;
+    background: linear-gradient(to right, #82ae46 0%, #03ae7d 200%);
+    border: 0;
+    border-radius: 4px;
+    display: block;
+    font-size: 16px;
+    padding: 10px 26px;
+    width: 100%;
+}

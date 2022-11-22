@@ -38,6 +38,7 @@ import Home from "../user/features/Home";
 import Shop from "../user/features/Shop";
 import ForgotPassword from "../admin/features/ForgotPassword";
 import SuccessReset from "../admin/features/SuccessReset";
+import Register from "../user/features/Register";
 const Router = () => {
     const [loggedIn, setLoggedIn] = React.useState(false); // <-- undefined
 
@@ -121,6 +122,7 @@ const Router = () => {
 
                 <Route path="/">
                     <Route index element={<Home />}></Route>
+                    <Route path="register" element={<Register />}></Route>
                     <Route path="home" element={<Home />}></Route>
                     <Route path="shop" element={<Shop />}></Route>
                 </Route>
@@ -131,11 +133,14 @@ const Router = () => {
             {/* Muốn html nào k thay đổi theo router thì làm ở đây */}
             <Routes>
                 <Route path="/">
+                    <Route path="register" element={<Register />}></Route>
+                    <Route path="forgot" element={<ForgotPassword />}></Route>
                     <Route path="admin">
                         <Route index element={<IndexLogin />}></Route>
+
                         {/* <Route path='api/reset-password' element={<Navigate to="/reset-password" />} /> */}
                         {/* <Redirect from="forgot" to="/"></Redirect> */}
-                        <Route path="forgot" element={<ForgotPassword />}></Route>
+
                         {/* <Redirect from="api/reset-password" to="reset-password"></Redirect> */}
                     </Route>
                 </Route>

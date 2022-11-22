@@ -17,8 +17,8 @@ import Stack from '@mui/material/Stack';
 import axios from 'axios';
 const ListProduct = () => {
     const [products, setProduct] = React.useState([]);
-    const [page,SetPage] = React.useState([]);
-    const [currentpage,SetCurrentPage] = React.useState('1');
+    const [page, SetPage] = React.useState([]);
+    const [currentpage, SetCurrentPage] = React.useState('1');
     const [error, setError] = React.useState("");
     const [loaded, setLoaded] = React.useState(false);
     React.useEffect(() => {
@@ -26,17 +26,17 @@ const ListProduct = () => {
             try {
                 await axios.get("http://127.0.0.1:8000/api/sp/page/1").then((response) => {
                     setProduct(response.data.data);
-                }); 
+                });
                 await axios.get("http://127.0.0.1:8000/api/sp").then((response) => {
                     const pro = response.data.data;
-                    const m = (pro.length)/8;
+                    const m = (pro.length) / 8;
                     const totalpage = Math.ceil(m);
                     const arr = [];
-                    for (let i=1;i<=totalpage;i++){
+                    for (let i = 1; i <= totalpage; i++) {
                         arr.push(i);
                     }
                     SetPage(arr);
-                });                                              
+                });
             }
             catch (error) {
                 setError(error.message);
@@ -45,15 +45,14 @@ const ListProduct = () => {
                 setLoaded(true);
             }
         })();
-
     }, []);
 
-    function PageProduct(p){
+    function PageProduct(p) {
         axios.get("http://127.0.0.1:8000/api/sp/page/" + p).then((response) => {
-            setProduct(response.data.data);       
-            SetCurrentPage(p);     
-        });  
-    }    
+            setProduct(response.data.data);
+            SetCurrentPage(p);
+        });
+    }
 
     return (
         <section className="ftco-section" >
@@ -65,33 +64,33 @@ const ListProduct = () => {
                 </div>
                 {/* List product */}
                 <div className="row featured__filter">
-                    {products.map((item) => (      
-                        <div key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                    {products.map((item) => (
+                        <div key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" style={{ height: '380px' }}>
                             <div className="featured__item">
                                 <div className="featured__item__pic set-bg" style={{
-                                    backgroundImage: `url(${'http://127.0.0.1:8000/'+item.Hinh})`, backgroundRepeat: 'no-repeat', backgroundSize:'contain',
+                                    backgroundImage: `url(${'http://127.0.0.1:8000/' + item.Hinh})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain',
                                 }}>
-                                    <ul className="featured__item__pic__hover">                                        
+                                    <ul className="featured__item__pic__hover">
                                         <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
                                     </ul>
                                 </div>
-                                <div className="featured__item__text">
+                                <div className="featured__item__text1">
                                     <h6><a href="#">{item.TenSP}</a></h6>
-                                    <h5>{item.GiaBan.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</h5>
+                                    <h6 style={{ color: 'red' }}>{item.GiaBan.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</h6>
                                 </div>
                             </div>
-                        </div>                             
-                    ))}  
+                        </div>
+                    ))}
                     <div className="row mt-5">
                         Trang {currentpage}
-                    </div>  
+                    </div>
                     <div className="row mt-5">
                         <div className="col text-center">
                             <div className="block-27">
                                 <ul>
-                                {page.map((p) => (      
-                                    <li key={p} onClick={() => PageProduct(p)}><a href="#">{p}</a></li>                          
-                                ))}
+                                    {page.map((p) => (
+                                        <li key={p} onClick={() => PageProduct(p)}><a href="#">{p}</a></li>
+                                    ))}
                                 </ul>
                             </div>
                         </div>

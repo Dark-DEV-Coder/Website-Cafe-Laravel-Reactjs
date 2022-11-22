@@ -113,7 +113,7 @@ const SingleProvider = ({ title }) => {
 
                             </div>
                             <div className="singleformInput"   >
-                                {showButtonEdit ? <button type='button' onClick={EditProvider}>Lưu</button> : null}
+                                {showButtonEdit ? <button className='buttonSave' type='button' onClick={EditProvider}>Lưu</button> : null}
 
                             </div>
 

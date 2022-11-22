@@ -84,7 +84,7 @@ const Datatable = () => {
             <div className="search">
                 <input type="text" placeholder="Nhập tên sản phẩm cần tìm ..." value={inputtensp} onChange={onChangeTenSP} onKeyUp={FindProduct} />
             </div>
-            <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
+            <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "500px" }}
                 getRowId={(row) => row.MaSP}
                 rows={products}
                 columns={productColumns.concat(actionColumn)}

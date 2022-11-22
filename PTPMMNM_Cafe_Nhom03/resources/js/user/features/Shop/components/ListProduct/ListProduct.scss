@@ -194,14 +194,19 @@
     }
 }
 
-.featured__item__text {
-    text-align: center;
+.featured__item__text1 {
+    // text-align: center;
     padding-top: 15px;
 
     h6 {
         margin-bottom: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
 
-        a {
+        a { 
             color: #252525;
         }
     }
