@@ -3,7 +3,7 @@ import "./Shop.scss";
 import Header from '../../components/header/Header';
 import HeroListProduct from './components/Hero/Hero';
 import Footer from '../../components/footer/Footer';
-import Herowrap from './components/Herowrap/Herowrap';
+import Herowrap from '../Herowrap/Herowrap';
 import ProductHome from '../Home/components/ProductsHome/ProductHome';
 import ListProduct from './components/ListProduct/ListProduct';
 const Shop = () => {
@@ -12,7 +12,7 @@ const Shop = () => {
 
             <Header />
             <HeroListProduct />
-            <Herowrap />
+            <Herowrap title={"Products"} />
             <ListProduct />
             {/* <ListProduct /> */}
             <Footer />
