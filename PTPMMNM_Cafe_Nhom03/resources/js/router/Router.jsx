@@ -41,6 +41,9 @@ import SuccessReset from "../admin/features/SuccessReset";
 import Register from "../user/features/Register";
 import DetailProduct from "../user/features/DetailProduct";
 import Cart from "../user/features/Cart";
+import About from "../user/features/About";
+import Checkout from "../user/features/Checkout";
+import OrderConfirmation from "../user/features/OrderConfirmation";
 const Router = () => {
     const [loggedIn, setLoggedIn] = React.useState(false); // <-- undefined
 
@@ -128,6 +131,11 @@ const Router = () => {
                     <Route path="home" element={<Home />}></Route>
                     <Route path="shop" element={<Shop />}></Route>
                     <Route path="cart" element={<Cart />}></Route>
+                    <Route path="about" element={<About />}></Route>
+                    <Route path="checkout">
+                        <Route index element={<Checkout />}></Route>
+                        <Route path="OrderCon" element={<OrderConfirmation />}></Route>
+                    </Route>
                     <Route path="product">
                         <Route index element={<Shop />}></Route>
                         <Route path="single" element={<DetailProduct />}></Route>
@@ -159,6 +167,11 @@ const Router = () => {
                     <Route path="home" element={<Home />}></Route>
                     <Route path="shop" element={<Shop />}></Route>
                     <Route path="cart" element={<Cart />}></Route>
+                    <Route path="about" element={<About />}></Route>
+                    <Route path="checkout">
+                        <Route index element={<Checkout />}></Route>
+                        <Route path="OrderCon" element={<OrderConfirmation />}></Route>
+                    </Route>
                     <Route path="product">
                         <Route index element={<Shop />}></Route>
                         <Route path="single" element={<DetailProduct />}></Route>

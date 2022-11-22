@@ -18,10 +18,11 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 const ListProduct = () => {
-    const navigate = useNavigate()
+    
     // const clickDetailProduct = (link) => {
     //     navigate("/admin/" + link)
     // }
+    const navigate = useNavigate()
     const clickDetailProduct = () => {
         navigate("/product/single/")
     }

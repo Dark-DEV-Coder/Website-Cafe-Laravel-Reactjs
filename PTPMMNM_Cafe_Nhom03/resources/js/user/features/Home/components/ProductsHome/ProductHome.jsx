@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./ProductHome.scss";
+import { useNavigate } from 'react-router-dom';
 import "../../../../../../css/bootstrap2.min.css";
 import anh1 from "../img/features/feature-1.jpg";
 import anh2 from "../img/features/feature-2.jpg";
@@ -13,7 +14,10 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import axios from 'axios';
 const ProductHome = () => {
-
+    const navigate = useNavigate()
+    const clickDetailProduct = () => {
+        navigate("/product/single/")
+    }
     const [products, setProduct] = React.useState([]);
     const [error, setError] = React.useState("");
     const [loaded, setLoaded] = React.useState(false);
@@ -39,13 +43,13 @@ const ProductHome = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-title">
-                            <h2>Featured Product</h2>
+                            <h2>Sản Phẩm Nổi Bật</h2>
                         </div>
                     </div>
                 </div>
                 <div className="row featured__filter">
                     {products.map((item) => (
-                        <div key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                        <div onClick={() => clickDetailProduct()} key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                             <div className="featured__item">
                                 <div className="featured__item__pic set-bg" style={{
                                     backgroundImage: `url(${'http://127.0.0.1:8000/' + item.Hinh})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain',

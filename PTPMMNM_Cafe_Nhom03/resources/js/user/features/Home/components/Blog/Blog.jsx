@@ -12,7 +12,7 @@ const Blog = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-title from-blog__title">
-                            <h2>From The Blog</h2>
+                            <h2>Các Thông Tin Bổ Ích</h2>
                         </div>
                     </div>
                 </div>

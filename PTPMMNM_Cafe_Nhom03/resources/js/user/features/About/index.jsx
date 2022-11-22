@@ -1,20 +1,19 @@
 import React from 'react';
-import "./DetailProduct.scss";
 import Header from '../../components/header/Header';
 import HeroListProduct from '../Shop/components/Hero/Hero';
 import Herowrap from '../Herowrap/Herowrap';
+import DetailAbout from './components/DetailAbout';
 import Footer from '../../components/footer/Footer';
-import Detail from './components/Detail/Detail';
-const DetailProduct = () => {
+const About = () => {
     return (
         <div>
             <Header />
             <HeroListProduct />
-            <Herowrap title={"Detail Product"} />
-            <Detail />
+            <Herowrap title={"About"} />
+            <DetailAbout />
             <Footer />
         </div>
     )
 }
 
-export default DetailProduct
+export default About
