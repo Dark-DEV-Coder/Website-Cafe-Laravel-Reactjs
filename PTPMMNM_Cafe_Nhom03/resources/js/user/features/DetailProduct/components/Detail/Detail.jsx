@@ -1,6 +1,5 @@
 import React from 'react';
 import "./Detail.scss";
-import anh from "./anh.png";
 import { useState } from 'react';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';

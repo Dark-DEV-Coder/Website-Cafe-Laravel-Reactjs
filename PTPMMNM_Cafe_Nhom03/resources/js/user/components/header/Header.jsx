@@ -3,6 +3,7 @@ import "./Header.scss";
 import "../../../../css/bootstrap.min.css";
 import { useState } from 'react';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 const Header = () => {
     const [showShop, setShowShop] = useState(false);
 
@@ -16,14 +17,14 @@ const Header = () => {
 
                 <div className="collapse navbar-collapse" id="ftco-nav">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item active"><a href="/home" className="nav-link">Home</a></li>
+                        <li className="nav-item active"><a href="/home" className="nav-link">Trang chủ</a></li>
                         <li className="nav-item dropdown">
-                            <div onClick={() => setShowShop(!showShop)} className="nav-link dropdown-toggle" style={{ cursor: "pointer" }} >Shop</div>
+                            <div onClick={() => setShowShop(!showShop)} className="nav-link dropdown-toggle" style={{ cursor: "pointer" }} >Cửa hàng</div>
                             {showShop ?
                                 <div className="showShopMenu" style={{ position: "absolute" }} >
-                                    <a className="dropdown-item" href="/shop">Shop</a>
-                                    <a className="dropdown-item" href="/cart">Cart</a>
-                                    <a className="dropdown-item" href="checkout.html">Checkout</a>
+                                    <a className="dropdown-item" href="/shop">Cửa hàng</a>
+                                    <a className="dropdown-item" href="/cart">Giỏ hàng</a>
+                                    <a className="dropdown-item" href="/checkout">Thủ tục thanh toán</a>
                                 </div>
                                 : null}
                             {/* <div className="dropdown-menu" >
@@ -44,11 +45,10 @@ const Header = () => {
                             {/* </div> */}
 
                         </li>
-                        <li className="nav-item"><a href="about.html" className="nav-link">About</a></li>
-                        <li className="nav-item"><a href="blog.html" className="nav-link">Blog</a></li>
-                        <li className="nav-item"><a href="contact.html" className="nav-link">Contact</a></li>
+                        <li className="nav-item"><a href="/about" className="nav-link">Thông tin</a></li>
+                        <li className="nav-item"><a href="contact.html" className="nav-link">Liên lạc</a></li>
                         <li className="nav-item cta cta-colored"><a href="cart.html" className="nav-link"><ShoppingCartOutlinedIcon style={{ fontSize: "18px" }} />[0]</a></li>
-
+                        <li className="nav-item cta cta-colored"><a href="cart.html" className="nav-link"><AssignmentIndOutlinedIcon style={{ fontSize: "18px", marginRight: '5px' }} />Tài khoản</a></li>
                     </ul>
                 </div>
             </div>

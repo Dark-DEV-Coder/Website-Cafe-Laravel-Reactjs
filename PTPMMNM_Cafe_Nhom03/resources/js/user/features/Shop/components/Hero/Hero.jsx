@@ -45,11 +45,11 @@ const HeroListProduct = () => {
                                 </div>
                             </div>
                             {showCate ?
-                                 <ul>
-                                 {categorys.map((cate) => (      
-                                     <li key={cate.MaLoaiSP}><a href="#">{cate.TenLoai}</a></li>                              
-                                 ))}                                                                                                        
-                                 </ul>
+                                <ul>
+                                    {categorys.map((cate) => (
+                                        <li key={cate.MaLoaiSP}><a href="#">{cate.TenLoai}</a></li>
+                                    ))}
+                                </ul>
                                 : null
                             }
 
@@ -59,15 +59,8 @@ const HeroListProduct = () => {
                         <div className="hero__search">
                             <div className="hero__search__form">
                                 <form action="#">
-                                    <div className="hero__search__categories">
-                                        All Categories
-                                        <span className="arrow_carrot-down"></span>
-                                        <KeyboardArrowDownOutlinedIcon style={{
-                                            marginLeft: "20px"
-                                        }} />
-                                    </div>
-                                    <input type="text" placeholder="What do yo u need?" />
-                                    <button type="submit" className="site-btn">SEARCH</button>
+                                    <input type="text" placeholder="Nhập dữ liệu cần tìm ..." />
+                                    <button type="submit" className="site-btn">TÌM KIẾM</button>
                                 </form>
                             </div>
                         </div>
