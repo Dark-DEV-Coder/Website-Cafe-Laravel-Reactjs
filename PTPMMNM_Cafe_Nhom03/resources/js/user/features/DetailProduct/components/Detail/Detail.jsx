@@ -4,14 +4,6 @@ import { useState } from 'react';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 const Detail = () => {
-    const [valueinit, setValueinit] = useState(1);
-    const handleAdd = () => {
-        setValueinit(valueinit + 1);
-    }
-    const handleDelete = () => {
-        { valueinit < 0 || valueinit === 0 ? setValueinit(1) : setValueinit(valueinit - 1); }
-
-    }
     return (
         <section className="product-details spad">
             <div className="container">
@@ -45,17 +37,16 @@ const Detail = () => {
                             <div className="product__details__quantity">
                                 <div className="quantity">
                                     <div className="pro-qty">
-                                        <span className="dec qtybtn" onClick={() => handleDelete()}>-</span>
-                                        <input type="number" required />
-                                        <span className="inc qtybtn" onClick={() => handleAdd()}>+</span>
+
+                                        <input type="number" defaultValue={1} required />
+
 
                                     </div>
                                 </div>
                             </div>
                             <div className="primary-btn">THÊM VÀO GIỎ HÀNG</div>
                             <ul>
-                                <li><b>Availability</b> <span>In Stock</span></li>
-                                <li><b>Weight</b> <span>0.5 kg</span></li>
+                                <li><b>Trạng thái</b> <span>In Stock</span></li>
                             </ul>
                         </div>
                     </div>
@@ -64,7 +55,7 @@ const Detail = () => {
                             <ul className="nav nav-tabs" role="tablist">
                                 <li className="nav-item">
                                     <a style={{ cursor: 'pointer' }} className="nav-link" data-toggle="tab" role="tab"
-                                        aria-selected="false">Information</a>
+                                        aria-selected="false">Mô tả</a>
                                 </li>
                             </ul>
                             <div className="tab-content">

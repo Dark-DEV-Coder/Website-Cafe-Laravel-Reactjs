@@ -1,0 +1,94 @@
+.ftco-section {
+    padding: 2em 0;
+    position: relative;
+}
+
+.ftco-no-pt {
+    padding-top: 0 !important;
+}
+
+.ftco-no-pb {
+    padding-bottom: 0 !important;
+}
+
+.ftco-bg-dark {
+    background: #3c312e;
+}
+
+.select-css {
+    width: 100%;
+    padding: 8px;
+
+    border-radius: 5px;
+    border-bottom: 1px solid gray;
+}
+
+.select-css::-ms-expand {
+    display: none;
+}
+
+.select-css:hover {
+    border-color: #888;
+}
+
+.select-css:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+    box-shadow: 0 0 0 3px -moz-mac-focusring;
+    color: #222;
+    outline: none;
+}
+
+.select-css option {
+    font-weight: normal;
+}
+
+.cart-detail {
+    width: 100%;
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cart-detail.cart-total {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cart-detail .btn-primary {
+    display: block;
+    width: 100%;
+}
+
+.cart-total {
+    width: 100%;
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.cart-total h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.cart-total p {
+    width: 100%;
+    display: block;
+}
+
+.cart-total p span {
+    display: block;
+    width: 50%;
+}
+
+.cart-total p.total-price span {
+    text-transform: uppercase;
+}
+
+.cart-total p.total-price span:last-child {
+    color: #000000;
+    font-weight: 600;
+}
+
+.cart-total hr {
+    background: rgba(255, 255, 255, 0.1);
+}

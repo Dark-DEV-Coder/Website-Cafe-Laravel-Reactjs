@@ -18,7 +18,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 const ListProduct = () => {
-    
+
     // const clickDetailProduct = (link) => {
     //     navigate("/admin/" + link)
     // }
