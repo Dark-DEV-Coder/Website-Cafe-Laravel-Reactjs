@@ -74,7 +74,6 @@ const ListProduct = () => {
                 {/* List product */}
                 <div className="row featured__filter">
                     {products.map((item) => (
-                        // <Link to={"/product/single/" + item.MaSP}>
                         <div onClick={() => clickDetailProduct()} key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" style={{ height: '380px' }}>
                             <div className="featured__item">
                                 <div className="featured__item__pic set-bg" style={{

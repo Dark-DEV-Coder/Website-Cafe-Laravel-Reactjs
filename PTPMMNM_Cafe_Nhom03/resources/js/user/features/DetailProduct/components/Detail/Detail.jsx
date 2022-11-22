@@ -2,6 +2,8 @@ import React from 'react';
 import "./Detail.scss";
 import anh from "./anh.png";
 import { useState } from 'react';
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 const Detail = () => {
     const [valueinit, setValueinit] = useState(1);
     const handleAdd = () => {
@@ -36,14 +38,7 @@ const Detail = () => {
                     <div className="col-lg-6 col-md-6">
                         <div className="product__details__text">
                             <h3>Vetgetable’s Package</h3>
-                            <div className="product__details__rating">
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star"></i>
-                                <i className="fa fa-star-half-o"></i>
-                                <span>(18 reviews)</span>
-                            </div>
+                            <Rating name="half-rating" defaultValue={2.5} precision={0.5} readOnly style={{ color: 'red' }} />
                             <div className="product__details__price">$50.00</div>
                             <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
                                 vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
@@ -52,8 +47,9 @@ const Detail = () => {
                                 <div className="quantity">
                                     <div className="pro-qty">
                                         <span className="dec qtybtn" onClick={() => handleDelete()}>-</span>
-                                        <input type="text" value={valueinit} disabled={false} />
+                                        <input type="number" required />
                                         <span className="inc qtybtn" onClick={() => handleAdd()}>+</span>
+
                                     </div>
                                 </div>
                             </div>
