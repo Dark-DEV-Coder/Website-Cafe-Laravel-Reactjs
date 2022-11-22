@@ -56,9 +56,20 @@
 
 .showShopMenu {
     margin-left: -10px;
-    background-color: #222222   ;
+    background-color: #222222;
     margin-top: 0px;
     z-index: 1000;
+
+    a {
+        color: aliceblue;
+    }
+}
+
+.showAccount {
+    margin-left: 440px;
+    background-color: #222222;
+    margin-top: 40px;
+    z-index: 2000;
 
     a {
         color: aliceblue;

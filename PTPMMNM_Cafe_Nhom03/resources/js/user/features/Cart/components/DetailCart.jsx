@@ -13,7 +13,8 @@ const DetailCart = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="shoping__cart__table">
-                            <table>
+                            <h3 style={{ textAlign: 'center', marginTop: '-50px' }}>Giỏ hàng</h3>
+                            <table style={{ marginTop: '30px' }}>
                                 <thead>
                                     <tr>
                                         <th className="shoping__product" style={{ textAlign: 'left' }}>Sản phẩm</th>

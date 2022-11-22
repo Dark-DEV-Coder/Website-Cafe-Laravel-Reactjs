@@ -6,7 +6,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 const Header = () => {
     const [showShop, setShowShop] = useState(false);
-
+    const [showAccount, setShowAccount] = useState(false);
     return (
         <nav className="navbar navbar-expand-lg ftco-navbar-light" id="ftco-navbar">
             <div className="container">
@@ -46,9 +46,17 @@ const Header = () => {
 
                         </li>
                         <li className="nav-item"><a href="/about" className="nav-link">Thông tin</a></li>
-                        <li className="nav-item"><a href="contact.html" className="nav-link">Liên lạc</a></li>
+                        {/* <li className="nav-item"><a href="contact.html" className="nav-link">Liên lạc</a></li> */}
                         <li className="nav-item cta cta-colored"><a href="cart.html" className="nav-link"><ShoppingCartOutlinedIcon style={{ fontSize: "18px" }} />[0]</a></li>
-                        <li className="nav-item cta cta-colored"><a href="cart.html" className="nav-link"><AssignmentIndOutlinedIcon style={{ fontSize: "18px", marginRight: '5px' }} />Tài khoản</a></li>
+                        <li className="nav-item cta cta-colored"><div onClick={() => setShowAccount(!showAccount)} className="nav-link dropdown-toggle" style={{ cursor: "pointer" }} ><AssignmentIndOutlinedIcon style={{ fontSize: "18px", marginRight: '5px' }} />Tài khoản</div></li>
+                        {showAccount ?
+                            <div className="showAccount" style={{ position: "absolute" }} >
+                                <a className="dropdown-item" href="/user">Thông tin cá nhân</a>
+                                <a className="dropdown-item" href="/history">Lịch sử</a>
+                                <a className="dropdown-item" href="/changepass">Đổi mật khẩu</a>
+                                <a className="dropdown-item" href="/logout">Đăng xuất </a>
+                            </div>
+                            : null}
                     </ul>
                 </div>
             </div>
