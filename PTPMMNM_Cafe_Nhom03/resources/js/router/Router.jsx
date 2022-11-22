@@ -40,6 +40,7 @@ import ForgotPassword from "../admin/features/ForgotPassword";
 import SuccessReset from "../admin/features/SuccessReset";
 import Register from "../user/features/Register";
 import DetailProduct from "../user/features/DetailProduct";
+import Cart from "../user/features/Cart";
 const Router = () => {
     const [loggedIn, setLoggedIn] = React.useState(false); // <-- undefined
 
@@ -126,6 +127,7 @@ const Router = () => {
                     <Route path="register" element={<Register />}></Route>
                     <Route path="home" element={<Home />}></Route>
                     <Route path="shop" element={<Shop />}></Route>
+                    <Route path="cart" element={<Cart />}></Route>
                     <Route path="product">
                         <Route index element={<Shop />}></Route>
                         <Route path="single" element={<DetailProduct />}></Route>
@@ -141,9 +143,10 @@ const Router = () => {
                 <Route path="/">
                     <Route path="register" element={<Register />}></Route>
                     <Route path="forgot" element={<ForgotPassword />}></Route>
+
                     <Route path="admin">
                         <Route index element={<IndexLogin />}></Route>
-
+                        {/* <Route path="/404" element={<NotFoundPage />}></Route> */}
                         {/* <Route path='api/reset-password' element={<Navigate to="/reset-password" />} /> */}
                         {/* <Redirect from="forgot" to="/"></Redirect> */}
 
@@ -155,6 +158,7 @@ const Router = () => {
                     <Route index element={<Home />}></Route>
                     <Route path="home" element={<Home />}></Route>
                     <Route path="shop" element={<Shop />}></Route>
+                    <Route path="cart" element={<Cart />}></Route>
                     <Route path="product">
                         <Route index element={<Shop />}></Route>
                         <Route path="single" element={<DetailProduct />}></Route>

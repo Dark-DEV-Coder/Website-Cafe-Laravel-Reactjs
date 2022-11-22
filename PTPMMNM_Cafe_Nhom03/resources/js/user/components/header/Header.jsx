@@ -22,7 +22,7 @@ const Header = () => {
                             {showShop ?
                                 <div className="showShopMenu" style={{ position: "absolute" }} >
                                     <a className="dropdown-item" href="/shop">Shop</a>
-                                    <a className="dropdown-item" href="cart.html">Cart</a>
+                                    <a className="dropdown-item" href="/cart">Cart</a>
                                     <a className="dropdown-item" href="checkout.html">Checkout</a>
                                 </div>
                                 : null}
