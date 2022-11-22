@@ -15,7 +15,16 @@ import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const ListProduct = () => {
+    const navigate = useNavigate()
+    // const clickDetailProduct = (link) => {
+    //     navigate("/admin/" + link)
+    // }
+    const clickDetailProduct = () => {
+        navigate("/product/single/")
+    }
     const [products, setProduct] = React.useState([]);
     const [page, SetPage] = React.useState([]);
     const [currentpage, SetCurrentPage] = React.useState('1');
@@ -65,7 +74,8 @@ const ListProduct = () => {
                 {/* List product */}
                 <div className="row featured__filter">
                     {products.map((item) => (
-                        <div key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" style={{ height: '380px' }}>
+                        // <Link to={"/product/single/" + item.MaSP}>
+                        <div onClick={() => clickDetailProduct()} key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" style={{ height: '380px' }}>
                             <div className="featured__item">
                                 <div className="featured__item__pic set-bg" style={{
                                     backgroundImage: `url(${'http://127.0.0.1:8000/' + item.Hinh})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain',
@@ -80,6 +90,7 @@ const ListProduct = () => {
                                 </div>
                             </div>
                         </div>
+                        // </Link>
                     ))}
                     <div className="row mt-5">
                         Trang {currentpage}

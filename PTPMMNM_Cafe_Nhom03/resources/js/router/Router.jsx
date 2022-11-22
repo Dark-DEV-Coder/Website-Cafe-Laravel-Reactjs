@@ -39,6 +39,7 @@ import Shop from "../user/features/Shop";
 import ForgotPassword from "../admin/features/ForgotPassword";
 import SuccessReset from "../admin/features/SuccessReset";
 import Register from "../user/features/Register";
+import DetailProduct from "../user/features/DetailProduct";
 const Router = () => {
     const [loggedIn, setLoggedIn] = React.useState(false); // <-- undefined
 
@@ -125,6 +126,11 @@ const Router = () => {
                     <Route path="register" element={<Register />}></Route>
                     <Route path="home" element={<Home />}></Route>
                     <Route path="shop" element={<Shop />}></Route>
+                    <Route path="product">
+                        <Route index element={<Shop />}></Route>
+                        <Route path="single" element={<DetailProduct />}></Route>
+
+                    </Route>
                 </Route>
             </Routes>
         </div >
@@ -149,6 +155,11 @@ const Router = () => {
                     <Route index element={<Home />}></Route>
                     <Route path="home" element={<Home />}></Route>
                     <Route path="shop" element={<Shop />}></Route>
+                    <Route path="product">
+                        <Route index element={<Shop />}></Route>
+                        <Route path="single" element={<DetailProduct />}></Route>
+
+                    </Route>
                 </Route>
             </Routes>
         </div >
