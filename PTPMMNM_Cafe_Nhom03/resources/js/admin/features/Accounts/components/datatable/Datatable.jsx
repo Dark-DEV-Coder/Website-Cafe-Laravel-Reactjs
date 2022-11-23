@@ -35,30 +35,11 @@ const Datatable = () => {
 
     }, []);
 
-    const actionColumn = [
-        {
-            field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
-                return (
-                    <div className="cellAction">
-                        <Link to="/admin/accounts/single">
-                            <div className="viewButton">
-                                Xem chi tiết
-                            </div>
-                        </Link>
-
-                        <div className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
-                            Xóa
-                        </div>
-                    </div>
-                );
-            },
-        },
-    ]
     return (
         <div className='datatable'>
             <div className="datatableTitle">
                 Danh sách tài khoản
-                <Link to="/admin/accounts/new" className="newaccount">Thêm Mới</Link>
+
             </div>
             <div className="search">
 
@@ -67,7 +48,7 @@ const Datatable = () => {
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 rows={accounts}
-                columns={productColumns.concat(actionColumn)}
+                columns={productColumns}
                 pageSize={9}
                 rowsPerPageOptions={[5]}
                 checkboxSelection
