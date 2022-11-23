@@ -25,6 +25,55 @@ class KhachHangController extends Controller
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
+    public function CheckInfor(Request $request) // Hàm thêm mới thông tin nhân viên
+    {        
+        $input = $request->all();
+        $validator = Validator::make($input,[
+            'ho' => 'required', 'ten' => 'required',
+            'ngaysinh' => 'required', 'gioitinh' => 'required', 'diachi' => 'required','sdt' => 'required', 
+            'email' => 'required'
+        ]);
+        
+        if ($validator->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Chưa nhập đủ dữ liệu',
+                'data' => $validator->errors(),
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        }
+
+        $checkphone = Validator::make($input,[
+            'sdt' => 'regex:/^(0)+([0-9]{9})$/',
+        ]);
+        if ($checkphone->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Số điện thoại không đúng định dạng hoặc không đủ 10 chữ số',
+                'data' => $checkphone->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
+        $checkmail = Validator::make($input,[
+            'email' => 'email',
+        ]);
+        if ($checkmail->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Email không đúng định dạng',
+                'data' => $checkmail->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+        
+        $arr = [
+            'status' => true,
+            'message' => 'Nhân viên đã thêm thành công',
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
