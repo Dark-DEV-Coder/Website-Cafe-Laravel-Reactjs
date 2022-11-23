@@ -232,25 +232,71 @@ class UserController extends Controller
 
     public function register(Request $request)
     {   
+        $input = $request->all();
+        $validator = Validator::make($input,[
+            'ho' => 'required', 'ten' => 'required',
+            'ngaysinh' => 'required', 'gioitinh' => 'required', 'diachi' => 'required','sdt' => 'required', 
+            'email' => 'required'
+        ]);
+        
+        if ($validator->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Chưa nhập đủ dữ liệu',
+                'data' => $validator->errors(),
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        }
+
+        $checkphone = Validator::make($input,[
+            'sdt' => 'regex:/^(0)+([0-9]{9})$/',
+        ]);
+        if ($checkphone->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Số điện thoại không đúng định dạng hoặc không đủ 10 chữ số',
+                'data' => $checkphone->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
+        $checkmail = Validator::make($input,[
+            'email' => 'email',
+        ]);
+        if ($checkmail->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Email không đúng định dạng',
+                'data' => $checkmail->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+        if ($input['password'] != $input['cfpass']){
+            $arr = [
+                'status' => false,
+                'message' => 'Mật khẩu xác nhận không đúng',
+                'data' => $checkmail->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json(['success'=>false,'data'=>$validator->errors()],200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
         }
 
         $payload = [
             'password'=>Hash::make($request->password),
             'email'=>$request->email,
-            'name'=>$request->name,
             'auth_token'=> ''
         ];
 
         $user = new User($payload);
-        if ($user->save())
+        if ($user)
         {
 
             $token = self::getToken($request->email, $request->password);
@@ -259,13 +305,47 @@ class UserController extends Controller
             $user = User::where('email', $request->email)->get()->first();
 
             $user->auth_token = $token; 
-            $user->save();
-            $response = ['success'=>true,'auth_token'=>$token];        
+            User::insertGetId([
+                'MaQuyen' => 'KH',            
+                'email' => $user->email,    
+                'password' => $user->password, 
+                'remember_token' => Str::random(10), 
+                'auth_token' => $user->auth_token,        
+                'email_verified_at' => date('Y-m-d h-i-s'),
+                'updated_at' => date('Y-m-d h-i-s'),
+                'created_at' => date('Y-m-d h-i-s'),
+                'TrangThai' => 1,
+            ]);
+            
+            $count = KhachHangModel::select('MaKH')->count();
+            $makh = 'KH'.($count);
+            $matk = User::where('email',$user->email)->select('MaTK')->first();
+            $ho = $input['ho'];
+            $ten = $input['ten'];
+            $ngay = $input['ngaysinh'];
+            $gioitinh = $input['gioitinh'];
+            $dc = $input['diachi'];
+            $sdt = $input['sdt'];
+            $email = $user->email;
+            KhachHangModel::insert([
+                'MaKH' => $makh,
+                'MaTK' => $matk->MaTK,
+                'HoKH' => $ho,
+                'TenKH' => $ten,
+                'NgaySinh' => $ngay,
+                'GioiTinh' => $gioitinh,
+                'DiaChi' => $dc,
+                'SoDienThoai' => $sdt,
+                'Email' => $email,
+                'TrangThai' => 1,
+                'updated_at' => date('Y-m-d h-i-s'),
+            ]);
+            $response = ['success'=>true,'auth_token'=>$token,'message'=>'Đăng ký thành công'];        
         }
         else
             $response = ['success'=>false, 'data'=>'Register Failed'];
 
-        return response()->json($response, 201);
+        return response()->json($response, 201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
          
     }
 
