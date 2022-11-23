@@ -64,6 +64,22 @@ const ListProduct = () => {
         });
     }
 
+    function AddToCart(id,hinh,ten,gia){
+        let giohang = [];        
+        if (localStorage['cart'])
+            giohang=JSON.parse(localStorage.getItem('cart'));               
+        const temp={productid:id,productname:ten,productprice:gia,productcount:1,productimg:hinh};
+        giohang.push(temp);        
+        for (let i=0;i<giohang.length-1;i++){
+            for (let j=i+1;j<giohang.length;j++)
+                if (giohang[i].productid==giohang[j].productid){
+                    giohang.splice(j,1);
+                    giohang[i].productcount++;
+                }
+        }
+        localStorage.setItem('cart',JSON.stringify(giohang));
+    }
+
     return (
         <section className="ftco-section" >
             <div className="container">
@@ -75,17 +91,17 @@ const ListProduct = () => {
                 {/* List product */}
                 <div className="row featured__filter">
                     {products.map((item) => (
-                        <div onClick={() => clickDetailProduct()} key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" style={{ height: '380px' }}>
+                        <div key={item.MaSP} className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" style={{ height: '380px' }}>
                             <div className="featured__item">
                                 <div className="featured__item__pic set-bg" style={{
                                     backgroundImage: `url(${'http://127.0.0.1:8000/' + item.Hinh})`, backgroundRepeat: 'no-repeat', backgroundSize: 'contain',
                                 }}>
                                     <ul className="featured__item__pic__hover">
-                                        <li><a href="#"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
+                                        <li onClick={() => AddToCart(item.MaSP,item.Hinh,item.TenSP,item.GiaBan)}><a href="/cart"><ShoppingCartRoundedIcon style={{ marginBottom: "6px", fontSize: "20px" }} /></a></li>
                                     </ul>
                                 </div>
                                 <div className="featured__item__text1">
-                                    <h6><a href="#">{item.TenSP}</a></h6>
+                                    <h6><a href={"http://127.0.0.1:8000/product/single/"+item.MaSP}>{item.TenSP}</a></h6>
                                     <h6 style={{ color: 'red' }}>{item.GiaBan.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</h6>
                                 </div>
                             </div>
