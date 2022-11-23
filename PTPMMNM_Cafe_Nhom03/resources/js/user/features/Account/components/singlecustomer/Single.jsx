@@ -83,19 +83,19 @@ const SingleCustomerUser = () => {
         <div className="single">
             <div className="singleContainer">
                 <div className="singletop">
-                    <h1>Thông tin tài khoản</h1>
+                    <h1 style={{ color: 'black' }}>Thông tin tài khoản</h1>
 
                 </div>
                 <div className="singlebottom" style={{ height: "510px" }}>
                     <div className="singleright">
                         <form>
                             <div className='singleformInput'>
-                                <label>Họ khách hàng</label>
+                                <label>Họ</label>
                                 <input type={"text"} disabled={input} />
                             </div>
 
                             <div className='singleformInput'>
-                                <label>Tên khách hàng</label>
+                                <label>Tên</label>
                                 <input type={"text"} disabled={input} />
                             </div>
                             <div className='singleformInput'>

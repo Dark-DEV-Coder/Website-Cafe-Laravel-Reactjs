@@ -8,8 +8,8 @@ const NotFound = () => {
 
     return (
         <>
-            <h1>Not Found Page </h1>
-            <button onClick={() => click()} >Click me</button>
+            <h1 style={{ textAlign: 'center', marginTop: '20px' }}>Không tìm thấy trang </h1>
+
         </>
 
     )

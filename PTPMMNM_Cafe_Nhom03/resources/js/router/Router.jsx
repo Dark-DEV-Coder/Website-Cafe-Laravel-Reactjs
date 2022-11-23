@@ -48,6 +48,8 @@ import Checkout from "../user/features/Checkout";
 import OrderConfirmation from "../user/features/OrderConfirmation";
 import AccountUser from "../user/features/Account";
 import ChangePass from "../user/features/ChangePass";
+import ChangePassAd from "../admin/features/ChangePass";
+import History from "../user/features/History";
 const Router = () => {
     const [loggedIn, setLoggedIn] = React.useState(false); // <-- undefined
 
@@ -69,6 +71,7 @@ const Router = () => {
                         <Route path="reset-susscess" element={<SuccessReset />}></Route>
                         {/* <Route path='api/reset-password' element={<Navigate to="/reset-password" />} /> */}
                         <Route path="home" element={<HomeAdmin />}></Route>
+                        <Route path="changepass" element={<ChangePassAd />}></Route>
                         {/* <Route path="login_admin" element={<IndexLogin />}></Route> */}
                         <Route path="404" element={<NotFoundPage />}></Route>
                         <Route path="products">
@@ -138,6 +141,8 @@ const Router = () => {
                     <Route path="about" element={<About />}></Route>
                     <Route path="user" element={<AccountUser />}></Route>
                     <Route path="changepass" element={<ChangePass />}></Route>
+                    <Route path="reset-password" element={<SuccessReset />}></Route>
+                    <Route path="history" element={<History />}></Route>
                     <Route path="checkout">
                         <Route index element={<Checkout />}></Route>
                         <Route path="OrderCon" element={<OrderConfirmation />}></Route>
@@ -160,11 +165,19 @@ const Router = () => {
 
                     <Route path="admin">
                         <Route index element={<IndexLogin />}></Route>
-                        {/* <Route path="/404" element={<NotFoundPage />}></Route> */}
-                        {/* <Route path='api/reset-password' element={<Navigate to="/reset-password" />} /> */}
-                        {/* <Redirect from="forgot" to="/"></Redirect> */}
-
-                        {/* <Redirect from="api/reset-password" to="reset-password"></Redirect> */}
+                        <Route path="changepass" element={<NotFoundPage />}></Route>
+                        <Route path="home" element={<NotFoundPage />}></Route>
+                        <Route path="products" element={<NotFoundPage />}></Route>
+                        <Route path="category" element={<NotFoundPage />}></Route>
+                        <Route path="customer" element={<NotFoundPage />}></Route>
+                        <Route path="provider" element={<NotFoundPage />}></Route>
+                        <Route path="staff" element={<NotFoundPage />}></Route>
+                        <Route path="bill" element={<NotFoundPage />}></Route>
+                        <Route path="statistical" element={<NotFoundPage />}></Route>
+                        <Route path="imports" element={<NotFoundPage />}></Route>
+                        <Route path="accounts" element={<NotFoundPage />}></Route>
+                        <Route path="functions" element={<NotFoundPage />}></Route>
+                        <Route path="votes" element={<NotFoundPage />}></Route>
                     </Route>
                 </Route>
 

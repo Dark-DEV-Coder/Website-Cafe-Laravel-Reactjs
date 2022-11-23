@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Sidebar.scss";
 import { useNavigate } from 'react-router-dom';
+import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 // import DashboardIcon from '@mui/icons-material/Dashboard';
 // import LocalCafeIcon from '@mui/icons-material/LocalCafe';
 // import CategoryIcon from '@mui/icons-material/Category';
@@ -14,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 // import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
-const Sidebar = ({chucNangList}) => {
+const Sidebar = ({ chucNangList }) => {
     // const iconchucnang = [
     //     {icon: <DashboardIcon className='icon' />,},
     //     {icon: <LocalCafeIcon className='icon' />,},
@@ -32,7 +33,10 @@ const Sidebar = ({chucNangList}) => {
     const click = (link) => {
         navigate("/admin/" + link)
     }
-    function Logout(){
+    const changePass = (changePass) => {
+        navigate("/admin/" + changePass)
+    }
+    function Logout() {
         window.location.assign("http://127.0.0.1:8000/admin");
     }
     // const [listChucNang, setChucNang] = React.useState([]);
@@ -78,9 +82,13 @@ const Sidebar = ({chucNangList}) => {
                         ))}
 
                     <p className="title">LOG OUT</p>
+                    <li onClick={() => changePass("changepass")}>
+                        <PasswordOutlinedIcon className='icon' />
+                        <span>Đổi mật khẩu</span>
+                    </li>
                     <li onClick={Logout}>
                         <LogoutIcon className='icon' />
-                        <span>Logout</span>
+                        <span>Đăng xuất</span>
                     </li>
 
                 </ul>
