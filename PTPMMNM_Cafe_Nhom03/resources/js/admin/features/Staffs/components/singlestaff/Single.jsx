@@ -70,7 +70,7 @@ const SingleStaff = ({ title }) => {
     const onChangeDiaChiNV = event => {
         setInputDiaChiNV(event.target.value);
     };
-    
+
     const [error, setError] = React.useState("");
     const [loaded, setLoaded] = React.useState(false);
     React.useEffect(() => {

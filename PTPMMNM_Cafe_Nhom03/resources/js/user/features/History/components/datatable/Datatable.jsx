@@ -11,14 +11,6 @@ import axios from 'axios';
 import DetailBillHis from '../DetailBillHis/DetailBillHis';
 
 const DatatableHistory = () => {
-    const [search, setSearch] = React.useState('');
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
     const handleChange = (event) => {
         setSearch(event.target.value);
     };
@@ -83,7 +75,7 @@ const DatatableHistory = () => {
                     checkboxSelection
                 />
             </div>
-            {/* <DetailBillHis /> */}
+            <DetailBillHis />
         </>
 
     )

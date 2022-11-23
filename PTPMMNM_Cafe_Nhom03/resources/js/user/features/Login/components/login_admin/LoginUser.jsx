@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-const LoginAdmin = () => {
+const LoginUser = () => {
     const navigate = useNavigate()
     const clickLogin = () => {
         navigate("/admin/home")
@@ -58,7 +58,7 @@ const LoginAdmin = () => {
                 <div className="container">
                     <div className="account-box">
                         <div className="account-wrapper">
-                            <h3 className="account-title" style={{ fontSize: '24px' }}> ĐĂNG NHẬP</h3>
+                            <h4 className="account-title" style={{ fontSize: '24px' }}>ĐĂNG NHẬP</h4>
                             <form>
                                 <div className="form-group">
                                     <label>Email</label>
@@ -79,9 +79,11 @@ const LoginAdmin = () => {
                                 </div>
                                 <div className="form-group text-center">
 
-                                    <button type="button" className="btn btn-primary account-btn" onClick={Login} style={{ fontSize: '20px' }} >Đăng Nhập</button>
+                                    <button type="button" className="btn btn-primary account-btn" style={{ fontSize: '20px' }} onClick={Login} >Đăng Nhập </button>
                                 </div>
-
+                                <div className="account-footer">
+                                    <p>Bạn chưa có tài khoản ? <a href="/register">Đăng Ký</a></p>
+                                </div>
                             </form>
 
 
@@ -89,7 +91,7 @@ const LoginAdmin = () => {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
-export default LoginAdmin
+export default LoginUser
