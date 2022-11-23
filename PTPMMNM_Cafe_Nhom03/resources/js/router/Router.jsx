@@ -21,19 +21,21 @@ import NewStaff from "../admin/features/Staffs/components/newstaff/Newstaff";
 import SingleStaff from "../admin/features/Staffs/components/singlestaff/Single";
 import Bill from "../admin/features/Bills";
 import NewBill from "../admin/features/Bills/components/newbill/Newbill";
+import SingleBill from "../admin/features/Bills/components/singlebill/Single";
 import { billInputs } from "../admin/features/Bills/components/newbill/formSource";
 import Statistical from "../admin/features/Bills/components/statistical/Statistical";
 import Import from "../admin/features/Imports";
 import NewImport from "../admin/features/Imports/components/newimport/Newimport";
-import { importInputs } from "../admin/features/Imports/components/newimport/formSource";
+import SingleImport from "../admin/features/Imports/components/singleimport/Single";
 import Account from "../admin/features/Accounts";
 import NewAccount from "../admin/features/Accounts/components/newaccount/Newaccount";
 import { accountInputs } from "../admin/features/Accounts/components/newaccount/formSource";
 import Function from "../admin/features/Functions";
 import NewFunction from "../admin/features/Functions/components/newfunction/Newfunction";
+import SingleFunction from "../admin/features/Functions/components/singlefunction/Single";
 import { functionInputs } from "../admin/features/Functions/components/newfunction/formSource";
 import Vote from "../admin/features/Votes";
-
+import SingleVote from "../admin/features/Votes/components/singlevote/Single";
 import Home from "../user/features/Home";
 import Shop from "../user/features/Shop";
 import ForgotPassword from "../admin/features/ForgotPassword";
@@ -98,7 +100,7 @@ const Router = () => {
                         <Route path="bill">
                             <Route index element={<Bill />}></Route>
                             <Route path="new" element={<NewBill inputs={billInputs} title="Thêm hóa đơn" />}></Route>
-                            {/* <Route path="single" element={<Single />}></Route> */}
+                            <Route path="single/:id" element={<SingleBill title="Thông tin chi tiết hóa đơn" />}></Route>
                         </Route>
                         <Route path="statistical">
                             <Route index element={<Statistical />}></Route>
@@ -106,8 +108,8 @@ const Router = () => {
                         </Route>
                         <Route path="imports">
                             <Route index element={<Import />}></Route>
-                            <Route path="new" element={<NewImport inputs={importInputs} title="Thêm phiếu nhập hàng" />}></Route>
-                            {/* <Route path="single" element={<Single />}></Route> */}
+                            <Route path="new" element={<NewImport title="Thêm phiếu nhập hàng" />}></Route>
+                            <Route path="single/:id" element={<SingleImport title="Thông tin chi tiết phiếu nhập hàng" />}></Route>
                         </Route>
                         <Route path="accounts">
                             <Route index element={<Account />}></Route>
@@ -117,12 +119,12 @@ const Router = () => {
                         <Route path="functions">
                             <Route index element={<Function />}></Route>
                             <Route path="new" element={<NewFunction inputs={functionInputs} title="Thêm quyền tài khoản" />}></Route>
-                            {/* <Route path="single" element={<Single />}></Route> */}
+                            <Route path="single/:id" element={<SingleFunction title="Thông tin chi tiết quyền tài khoản" />}></Route>
                         </Route>
                         <Route path="votes">
                             <Route index element={<Vote />}></Route>
-                            {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route>
-                        <Route path="single" element={<Single />}></Route> */}
+                            {/* <Route path="new" element={<New inputs={productInputs} title="Thêm sản phẩm" />}></Route> */}
+                            <Route path="single/:id" element={<SingleVote title="Thông tin chi tiết bình luận" />}></Route>
                         </Route>
                     </Route>
                 </Route>
