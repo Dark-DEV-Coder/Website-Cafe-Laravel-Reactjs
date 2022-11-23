@@ -50,6 +50,7 @@ import AccountUser from "../user/features/Account";
 import ChangePass from "../user/features/ChangePass";
 import ChangePassAd from "../admin/features/ChangePass";
 import History from "../user/features/History";
+import LoginUsers from "../user/features/Login";
 const Router = () => {
     const [loggedIn, setLoggedIn] = React.useState(false); // <-- undefined
 
@@ -134,6 +135,7 @@ const Router = () => {
 
                 <Route path="/">
                     <Route index element={<Home />}></Route>
+                    <Route path="login" element={<LoginUsers />}></Route>
                     <Route path="register" element={<Register />}></Route>
                     <Route path="home" element={<Home />}></Route>
                     <Route path="shop" element={<Shop />}></Route>
@@ -183,12 +185,14 @@ const Router = () => {
 
                 <Route path="/">
                     <Route index element={<Home />}></Route>
+                    <Route path="login" element={<LoginUsers />}></Route>
                     <Route path="home" element={<Home />}></Route>
                     <Route path="shop" element={<Shop />}></Route>
                     <Route path="cart" element={<Cart />}></Route>
                     <Route path="about" element={<About />}></Route>
                     <Route path="user" element={<AccountUser />}></Route>
                     <Route path="changepass" element={<ChangePass />}></Route>
+                    <Route path="history" element={<History />}></Route>
                     <Route path="checkout">
                         <Route index element={<Checkout />}></Route>
                         <Route path="OrderCon" element={<OrderConfirmation />}></Route>

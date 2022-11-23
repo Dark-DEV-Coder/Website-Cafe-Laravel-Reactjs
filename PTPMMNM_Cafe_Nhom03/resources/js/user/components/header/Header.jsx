@@ -12,12 +12,12 @@ const Header = () => {
     const [loaded, setLoaded] = React.useState(false);
     React.useEffect(() => {
         (async () => {
-            try {                
-                if (localStorage['cart']){
-                    let giohang=JSON.parse(localStorage.getItem('cart'));
+            try {
+                if (localStorage['cart']) {
+                    let giohang = JSON.parse(localStorage.getItem('cart'));
                     setCountCart(giohang.length);
                 }
-                else{
+                else {
                     setCountCart("0");
                 }
             }
@@ -70,6 +70,11 @@ const Header = () => {
                         <li className="nav-item"><a href="/about" className="nav-link">Thông tin</a></li>
                         {/* <li className="nav-item"><a href="contact.html" className="nav-link">Liên lạc</a></li> */}
                         <li className="nav-item cta cta-colored"><a href="/cart" className="nav-link"><ShoppingCartOutlinedIcon style={{ fontSize: "18px" }} />[{countcart}]</a></li>
+
+                        {/* Này là chưa đăng nhập */}
+                        {/* <li className="nav-item cta cta-colored"><a href="/login" className="nav-link"><AssignmentIndOutlinedIcon style={{ fontSize: "18px", marginRight: '5px' }} />Đăng nhập</a></li> */}
+
+                        {/* Này là sau khi đăng nhập mới hiện */}
                         <li className="nav-item cta cta-colored"><div onClick={() => setShowAccount(!showAccount)} className="nav-link dropdown-toggle" style={{ cursor: "pointer" }} ><AssignmentIndOutlinedIcon style={{ fontSize: "18px", marginRight: '5px' }} />Tài khoản</div></li>
                         {showAccount ?
                             <div className="showAccount" style={{ position: "absolute" }} >

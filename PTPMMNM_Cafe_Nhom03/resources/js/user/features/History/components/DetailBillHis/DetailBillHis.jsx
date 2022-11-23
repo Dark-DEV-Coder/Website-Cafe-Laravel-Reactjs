@@ -8,7 +8,7 @@ import cf2 from "./cf2.jpg";
 import cf5 from "./cf5.jpg";
 const DetailBillHis = () => {
     return (
-        <section className="shoping-cart spad" style={{ border: 'solid', width: '70%', marginLeft: '15%' }} disabled='true'>
+        <section className="shoping-cart spad" style={{ border: 'solid', width: '70%', marginLeft: '15%' }}>
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
