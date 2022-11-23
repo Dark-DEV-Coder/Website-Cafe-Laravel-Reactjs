@@ -131,7 +131,7 @@ const DetailCheckout = () => {
                                 </div>
                                 <div className="col-md-6">
                                     <div className="form-group">
-                                        <label>Địa chỉ email</label>
+                                        <label>Email</label>
                                         <input type={"text"} className="form-control" value={inputemail} onChange={onChangeEmail} />
                                     </div>
                                 </div>

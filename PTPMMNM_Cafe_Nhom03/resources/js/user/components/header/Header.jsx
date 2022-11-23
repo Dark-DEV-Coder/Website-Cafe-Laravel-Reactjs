@@ -5,9 +5,11 @@ import { useState } from 'react';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 const Header = () => {
-    const [showShop, setShowShop] = useState(false);
-    const [showAccount, setShowAccount] = useState(false);
-    const [countcart, setCountCart] = useState("");
+
+    const [showLogin, setShowLogin] = React.useState(true);
+    const [showShop, setShowShop] = React.useState(false);
+    const [showAccount, setShowAccount] = React.useState(false);
+    const [countcart, setCountCart] = React.useState("");
     const [error, setError] = React.useState("");
     const [loaded, setLoaded] = React.useState(false);
     React.useEffect(() => {
@@ -20,6 +22,10 @@ const Header = () => {
                 else {
                     setCountCart("0");
                 }
+                if (localStorage['auth_token'])
+                    setShowLogin(false);
+                else
+                    setShowLogin(true);
             }
             catch (error) {
                 setError(error.message);
@@ -70,20 +76,25 @@ const Header = () => {
                         <li className="nav-item"><a href="/about" className="nav-link">Thông tin</a></li>
                         {/* <li className="nav-item"><a href="contact.html" className="nav-link">Liên lạc</a></li> */}
                         <li className="nav-item cta cta-colored"><a href="/cart" className="nav-link"><ShoppingCartOutlinedIcon style={{ fontSize: "18px" }} />[{countcart}]</a></li>
-
-                        {/* Này là chưa đăng nhập */}
-                        {/* <li className="nav-item cta cta-colored"><a href="/login" className="nav-link"><AssignmentIndOutlinedIcon style={{ fontSize: "18px", marginRight: '5px' }} />Đăng nhập</a></li> */}
+                        
+                        {showLogin ?
+                            <li className="nav-item cta cta-colored"><a href="/login" className="nav-link"><AssignmentIndOutlinedIcon style={{ fontSize: "18px", marginRight: '5px' }} />Đăng nhập</a></li>
+                            :
+                            <>
+                                <li className="nav-item cta cta-colored"><div onClick={() => setShowAccount(!showAccount)} className="nav-link dropdown-toggle" style={{ cursor: "pointer" }} ><AssignmentIndOutlinedIcon style={{ fontSize: "18px", marginRight: '5px' }} />Tài khoản</div></li>
+                                {showAccount ?
+                                    <div className="showAccount" style={{ position: "absolute" }} >
+                                        <a className="dropdown-item" href="/user">Thông tin cá nhân</a>
+                                        <a className="dropdown-item" href="/history">Lịch sử</a>
+                                        <a className="dropdown-item" href="/changepass">Đổi mật khẩu</a>
+                                        <a className="dropdown-item" href="/login">Đăng xuất </a>
+                                    </div>
+                                    : null}
+                            </>                            
+                        }
 
                         {/* Này là sau khi đăng nhập mới hiện */}
-                        <li className="nav-item cta cta-colored"><div onClick={() => setShowAccount(!showAccount)} className="nav-link dropdown-toggle" style={{ cursor: "pointer" }} ><AssignmentIndOutlinedIcon style={{ fontSize: "18px", marginRight: '5px' }} />Tài khoản</div></li>
-                        {showAccount ?
-                            <div className="showAccount" style={{ position: "absolute" }} >
-                                <a className="dropdown-item" href="/user">Thông tin cá nhân</a>
-                                <a className="dropdown-item" href="/history">Lịch sử</a>
-                                <a className="dropdown-item" href="/changepass">Đổi mật khẩu</a>
-                                <a className="dropdown-item" href="/logout">Đăng xuất </a>
-                            </div>
-                            : null}
+                        
                     </ul>
                 </div>
             </div>

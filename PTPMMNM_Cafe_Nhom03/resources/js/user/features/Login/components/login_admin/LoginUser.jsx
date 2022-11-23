@@ -12,8 +12,8 @@ const LoginUser = () => {
     React.useEffect(() => {
         if (localStorage['auth_token']) {
             localStorage.removeItem('auth_token');
-            localStorage.removeItem('quyyentk');
-            localStorage.removeItem('IDNV');
+            localStorage.removeItem('quyentk');
+            localStorage.removeItem('idkh');
         }
     }, [auth_token]);
 
@@ -35,19 +35,15 @@ const LoginUser = () => {
             if (response.data.status == false) {
                 alert(JSON.stringify(response.data.message));
             }
-            else {
-                if (response.data.data.MaQuyen == 'KH') {
-                    alert("Tài khoản này không có quyền truy cập");
-                }
-                else {
+            else {            
                     setLoginUser(response.data);
                     localStorage.setItem('auth_token', JSON.stringify(response.data.data.auth_token));
                     localStorage.setItem('quyentk', JSON.stringify(response.data.data.MaQuyen));
-                    localStorage.setItem('idnv', JSON.stringify(response.data.data.MaNV));
+                    localStorage.setItem('idkh', JSON.stringify(response.data.data.MaNV));
                     alert(JSON.stringify(response.data.message));
-                    window.location.assign("http://127.0.0.1:8000/admin/home");
+                    window.location.assign("http://127.0.0.1:8000/home");
                     //headers: { 'Authorization': 'Bearer ' + token }           
-                }
+                
             }
 
         });

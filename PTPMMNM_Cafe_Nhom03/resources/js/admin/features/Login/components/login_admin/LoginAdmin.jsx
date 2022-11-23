@@ -12,8 +12,8 @@ const LoginAdmin = () => {
     React.useEffect(() => {
         if (localStorage['auth_token']) {
             localStorage.removeItem('auth_token');
-            localStorage.removeItem('quyyentk');
-            localStorage.removeItem('IDNV');
+            localStorage.removeItem('quyentk');
+            localStorage.removeItem('idnv');
         }
     }, [auth_token]);
 
