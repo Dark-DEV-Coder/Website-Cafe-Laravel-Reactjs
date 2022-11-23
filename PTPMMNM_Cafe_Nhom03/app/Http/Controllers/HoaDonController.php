@@ -88,10 +88,29 @@ class HoaDonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) // Hàm tìm thông tin 1 hóa đơn
+    public function show($ten) // Hàm tìm thông tin 1 hóa đơn
     {        
-        $hoadon = HoaDonModel::where('MaHD',$id)->get();
-        if (is_null($hoadon)){
+        $hd = HoaDonModel::where('HoKH','like',"%$ten%")->orWhere('TenKH','like',"%$ten%")->get();
+        if (is_null($hd)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có hóa đơn này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Các hóa đơn cần tìm',
+            'data' => HoaDonResource::collection($hd),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function detail($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $hd = HoaDonModel::where('MaHD',$id)->first();
+        if (is_null($hd)){
             $arr = [
                 'status' => false,
                 'message' => 'Không có hóa đơn này',
@@ -101,8 +120,70 @@ class HoaDonController extends Controller
         }
         $arr = [
             'status' => true,
-            'message' => 'Chi tiết hóa đơn',
-            'data' => new HoaDonResource($hoadon),
+            'message' => 'Hóa đơn cần tìm',
+            'data' => $hd,
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function ThongKe(Request $request) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $input = $request->all();
+        $validator = Validator::make($input,[
+            'tungay' => 'required', 'denngay' => 'required', 
+        ]);
+        // Kiểm tra dữ liệu
+        if ($validator->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Lỗi kiểm tra dữ liệu',
+                'data' => $validator->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+        $tungay = $input['tungay'];
+        $denngay = $input['denngay'];
+
+        $currentdate = date('Y-m-d');
+        $checkngay = Validator::make($input,[
+            "denngay" => "before_or_equal:$currentdate",
+        ]);
+        if ($checkngay->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Ngày kết thúc thống kê quá ngày hiện tại',
+                'data' => $checkngay->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
+        $checkngay = Validator::make($input,[
+            "tungay" => "before_or_equal:$denngay",
+        ]);
+        if ($checkngay->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Ngày bắt đầu thống kê quá ngày kết thúc thống kê',
+                'data' => $checkngay->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
+        $hd = HoaDonModel::where('NgayLapHD','>=',$tungay)->where('NgayLapHD','<=',$denngay)->get();
+        $doanhthu = HoaDonModel::where('NgayLapHD','>=',$tungay)->where('NgayLapHD','<=',$denngay)->sum('TongTien');
+        if (is_null($hd)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có phiếu nhập hàng này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Phiếu nhập hàng cần tìm',
+            'price' => $doanhthu,
+            'data' => $hd,
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -118,9 +199,7 @@ class HoaDonController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaNV' => 'required','HoKH' => 'required', 'TenKH' => 'required','NgaySinh' => 'required', 
-            'DiaChi' => 'required','SoDienThoai' => 'required', 'Email' => 'required', 
-            'NgayLapHoaDon' => 'required', 
+            'manv' => 'required', 'trangthai' => 'required', 
         ]);
         // Kiểm tra dữ liệu
         if ($validator->fails()){
@@ -132,23 +211,11 @@ class HoaDonController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $manv = $input['MaNV'];
-        $ho = $input['HoKH'];
-        $ten = $input['TenKH'];
-        $ngay = $input['NgaySinh'];
-        $dc = $input['DiaChi'];
-        $sdt = $input['SoDienThoai'];
-        $email = $input['Email'];
-        $ngay = $input['NgayLapHoaDon'];
+        $manv = $input['manv'];
+        $trangthai = $input['trangthai'];
         HoaDonModel::where('MaHD',$id)->update([
-            'MaNV' => $manv,          
-            'HoKH' => $ho,
-            'TenKH' => $ten,
-            'NgaySinh' => $ngay,
-            'DiaChi' => $dc,
-            'SoDienThoai' => $sdt,
-            'Email' => $email,
-            'NgayLapHoaDon' => $ngay,
+            'MaNV' => $manv,
+            'TrangThai' => $trangthai,
         ]);
 
         $arr = [

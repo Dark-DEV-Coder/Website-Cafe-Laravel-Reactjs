@@ -33,19 +33,7 @@ const SingleProduct = ({ title }) => {
     const [providers, setProvider] = React.useState([]);
     const [error, setError] = React.useState("");
     const [loaded, setLoaded] = React.useState(false);
-    // React.useEffect(() => {                                    
-    //     axios.get("http://127.0.0.1:8000/api/chitietsp/" + params.id).then((response) => {  
-    //         setInputMaSP(response.data.data.MaSP);          
-    //         setInputTenSP(response.data.data.TenSP);
-    //         setInputNCCSP(response.data.data.MaNCC);
-    //         setInputLoaiSP(response.data.data.MaLoaiSP);
-    //         setInputMotaSP(response.data.data.MoTa);
-    //         setInputHinhSP(response.data.data.Hinh);
-    //         setInputSoLuong(response.data.data.SoLuong);
-    //         setInputGiaNhap(response.data.data.Gia);
-    //         setInputGiaBan(response.data.data.GiaBan);
-    //     });  
-    // }, []);  
+   
     React.useEffect(() => {
         (async () => {
             try {

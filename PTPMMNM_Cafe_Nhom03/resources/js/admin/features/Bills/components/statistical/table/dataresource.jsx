@@ -3,7 +3,7 @@ export const productColumns = [
         field: "bills", headerName: "Họ Tên Khách Hàng", width: 280, renderCell: (params) => {
             return (
                 <div className="cellWithImg">
-                    {params.row.HoKH + " "}{params.row.TenHK}
+                    {params.row.HoKH + " "}{params.row.TenKH}
                 </div>
             );
         },

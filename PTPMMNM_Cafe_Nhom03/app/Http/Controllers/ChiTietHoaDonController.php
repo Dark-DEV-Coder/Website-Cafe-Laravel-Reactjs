@@ -26,6 +26,18 @@ class ChiTietHoaDonController extends Controller
     //     return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     // }
 
+    public function detail($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        
+        $hd = ChiTietHoaDonModel::where('MaHD',$id)->get(); 
+        $arr = [
+            'status' => true,
+            'message' => 'Phiếu nhập hàng cần tìm',
+            'data' => ChiTietHoaDonResource::collection($hd),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

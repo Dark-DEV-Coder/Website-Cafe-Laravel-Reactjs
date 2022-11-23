@@ -16,10 +16,23 @@ const Datatable = () => {
     };
 
     const [customers, setCustomer] = React.useState([]);
+    const [error, setError] = React.useState("");
+    const [loaded, setLoaded] = React.useState(false);
     React.useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/khhang").then((response) => {
-            setCustomer(response.data.data);
-        });
+        (async () => {
+            try {
+                await axios.get("http://127.0.0.1:8000/api/khhang").then((response) => {
+                    setCustomer(response.data.data);
+                });
+            }
+            catch (error) {
+                setError(error.message);
+            }
+            finally {
+                setLoaded(true);
+            }
+        })();
+
     }, []);
 
     const actionColumn = [
@@ -55,6 +68,7 @@ const Datatable = () => {
             </div>
             <div className="search">
                 <input type="text" placeholder="Nhập tên khách hàng cần tìm ..." value={inputtenkh} onChange={onChangeTenKH} onKeyUp={FindCustomer} />
+                <button className='timKiem' onClick={FindCustomer}>Tìm kiếm</button>
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaKH}

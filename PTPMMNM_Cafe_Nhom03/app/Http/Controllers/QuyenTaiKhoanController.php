@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\QuyenTaiKhoan as QuyenTaiKhoanResource;
+use App\Models\ChucNangModel;
 use App\Models\QuyenTaiKhoanModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class QuyenTaiKhoanController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaQuyen' => 'required', 'TenQuyen' => 'required',
+            'maqtk' => 'required', 'tenqtk' => 'required',
         ]);
         //Kiểm tra dữ liệu
         if ($validator->fails()){
@@ -46,8 +47,8 @@ class QuyenTaiKhoanController extends Controller
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
-        $maq = $input['MaQuyen'];
-        $ten = $input['TenQuyen'];
+        $maq = $input['maqtk'];
+        $ten = $input['tenqtk'];
         QuyenTaiKhoanModel::insert([
                                     'MaQuyen' => $maq,
                                     'TenQuyen' => $ten,
@@ -57,6 +58,7 @@ class QuyenTaiKhoanController extends Controller
         $arr = [
             'status' => true,
             'message' => 'Quyền tài khoản đã tạo thành công',
+            'data' => $maq,
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -67,9 +69,9 @@ class QuyenTaiKhoanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) // Hàm tìm 1 quyền tài khoản
+    public function show($ten) // Hàm tìm 1 quyền tài khoản
     {        
-        $quyentaikhoan = QuyenTaiKhoanModel::where('MaQuyen',$id)->get();
+        $quyentaikhoan = QuyenTaiKhoanModel::where('TenQuyen','like',"%$ten%")->where('TrangThai','!=',0)->get();
         if (is_null($quyentaikhoan)){
             $arr = [
                 'status' => false,
@@ -81,7 +83,37 @@ class QuyenTaiKhoanController extends Controller
         $arr = [
             'status' => true,
             'message' => 'Chi tiết quyền tài khoản',
-            'data' => new QuyenTaiKhoanResource($quyentaikhoan),
+            'data' => $quyentaikhoan,
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function detail($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $qtk = QuyenTaiKhoanModel::where('MaQuyen',$id)->first();
+        if (is_null($qtk)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có loại sản phẩm này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Loại sản phẩm cần tìm',
+            'data' => new QuyenTaiKhoanResource($qtk),
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function ListChucNang() // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $cn = ChucNangModel::get();        
+        $arr = [
+            'status' => true,
+            'message' => 'Danh sách chức năng',
+            'data' => $cn,
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -97,19 +129,19 @@ class QuyenTaiKhoanController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'TenQuyen' => 'required',
+            'tenqtk' => 'required',
         ]);
         //Kiểm tra dữ liệu
         if ($validator->fails()){
             $arr = [
                 'status' => false,
                 'message' => 'Lỗi kiểm tra dữ liệu',
-                'data' => $validator->errors()
+                'data' => $input
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $ten = $input['TenQuyen'];
+        $ten = $input['tenqtk'];
         QuyenTaiKhoanModel::where('MaQuyen',$id)->update(['TenQuyen' => $ten]);
 
         $arr = [

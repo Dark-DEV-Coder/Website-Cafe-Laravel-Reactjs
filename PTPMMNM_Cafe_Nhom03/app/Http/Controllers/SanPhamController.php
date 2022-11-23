@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\SanPhamModel;
 use App\Http\Resources\SanPham as SanPhamResource;
-
+use App\Models\PhieuNhapHangModel;
 
 class SanPhamController extends Controller
 {    
@@ -18,6 +18,19 @@ class SanPhamController extends Controller
     public function index() // Hàm lấy danh sách sản phẩm
     {
         $sanphams = SanPhamModel::where('TrangThai','!=',0)->get();
+        $arr=[
+            'status' => true,
+            'message' => 'Danh sách sản phẩm',
+            'data' => SanPhamResource::collection($sanphams),
+        ];
+        // Trả về dữ liệu dạng json
+        return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function SanPhamNCC($id) // Hàm lấy danh sách sản phẩm
+    {
+        $pnh = PhieuNhapHangModel::where('MaPNH',$id)->first();
+        $sanphams = SanPhamModel::where('TrangThai','!=',0)->where('MaNCC',$pnh->MaNCC)->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách sản phẩm',

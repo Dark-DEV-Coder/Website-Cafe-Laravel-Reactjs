@@ -85,6 +85,7 @@ const Datatable = () => {
             </div>
             <div className="search">
                 <input type="text" placeholder="Nhập tên cần tìm ..." value={inputtenlsp} onChange={onChangeTenLSP} onKeyUp={FindCategory} />
+                <button className='timKiem' onClick={FindCategory}>Tìm kiếm</button>
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaLoaiSP}

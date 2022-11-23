@@ -83,6 +83,7 @@ const Datatable = () => {
             </div>
             <div className="search">
                 <input type="text" placeholder="Nhập tên nhân viên cần tìm ..." value={inputtennv} onChange={onChangeTenNV} onKeyUp={FindStaff} />
+                <button className='timKiem' onClick={FindStaff}>Tìm kiếm</button>
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaNV}
