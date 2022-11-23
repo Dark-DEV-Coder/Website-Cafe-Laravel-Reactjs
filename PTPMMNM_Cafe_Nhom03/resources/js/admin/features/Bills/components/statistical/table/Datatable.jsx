@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import axios from 'axios';
 const DataTableStatistical = () => {
     const [search, setSearch] = React.useState('');
 
@@ -15,31 +16,36 @@ const DataTableStatistical = () => {
     };
 
     const [bills, setBill] = React.useState([]);
-    React.useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/hdon").then((response) => {
-            setBill(response.data.data);
+    const [inputtungay, setInputTuNgay] = React.useState("");
+    const [inputdenngay, setInputDenNgay] = React.useState("");
+    const [inputtongtien, setInputTongTien] = React.useState("");
+    const onChangeTuNgay = event => {
+        setInputTuNgay(event.target.value);
+    };
+    const onChangeDenNgay = event => {
+        setInputDenNgay(event.target.value);
+    };
+    const onChangeTongTien = event => {
+        setInputTongTien(event.target.value);
+    };
+    async function Thongke() {        
+        const staff = {
+            tungay: inputtungay,
+            denngay: inputdenngay,
+        };
+        await axios.post("http://127.0.0.1:8000/api/thongke", staff).then((response) => {
+            if (response.data.status == false) {
+                alert(JSON.stringify(response.data.message));
+            }
+            else {
+                setBill(response.data.data);
+                setInputTongTien(response.data.price);
+            }
+
         });
-    }, []);
+    }
+    
 
-    const actionColumn = [
-        {
-            field: "action", headerName: "Chức năng", width: 200, renderCell: (params) => {
-                return (
-                    <div className="cellAction">
-                        <Link to="/products/single">
-                            <div className="viewButton">
-                                Xem chi tiết
-                            </div>
-                        </Link>
-
-                        <div className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
-                            Xóa
-                        </div>
-                    </div>
-                );
-            },
-        },
-    ]
     return (
         <div className='datatable'>
             <div className="datatableTitle">
@@ -48,19 +54,19 @@ const DataTableStatistical = () => {
             </div>
             <div className="searchStatistical">
                 <label>Ngày lập hóa đơn từ : </label>
-                <input type="date" placeholder="Search ..." />
+                <input type="date" value={inputtungay} onChange={onChangeTuNgay} />
                 --
-                <input type="date" placeholder="Search ..." />
-                <button className='timKiem'>Thống kê</button>
+                <input type="date" value={inputdenngay} onChange={onChangeDenNgay} />
+                <button className='timKiem' onClick={Thongke}>Thống kê</button>
             </div>
             <div className="searchStatistical" style={{ marginTop: "20px" }}>
-                <h5 >Tổng Doanh Thu :  {"50000000"} </h5>
+                <h5 >Tổng Doanh Thu :  {inputtongtien + " VND"} </h5>
 
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "470px" }}
                 getRowId={(row) => row.MaHD}
                 rows={bills}
-                columns={productColumns.concat(actionColumn)}
+                columns={productColumns}
                 pageSize={6}
                 rowsPerPageOptions={[5]}
                 checkboxSelection

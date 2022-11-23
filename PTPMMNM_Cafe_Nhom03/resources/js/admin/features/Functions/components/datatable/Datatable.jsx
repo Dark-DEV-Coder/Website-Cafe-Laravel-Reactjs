@@ -15,24 +15,58 @@ const Datatable = () => {
     };
 
     const [functions, setFunction] = React.useState([]);
+    const [error, setError] = React.useState("");
+    const [loaded, setLoaded] = React.useState(false);
     React.useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/qtkhoan").then((response) => {
+        (async () => {
+            try {
+                await axios.get("http://127.0.0.1:8000/api/qtkhoan").then((response) => {
+                    setFunction(response.data.data);
+                });
+            }
+            catch (error) {
+                setError(error.message);
+            }
+            finally {
+                setLoaded(true);
+            }
+        })();
+
+    }, []);
+
+    const [deletefun, setDeleteFunction] = React.useState(null);
+    function DeleteFunciton(id) {
+        if (window.confirm('Bạn có chắc muốn xóa quyền tài khoản này?')) {
+            axios.delete("http://127.0.0.1:8000/api/qtkhoan/" + id).then((response) => {
+                setDeleteFunction(response.data);
+                alert(JSON.stringify(response.data.message));
+                window.location.reload();
+            });
+        }
+    }
+
+    const [inputtenqtk, setInputTenQTK] = React.useState("");
+    const onChangeTenQTK = event => {
+        setInputTenQTK(event.target.value);
+    };
+    async function FindFunction() {
+        await axios.get("http://127.0.0.1:8000/api/qtkhoan/" + inputtenqtk).then((response) => {
             setFunction(response.data.data);
         });
-    }, []);
+    }
 
     const actionColumn = [
         {
             field: "action", headerName: "Chức năng", width: 250, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/admin/functions/single">
+                        <Link to={"/admin/functions/single/"+params.row.MaQuyen}>
                             <div className="viewButton">
                                 Xem chi tiết
                             </div>
                         </Link>
 
-                        <div className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
+                        <div onClick={() => DeleteFunciton(params.row.MaQuyen)} className="deleteButton" style={{ padding: "8px 20px 8px 20px" }}>
                             Xóa
                         </div>
                     </div>
@@ -48,8 +82,8 @@ const Datatable = () => {
             </div>
             <div className="search">
 
-                <input type="text" placeholder="Search ..." />
-                <button className='timKiem'>Tìm kiếm</button>
+                <input type="text" placeholder="Nhập tên quyền tài khoản cần tìm ..." value={inputtenqtk} onChange={onChangeTenQTK} onKeyUp={FindFunction} />
+                <button className='timKiem' onClick={FindFunction}>Tìm kiếm</button>
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaQuyen}

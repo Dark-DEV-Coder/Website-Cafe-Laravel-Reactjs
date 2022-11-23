@@ -16,11 +16,14 @@ class PhieuNhapHangController extends Controller
      */
     public function index() // Hàm lấy danh sách phiếu nhập hàng
     {        
-        $phieunhaphangs = PhieuNhapHangModel::where('TrangThai','!=',0)->get();
+        $phieunhaphangs = PhieuNhapHangModel::join('nha_cung_cap','nha_cung_cap.MaNCC','=','phieu_nhap_hang.MaNCC')
+                                            ->where('phieu_nhap_hang.TrangThai','!=',0)
+                                            ->select('phieu_nhap_hang.*','nha_cung_cap.TenNCC')
+                                            ->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách phiếu nhập hàng',
-            'data' => PhieuNhapHangResource::collection($phieunhaphangs),
+            'data' => $phieunhaphangs,
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -35,7 +38,7 @@ class PhieuNhapHangController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaNV' => 'required','MaNCC' => 'required', 'NgayNhapHang' => 'required',
+            'manv' => 'required','mancc' => 'required', 'ngay' => 'required',
         ]);
         // Kiểm tra dữ liệu
         if ($validator->fails()){
@@ -46,22 +49,39 @@ class PhieuNhapHangController extends Controller
             ];
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
+
+        $currentdate = date('Y-m-d');
+        $checkngay = Validator::make($input,[
+            "ngay" => "before_or_equal:$currentdate",
+        ]);
+        if ($checkngay->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Ngày nhập quá ngày hiện tại',
+                'data' => $checkngay->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+
+
         $count = PhieuNhapHangModel::select('MaPNH')->count();
-        $mapnh = 'PNH'+($count+1);
-        $manv = $input['MaNV'];
-        $mancc = $input['MaNCC'];
-        $ngay = $input['NgayNhapHang'];
+        $mapnh = 'PNH'.strval($count+1);
+        $manv = $input['manv'];
+        $mancc = $input['mancc'];
+        $ngay = $input['ngay'];
         PhieuNhapHangModel::insert([
             'MaPNH' => $mapnh,
             'MaNV' => $manv,
             'MaNCC' => $mancc,
             'NgayNhapHang' => $ngay,
+            'TongTien' => 0,
             'TrangThai' => 1,
             'updated_at' => date('Y-m-d h-i-s'),
         ]);
         $arr = [
             'status' => true,
             'message' => 'Phiếu nhập hàng đã tạo thành công',
+            'data' => $mapnh,
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -72,9 +92,12 @@ class PhieuNhapHangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) // Hàm tìm 1 phiếu nhập hàng
+    public function show($ten) // Hàm tìm 1 phiếu nhập hàng
     {        
-        $phieunhaphang = PhieuNhapHangModel::where('MaPNH',$id)->get();
+        $phieunhaphang = PhieuNhapHangModel::join('nha_cung_cap','nha_cung_cap.MaNCC','=','phieu_nhap_hang.MaNCC')
+                                            ->where('nha_cung_cap.TenNCC','like',"%$ten%")
+                                            ->select('phieu_nhap_hang.*','nha_cung_cap.TenNCC')
+                                            ->get();
         if (is_null($phieunhaphang)){
             $arr = [
                 'status' => false,
@@ -85,7 +108,29 @@ class PhieuNhapHangController extends Controller
         $arr = [
             'status' => true,
             'message' => 'Chi tiết phiếu nhập hàng',
-            'data' => new PhieuNhapHangResource($phieunhaphang),
+            'data' => $phieunhaphang,
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function detail($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $pnh = PhieuNhapHangModel::join('nha_cung_cap','nha_cung_cap.MaNCC','=','phieu_nhap_hang.MaNCC')
+                                ->where('MaPNH',$id)
+                                ->select('phieu_nhap_hang.*','nha_cung_cap.TenNCC')
+                                ->first();
+        if (is_null($pnh)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có phiếu nhập hàng này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Phiếu nhập hàng cần tìm',
+            'data' => $pnh,
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
@@ -101,7 +146,7 @@ class PhieuNhapHangController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaNV' => 'required', 'MaNCC' => 'required', 'NgayNhapHang' => 'required',
+            'ngay' => 'required',
         ]);
         // Kiểm tra dữ liệu
         if ($validator->fails()){
@@ -113,12 +158,22 @@ class PhieuNhapHangController extends Controller
             return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
         }
 
-        $manv = $input['MaNV'];
-        $mancc = $input['MaNCC'];
-        $ngay = $input['NgayNhapHang'];
+        $currentdate = date('Y-m-d');
+        $checkngay = Validator::make($input,[
+            "ngay" => "before_or_equal:$currentdate",
+        ]);
+        if ($checkngay->fails()){
+            $arr = [
+                'status' => false,
+                'message' => 'Ngày nhập quá ngày hiện tại',
+                'data' => $checkngay->errors()
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);            
+        }
+        $manv = $input['manv'];
+        $ngay = $input['ngay'];
         PhieuNhapHangModel::where('MaPNH',$id)->update([
                                                 'MaNV' => $manv,
-                                                'MaNCC' => $mancc,
                                                 'NgayNhapHang' => $ngay,
                                                 ]);
 

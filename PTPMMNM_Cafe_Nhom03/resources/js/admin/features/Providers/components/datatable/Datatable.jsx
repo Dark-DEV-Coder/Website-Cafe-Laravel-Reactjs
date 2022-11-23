@@ -83,6 +83,7 @@ const Datatable = () => {
             </div>
             <div className="search">
                 <input type="text" placeholder="Nhập tên cần tìm ..." value={inputtenncc} onChange={onChangeTenNCC} onKeyUp={FindProvider} />
+                <button className='timKiem' onClick={FindProvider}>Tìm kiếm</button>
             </div>
             <DataGrid style={{ fontSize: 14, textDecoration: "none", marginTop: "10px", height: "520px" }}
                 getRowId={(row) => row.MaNCC}

@@ -16,13 +16,30 @@ class DanhGiaSanPhamController extends Controller
      */
     public function index() // Lấy danh sách đánh giá sản phẩm
     {        
-        $danhgiasanphams = DanhGiaSanPhamModel::where('TrangThai','!=',0)->get();
+        $danhgiasanphams = DanhGiaSanPhamModel::join('users','users.id','=','danh_gia_san_pham.MaTK')
+                                                ->where('danh_gia_san_pham.TrangThai','!=',0)
+                                                ->select('danh_gia_san_pham.*','users.email')
+                                                ->get();
         $arr=[
             'status' => true,
             'message' => 'Danh sách đánh giá sản phẩm',
-            'data' => DanhGiaSanPhamResource::collection($danhgiasanphams),
+            'data' => $danhgiasanphams,
         ];
         return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function detail($id) // Tìm 1 sản phẩm theo mã sản phẩm
+    {
+        $dgsp = DanhGiaSanPhamModel::join('users','users.id','=','danh_gia_san_pham.MaTK')
+                                    ->where('MaBinhLuan',$id)
+                                    ->select('danh_gia_san_pham.*','users.email')
+                                    ->first();        
+        $arr = [
+            'status' => true,
+            'message' => 'Đánh giá sản phẩm cần tìm',
+            'data' => $dgsp,
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -76,9 +93,12 @@ class DanhGiaSanPhamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) // Tìm thông tin 1 đánh giá
+    public function show($ten) // Tìm thông tin 1 đánh giá
     {        
-        $danhgiasanpham = DanhGiaSanPhamModel::where('MaBinhLuan',$id)->get();
+        $danhgiasanpham = DanhGiaSanPhamModel::join('users','users.id','=','danh_gia_san_pham.MaTK')
+                                            ->where('users.email','like',"%$ten%")
+                                            ->select('danh_gia_san_pham.*','users.email')
+                                            ->get();
         if (is_null($danhgiasanpham)){
             $arr = [
                 'status' => false,
@@ -90,7 +110,7 @@ class DanhGiaSanPhamController extends Controller
         $arr = [
             'status' => true,
             'message' => 'Chi tiết đánh giá sản phẩm',
-            'data' => new DanhGiaSanPhamResource($danhgiasanpham),
+            'data' => $danhgiasanpham,
         ];
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }

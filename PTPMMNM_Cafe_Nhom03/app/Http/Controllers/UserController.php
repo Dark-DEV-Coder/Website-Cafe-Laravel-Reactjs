@@ -281,10 +281,11 @@ class UserController extends Controller
                 $token = self::getToken($request->email, $request->password);
                 $user->auth_token = $token;
                 $user->save();
+                $nv = NhanVienModel::where('MaTK',$user->id)->first();
                 $response=[
                     'status' => true,
                     'message' => 'Đăng nhập thành công',
-                    'data' => ['auth_token' => $user->auth_token,'MaQuyen' => $user->MaQuyen],
+                    'data' => ['auth_token' => $user->auth_token,'MaQuyen' => $user->MaQuyen,'MaNV' => $nv->MaNV],
                 ];                     
             }
             else 
