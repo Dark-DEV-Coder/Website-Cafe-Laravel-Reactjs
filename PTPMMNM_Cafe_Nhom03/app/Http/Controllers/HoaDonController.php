@@ -188,6 +188,29 @@ class HoaDonController extends Controller
         return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
+    public function ThongKeSPNoiBat() // Tìm 1 sản phẩm theo mã sản phẩm
+    {        
+        $hd = HoaDonModel::join('chi_tiet_hoa_don','chi_tiet_hoa_don.MaHD','=','hoa_don.MaHD')
+                            ->where('hoa_don.TrangThai','=',4)
+                            ->groupBy('chi_tiet_hoa_don.MaSP')
+                            ->select('chi_tiet_hoa_don.MaSP')
+                            ->get();
+        if (is_null($hd)){
+            $arr = [
+                'status' => false,
+                'message' => 'Không có phiếu nhập hàng này',
+                'data' => [],
+            ];
+            return response()->json($arr,200,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);  
+        }
+        $arr = [
+            'status' => true,
+            'message' => 'Phiếu nhập hàng cần tìm',
+            'data' => $hd,
+        ];
+        return response()->json($arr,201,['Content-type','application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
     /**
      * Update the specified resource in storage.
      *

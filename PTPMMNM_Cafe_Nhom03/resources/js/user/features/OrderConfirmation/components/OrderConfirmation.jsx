@@ -7,6 +7,32 @@ import cf1 from "./cf1.jpg";
 import cf2 from "./cf2.jpg";
 import cf5 from "./cf5.jpg";
 const DetailOrderCon = () => {
+
+    const [cart, SetCart] = React.useState([]);
+    const [total, SetTotal] = React.useState("");
+    const [error, setError] = React.useState("");
+    const [loaded, setLoaded] = React.useState(false);
+    React.useEffect(() => {
+        (async () => {
+            try {
+                if (localStorage['cart']){
+                    let sp = JSON.parse(localStorage.getItem('cart'));
+                    SetCart(sp);   
+                    let t= 0;                     
+                    for (let i=0;i<sp.length;i++){
+                        t+=(sp[i].productcount * sp[i].productprice);
+                    }
+                    SetTotal(t);
+                }
+            }
+            catch (error) {
+                setError(error.message);
+            }
+            finally {
+                setLoaded(true);
+            }
+        })();
+    }, []);
     return (
         <section className="shoping-cart spad">
             <div className="container">
@@ -25,72 +51,30 @@ const DetailOrderCon = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td className="shoping__cart__item">
-                                            <img src={cf1} alt="" />
-                                            <h5>Vegetables Package</h5>
-                                        </td>
-                                        <td className="shoping__cart__price">
-                                            $55.00
-                                        </td>
-                                        <td className="shoping__cart__quantity">
-                                            <div className="quantity">
-                                                <div className="pro-qty" >
-                                                    <input type="number" disabled='true' />
+                                    {cart.map((item) => (
+                                        <tr>
+                                            <td className="shoping__cart__item">
+                                                <img src={"http://127.0.0.1:8000/"+item.productimg} alt="" />
+                                                <h5>{item.productname}</h5>
+                                            </td>
+                                            <td className="shoping__cart__price">
+                                                {item.productprice.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                            </td>
+                                            <td className="shoping__cart__quantity">
+                                                <div className="quantity">
+                                                    <div className="pro-qty" >
+                                                        <input type="number" defaultValue={item.productcount} />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td className="shoping__cart__total">
-                                            $110.00
-                                        </td>
-                                        <td className="shoping__cart__item__close">
-                                            <span className="icon_close"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className="shoping__cart__item">
-                                            <img src={cf2} alt="" />
-                                            <h5>Fresh Garden Vegetable</h5>
-                                        </td>
-                                        <td className="shoping__cart__price">
-                                            $39.00
-                                        </td>
-                                        <td className="shoping__cart__quantity">
-                                            <div className="quantity">
-                                                <div className="pro-qty">
-                                                    <input type="number" disabled='true' />
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="shoping__cart__total">
-                                            $39.99
-                                        </td>
-                                        <td className="shoping__cart__item__close">
-                                            <span className="icon_close"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className="shoping__cart__item">
-                                            <img src={cf5} alt="" />
-                                            <h5>Organic Bananas</h5>
-                                        </td>
-                                        <td className="shoping__cart__price">
-                                            $69.00
-                                        </td>
-                                        <td className="shoping__cart__quantity">
-                                            <div className="quantity">
-                                                <div className="pro-qty">
-                                                    <input type="number" disabled='true' />
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="shoping__cart__total">
-                                            $69.99
-                                        </td>
-                                        <td className="shoping__cart__item__close">
-                                            <span className="icon_close"></span>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td className="shoping__cart__total">
+                                                {(item.productcount * item.productprice).toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                                            </td>
+                                            <td className="shoping__cart__item__close">
+                                                <span className="icon_close"></span>
+                                            </td>
+                                        </tr>
+                                    ))}                                                                        
                                 </tbody>
                             </table>
                         </div>

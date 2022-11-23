@@ -90,6 +90,7 @@ Route::get('chitietncc/{id}', [NhaCungCapController::class, 'detail']);
 Route::resource('hdon',HoaDonController::class);
 Route::get('chitiethdon/{id}', [HoaDonController::class, 'detail']);
 Route::post('thongke', [HoaDonController::class, 'ThongKe']);
+Route::get('thongkespnoibat', [HoaDonController::class, 'ThongKeSPNoiBat']);
 
 // API Chi tiết hóa đơn
 Route::resource('cthdon',ChiTietHoaDonController::class);

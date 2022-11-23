@@ -7,6 +7,28 @@ import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined
 const Header = () => {
     const [showShop, setShowShop] = useState(false);
     const [showAccount, setShowAccount] = useState(false);
+    const [countcart, setCountCart] = useState("");
+    const [error, setError] = React.useState("");
+    const [loaded, setLoaded] = React.useState(false);
+    React.useEffect(() => {
+        (async () => {
+            try {                
+                if (localStorage['cart']){
+                    let giohang=JSON.parse(localStorage.getItem('cart'));
+                    setCountCart(giohang.length);
+                }
+                else{
+                    setCountCart("0");
+                }
+            }
+            catch (error) {
+                setError(error.message);
+            }
+            finally {
+                setLoaded(true);
+            }
+        })();
+    }, []);
     return (
         <nav className="navbar navbar-expand-lg ftco-navbar-light" id="ftco-navbar">
             <div className="container">
@@ -47,7 +69,7 @@ const Header = () => {
                         </li>
                         <li className="nav-item"><a href="/about" className="nav-link">Thông tin</a></li>
                         {/* <li className="nav-item"><a href="contact.html" className="nav-link">Liên lạc</a></li> */}
-                        <li className="nav-item cta cta-colored"><a href="cart.html" className="nav-link"><ShoppingCartOutlinedIcon style={{ fontSize: "18px" }} />[0]</a></li>
+                        <li className="nav-item cta cta-colored"><a href="/cart" className="nav-link"><ShoppingCartOutlinedIcon style={{ fontSize: "18px" }} />[{countcart}]</a></li>
                         <li className="nav-item cta cta-colored"><div onClick={() => setShowAccount(!showAccount)} className="nav-link dropdown-toggle" style={{ cursor: "pointer" }} ><AssignmentIndOutlinedIcon style={{ fontSize: "18px", marginRight: '5px' }} />Tài khoản</div></li>
                         {showAccount ?
                             <div className="showAccount" style={{ position: "absolute" }} >
