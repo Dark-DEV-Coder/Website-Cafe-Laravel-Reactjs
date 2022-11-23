@@ -3,9 +3,7 @@ import "./OrderConfirmation.scss";
 import "../../../../../css/bootstrap2.min.css";
 import RotateLeftOutlinedIcon from '@mui/icons-material/RotateLeftOutlined';
 import { useState } from 'react';
-import cf1 from "./cf1.jpg";
-import cf2 from "./cf2.jpg";
-import cf5 from "./cf5.jpg";
+import axios from 'axios';
 const DetailOrderCon = () => {
 
     const [cart, SetCart] = React.useState([]);
@@ -33,6 +31,31 @@ const DetailOrderCon = () => {
             }
         })();
     }, []);
+    function ThanhToan(){
+        let thongtin = JSON.parse(localStorage.getItem('thongtin'));
+        let sp = JSON.parse(localStorage.getItem('cart'));
+        const hd = {
+            ho: thongtin.ho,
+            ten: thongtin.ten,
+            ngaysinh: thongtin.ngaysinh,
+            gioitinh: thongtin.gioitinh,
+            sdt: thongtin.sdt,
+            email: thongtin.email,            
+            diachi: thongtin.diachi,
+            cthd: sp,
+        };
+        axios.post("http://127.0.0.1:8000/api/hdon", hd).then((response) => {
+            if (response.data.status == false) {
+                alert(JSON.stringify(response.data.message));
+            }
+            else {
+                localStorage.removeItem('thongtin');
+                localStorage.removeItem('cart');
+                window.location.assign("http://127.0.0.1:8000/home");
+            }
+
+        });
+    }
     return (
         <section className="shoping-cart spad">
             <div className="container">
@@ -52,7 +75,7 @@ const DetailOrderCon = () => {
                                 </thead>
                                 <tbody>
                                     {cart.map((item) => (
-                                        <tr>
+                                        <tr key={item.productid}>
                                             <td className="shoping__cart__item">
                                                 <img src={"http://127.0.0.1:8000/"+item.productimg} alt="" />
                                                 <h5>{item.productname}</h5>
@@ -63,7 +86,7 @@ const DetailOrderCon = () => {
                                             <td className="shoping__cart__quantity">
                                                 <div className="quantity">
                                                     <div className="pro-qty" >
-                                                        <input type="number" defaultValue={item.productcount} />
+                                                        <input type="number" value={item.productcount} disabled />
                                                     </div>
                                                 </div>
                                             </td>
@@ -91,9 +114,9 @@ const DetailOrderCon = () => {
                         <div className="shoping__checkout">
                             <h5>Thanh toán</h5>
                             <ul>
-                                <li>Tổng tiền <span>$454.98</span></li>
+                                <li>Tổng tiền <span>{total.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</span></li>
                             </ul>
-                            <a href="/home" className="primary-btn">HOÀN TẤT</a>
+                            <a onClick={ThanhToan} className="primary-btn">HOÀN TẤT</a>
                         </div>
                     </div>
                 </div>

@@ -58,6 +58,7 @@ Route::get('chitietnvien/{id}', [NhanVienController::class, 'detail']);
 // API khách hàng
 Route::resource('khhang',KhachHangController::class);
 Route::get('chitietkhhang/{id}', [KhachHangController::class, 'detail']);
+Route::post('xacnhanthongtin', [KhachHangController::class, 'CheckInfor']);
 
 // API loại sản phẩm
 Route::resource('lspham',LoaiSanPhamController::class);

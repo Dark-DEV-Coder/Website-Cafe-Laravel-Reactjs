@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Resources\HoaDon as HoaDonResource;
+use App\Models\ChiTietHoaDonModel;
 use App\Models\HoaDonModel;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,9 +36,9 @@ class HoaDonController extends Controller
     {        
         $input = $request->all();
         $validator = Validator::make($input,[
-            'MaHD' => 'required', 'MaNV' => 'required','MaKH' => 'required',
-             'HoKH' => 'required', 'TenKH' => 'required','NgaySinh' => 'required', 'DiaChi' => 'required',
-             'SoDienThoai' => 'required', 'Email' => 'required', 'NgayLapHoaDon' => 'required', 
+            'ho' => 'required', 'ten' => 'required',
+            'ngaysinh' => 'required', 'gioitinh' => 'required', 'diachi' => 'required','sdt' => 'required', 
+            'email' => 'required'
         ]);
         // Kiểm tra dữ liệu
         if ($validator->fails()){
@@ -50,29 +51,46 @@ class HoaDonController extends Controller
         }
         
         $count = HoaDonModel::select('MaHD')->count();
-        $mahd = 'HD'+($count+1);
-        $manv = $input['MaNV'];
-        $makh = $input['MaKH'];
-        $ho = $input['HoKH'];
-        $ten = $input['TenKH'];
-        $ngay = $input['NgaySinh'];
-        $dc = $input['DiaChi'];
-        $sdt = $input['SoDienThoai'];
-        $email = $input['Email'];
-        $ngay = $input['NgayLapHoaDon'];
+        $mahd = 'HD'.strval($count+1);
+        $ho = $input['ho'];
+        $ten = $input['ten'];
+        $ngay = $input['ngaysinh'];
+        $gioitinh = $input['gioitinh'];
+        $dc = $input['diachi'];
+        $sdt = $input['sdt'];
+        $email = $input['email'];        
         HoaDonModel::insert([
             'MaHD' => $mahd,
-            'MaNV' => $manv,
-            'MaKH' => $makh,            
+            'MaNV' => 'null',
+            'MaKH' => 'null',            
             'HoKH' => $ho,
             'TenKH' => $ten,
             'NgaySinh' => $ngay,
             'DiaChi' => $dc,
+            'GioiTinh' => $gioitinh,
             'SoDienThoai' => $sdt,
             'Email' => $email,
-            'NgayLapHoaDon' => $ngay,
+            'NgayLapHD' => date('Y-m-d'),
             'TrangThai' => 1,
+            'TongTien' => 0,
             'updated_at' => date('Y-m-d h-i-s'),
+        ]);
+
+        $tongtien =0;
+        $cthd = $input['cthd'];
+        for($i=0;$i<count($cthd);$i++){
+            ChiTietHoaDonModel::insert([
+                'MaHD' => $mahd,
+                'MaSP' => $cthd[$i]['productid'],
+                'SoLuong' => $cthd[$i]['productcount'],
+                'DonGia' => $cthd[$i]['productprice'],
+                'ThanhTien' => $cthd[$i]['productcount'] * $cthd[$i]['productprice'],
+                'updated_at' => date('Y-m-d h-i-s'),
+            ]);
+            $tongtien+=$cthd[$i]['productcount'] * $cthd[$i]['productprice'];
+        }
+        HoaDonModel::where('MaHD',$mahd)->update([
+            'TongTien' => $tongtien,
         ]);
 
         $arr = [

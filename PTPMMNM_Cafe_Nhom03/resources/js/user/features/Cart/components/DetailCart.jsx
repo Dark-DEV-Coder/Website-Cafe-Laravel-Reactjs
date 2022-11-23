@@ -11,6 +11,11 @@ const DetailCart = () => {
     const [total, SetTotal] = React.useState("");
     const [error, setError] = React.useState("");
     const [loaded, setLoaded] = React.useState(false);
+
+    const [inputsl, setInputDiaChiNV] = React.useState("");
+    const onChangeHoNV = event => {
+        setInputHoNV(event.target.value);
+    };
     React.useEffect(() => {
         (async () => {
             try {
@@ -31,7 +36,22 @@ const DetailCart = () => {
                 setLoaded(true);
             }
         })();
-    }, []);    
+    }, []);  
+      
+    function TangSoLuong(id){
+        let sp = JSON.parse(localStorage.getItem('cart'));     
+        let sl = document.getElementById(id).value;
+        let t= 0;                     
+        for (let i=0;i<sp.length;i++){            
+            if (sp[i].productid == id){
+                sp[i].productcount=sl;
+            }
+            t+=(sp[i].productcount * sp[i].productprice);
+        }
+        SetTotal(t);
+        localStorage.setItem('cart',JSON.stringify(sp));
+        SetCart(sp);
+    }
     return (
         <section className="shoping-cart spad">
             <div className="container">
@@ -62,7 +82,7 @@ const DetailCart = () => {
                                                 <td className="shoping__cart__quantity">
                                                     <div className="quantity">
                                                         <div className="pro-qty" >
-                                                            <input type="number" defaultValue={item.productcount} />
+                                                            <input type="number" id={item.productid} min={1} onKeyUp={() => TangSoLuong(item.productid)} onClick={() => TangSoLuong(item.productid)} defaultValue={item.productcount} />
                                                         </div>
                                                     </div>
                                                 </td>
